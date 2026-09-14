@@ -15,7 +15,7 @@ theme values are pulled directly from the production codebase (`app/globals.css`
 | Category | AI automation & custom software studio |
 | Positioning line | "AI automation and custom software built around how your business actually works." |
 | Tagline / ethos | "No hype. Just outcomes." |
-| Provenance | Crafted in New York's Hudson Valley (ES: "Concebido en el Hudson Valley") |
+| Provenance | Crafted in the Hudson Valley (ES: "Concebido en el Hudson Valley") |
 | Palette codename | "Stellar" — a deep-space canvas with a starlight-gold accent |
 | Languages | English + Spanish (fully bilingual brand) |
 
