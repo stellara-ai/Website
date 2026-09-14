@@ -1,0 +1,487 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand identity — the Signal palette: a single vivid orange-red accent. */
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-strong-foreground: var(--brand-strong-foreground);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-tint-strong: var(--brand-tint-strong);
+
+  /* Status colors — the signature colored labels. */
+  --color-status-done: var(--status-done);
+  --color-status-work: var(--status-work);
+  --color-status-stuck: var(--status-stuck);
+  --color-status-purple: var(--status-purple);
+  --color-status-done-tint: var(--status-done-tint);
+  --color-status-work-tint: var(--status-work-tint);
+  --color-status-stuck-tint: var(--status-stuck-tint);
+  --color-status-purple-tint: var(--status-purple-tint);
+
+  /* Dark feature surface. */
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+  --color-paper: var(--paper);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-space-grotesk), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+}
+
+:root {
+  color-scheme: light;
+
+  --paper: #f7f8fb;
+  --background: #f7f8fb;
+  --foreground: #12172a;
+  --card: #ffffff;
+  --card-foreground: #12172a;
+  --popover: #ffffff;
+  --popover-foreground: #12172a;
+  --primary: #a8792a;
+  --primary-foreground: #ffffff;
+  --secondary: #eef0f5;
+  --secondary-foreground: #12172a;
+  --muted: #eef0f5;
+  --muted-foreground: #5c6172;
+  --accent: #f6ecd6;
+  --accent-foreground: #8a611e;
+  --destructive: #e2445c;
+  --border: #e2e4ec;
+  --input: #d3d6e0;
+  --ring: #a8792a;
+
+  /* Brand identity — the "Stellar" palette: a deep-space canvas with a starlight gold accent. */
+  --brand: #a8792a;
+  --brand-foreground: #ffffff;
+  --brand-strong: #8f651f;
+  --brand-strong-foreground: #ffffff;
+  --brand-tint: #f6ecd6;
+  --brand-tint-strong: #efe0c2;
+
+  --status-done: #12a150;
+  --status-work: #c98a1e;
+  --status-stuck: #e2445c;
+  --status-purple: #3e7bfa;
+  --status-done-tint: #e4f5ec;
+  --status-work-tint: #f6ecd6;
+  --status-stuck-tint: #fce4e8;
+  --status-purple-tint: #e7efff;
+
+  --ink: #070b16;
+  --ink-foreground: #eef1f7;
+  --ink-muted: #9aa0b2;
+  --ink-border: rgba(255, 255, 255, 0.12);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper: #0a0e1a;
+  --background: #0a0e1a;
+  --foreground: #eef1f7;
+  --card: #111726;
+  --card-foreground: #eef1f7;
+  --popover: #111726;
+  --popover-foreground: #eef1f7;
+  --primary: #e8c88a;
+  --primary-foreground: #0a0e1a;
+  --secondary: #141b2c;
+  --secondary-foreground: #eef1f7;
+  --muted: #111726;
+  --muted-foreground: #9aa0b2;
+  --accent: #241f12;
+  --accent-foreground: #f0d9a8;
+  --destructive: #ff6b7f;
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.16);
+  --ring: #e8c88a;
+
+  --brand: #e8c88a;
+  --brand-foreground: #0a0e1a;
+  --brand-strong: #f0d9a8;
+  --brand-strong-foreground: #0a0e1a;
+  --brand-tint: #241f12;
+  --brand-tint-strong: #2b2514;
+
+  --status-done: #2bb673;
+  --status-work: #e8c88a;
+  --status-stuck: #ff6b7f;
+  --status-purple: #7fa0ff;
+  --status-done-tint: #0f3325;
+  --status-work-tint: #2b2514;
+  --status-stuck-tint: #3d1f27;
+  --status-purple-tint: #16233f;
+
+  --ink: #070a14;
+  --ink-foreground: #eef1f7;
+  --ink-muted: #9aa0b2;
+  --ink-border: rgba(255, 255, 255, 0.12);
+}
+
+/* No-JS fallback: honor OS preference before the theme script runs. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    color-scheme: dark;
+    --paper: #0a0e1a;
+    --background: #0a0e1a;
+    --foreground: #eef1f7;
+    --card: #111726;
+    --card-foreground: #eef1f7;
+    --popover: #111726;
+    --popover-foreground: #eef1f7;
+    --primary: #e8c88a;
+    --primary-foreground: #0a0e1a;
+    --secondary: #141b2c;
+    --secondary-foreground: #eef1f7;
+    --muted: #111726;
+    --muted-foreground: #9aa0b2;
+    --accent: #241f12;
+    --accent-foreground: #f0d9a8;
+    --destructive: #ff6b7f;
+    --border: rgba(255, 255, 255, 0.09);
+    --input: rgba(255, 255, 255, 0.16);
+    --ring: #e8c88a;
+    --brand: #e8c88a;
+    --brand-foreground: #0a0e1a;
+    --brand-strong: #f0d9a8;
+    --brand-strong-foreground: #0a0e1a;
+    --brand-tint: #241f12;
+    --brand-tint-strong: #2b2514;
+    --status-done: #2bb673;
+    --status-work: #e8c88a;
+    --status-stuck: #ff6b7f;
+    --status-purple: #7fa0ff;
+    --status-done-tint: #0f3325;
+    --status-work-tint: #2b2514;
+    --status-stuck-tint: #3d1f27;
+    --status-purple-tint: #16233f;
+    --ink: #070a14;
+    --ink-foreground: #eef1f7;
+    --ink-muted: #9aa0b2;
+    --ink-border: rgba(255, 255, 255, 0.12);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Smooth but fast theme transition on surface colors only. */
+  :root.theme-transition * {
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  ::selection {
+    background: var(--brand);
+    color: #ffffff;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .container-editorial {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 78rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-editorial {
+      padding-inline: 2rem;
+    }
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  /* monday.com's signature tight negative tracking on large display headings. */
+  .tracking-monday {
+    letter-spacing: -0.04em;
+  }
+  /* Soft elevated card shadow, monday-style. */
+  .shadow-soft {
+    box-shadow: 0 4px 20px -4px rgba(20, 20, 24, 0.12), 0 2px 6px -2px rgba(20, 20, 24, 0.08);
+  }
+  .shadow-float {
+    box-shadow: 0 24px 60px -16px rgba(20, 20, 24, 0.28), 0 8px 20px -8px rgba(20, 20, 24, 0.14);
+  }
+}
+
+/* Motion primitives — all respect reduced-motion. */
+@keyframes stellara-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stellara-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stellara-flow {
+  0% {
+    transform: translateY(-6%);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes stellara-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: stellara-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Hero entrance: a single orchestrated load sequence that resolves on first paint. */
+@keyframes stellara-load-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-load > * {
+  opacity: 0;
+  animation: stellara-load-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-load > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.hero-load > *:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.hero-load > *:nth-child(3) {
+  animation-delay: 0.27s;
+}
+.hero-load > *:nth-child(4) {
+  animation-delay: 0.38s;
+}
+.hero-load > *:nth-child(5) {
+  animation-delay: 0.49s;
+}
+.hero-load > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.hero-load-board {
+  opacity: 0;
+  animation: stellara-load-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s forwards;
+}
+
+/* Signature motif: hairline corner ticks on the eyebrow accent + focal surfaces. */
+.corner-ticks {
+  position: relative;
+}
+.corner-ticks::before,
+.corner-ticks::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--brand);
+  border-style: solid;
+  pointer-events: none;
+}
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.hero-kicker::before {
+  content: "";
+  width: 1.75rem;
+  height: 1.5px;
+  background: var(--brand);
+}
+
+.word-rotate {
+  display: inline-block;
+  animation: stellara-word-in 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes stellara-status-pop {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.3;
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.status-pop {
+  animation: stellara-status-pop 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes stellara-board-forward {
+  0% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.board-enter {
+  animation: stellara-board-forward 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Signature "work moving" motif: a gold dot travels the connector from source to action. */
+@keyframes stellara-flow-move {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.flow-dot {
+  animation: stellara-flow-move 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    animation: none !important;
+  }
+  .flow-dot {
+    animation: none;
+    left: 100%;
+    opacity: 1;
+  }
+  .hero-load > *,
+  .hero-load-board {
+    opacity: 1;
+    animation: none !important;
+  }
+  .word-rotate {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
