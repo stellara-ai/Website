@@ -414,7 +414,7 @@ export function StellaraField({ className }: { className?: string }) {
     // Long, irregular silences so the grid reads as calm and static — each cluster
     // feels like a discovered moment, not a loop. Touch devices calmer still.
     function glintGap() {
-      return coarseMedia.matches ? 11000 + Math.random() * 10000 : 6000 + Math.random() * 8000
+      return coarseMedia.matches ? 5000 + Math.random() * 5000 : 2600 + Math.random() * 3200
     }
 
     // Spawn a small cluster (2–3) at distinct, well-separated intersections with
@@ -423,7 +423,7 @@ export function StellaraField({ className }: { className?: string }) {
       if (gCols <= 2 || gRows <= 2) return
       const room = glintCap() - glints.length
       if (room <= 0) return
-      const count = Math.min(room, coarseMedia.matches ? 2 : 2 + Math.floor(Math.random() * 2))
+      const count = Math.min(room, coarseMedia.matches ? 1 + Math.floor(Math.random() * 2) : 1 + Math.floor(Math.random() * 3))
       const minDist = GRID_CELL * 2
       for (let n = 0; n < count; n++) {
         let cx = 0
@@ -439,9 +439,9 @@ export function StellaraField({ className }: { className?: string }) {
         glints.push({
           cx,
           cy,
-          // Near-simultaneous rise with only a small phase offset, so the cluster
-          // twinkles together rather than one-at-a-time.
-          start: now + Math.random() * 180,
+          // Staggered rise so the set "pops" one after another in sequence
+          // rather than all at once, then the field pauses before the next set.
+          start: now + n * (200 + Math.random() * 170),
           duration: GLINT_LIFE_MIN + Math.random() * (GLINT_LIFE_MAX - GLINT_LIFE_MIN),
         })
       }
