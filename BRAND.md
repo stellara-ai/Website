@@ -82,12 +82,21 @@ theme values are pulled directly from the production codebase (`app/globals.css`
 ## 5. Visual Language / Art Direction
 
 - **Aesthetic:** precise, engineered, editorial — "engineering-grid meets celestial."
-- **Signature motifs:** hairline corner ticks on focal surfaces; a gold dot traveling a connector
-  line (work moving from source to action); soft elevated card shadows.
+- **Signature background (theme-dependent):** the ambient field behind hero and feature
+  sections adapts to the active theme:
+  - **Dark mode → star field.** A sparse, mathematically irregular scatter of stars
+    (a jittered grid with dropout, varied size/opacity). A subset slowly pulses and faint
+    connector lines occasionally trace between nearby stars — a calm, deep-space canvas.
+  - **Light mode → engineering grid + sparkles.** A very subtle, precise coordinate grid.
+    Gold "sparkles" (glints) emerge exactly on real grid intersections in sequenced sets of
+    1–3, catch the light with a brief four-point star spike, then fade — "a tiny star
+    emerging from an engineered system." The grid is otherwise static and quiet between sets.
+- **Other signature motifs:** hairline corner ticks on focal surfaces; a gold dot traveling a
+  connector line (work moving from source to action); soft elevated card shadows.
 - **Corner radii scale:** 8 / 12 / 16 / 20 / 24 px.
 - **Avoid:** decorative gradients, glow blobs, heavy skeuomorphic shadows, emojis as icons.
-- **Motion:** one orchestrated entrance sequence with staggered reveals; always honor
-  reduced-motion preferences.
+- **Motion:** one orchestrated entrance sequence with staggered reveals; the ambient field is
+  deliberately restrained (long, irregular silences); always honor reduced-motion preferences.
 
 ---
 
