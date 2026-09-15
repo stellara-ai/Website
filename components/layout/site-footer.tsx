@@ -60,7 +60,9 @@ export function SiteFooter({ content }: { content: SiteContent }) {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p className="label-mono">{content.footer.crafted}</p>
+          <p className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.06em]">
+            {content.footer.crafted}
+          </p>
           <div className="flex items-center gap-4">
             <p>
               © {year} Stellara AI LLC. {content.footer.rights}
