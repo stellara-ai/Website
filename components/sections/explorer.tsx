@@ -64,7 +64,7 @@ export function Explorer({ content }: { content: SiteContent }) {
         <SectionHeading eyebrow={explorer.eyebrow} title={explorer.title} description={explorer.intro} tone="ink" />
 
         <div className="mt-12">
-          <div className="mx-auto max-w-2xl rounded-2xl border border-ink-border bg-white/[0.02] p-6 sm:p-8">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-ink-border bg-ink-raised p-6 sm:p-8">
             {stage === "intro" && (
               <div className="flex flex-col items-start gap-6">
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink-border px-3 py-1.5 text-xs text-ink-muted">

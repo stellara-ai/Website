@@ -44,6 +44,7 @@
 
   /* Dark feature surface. */
   --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
   --color-ink-border: var(--ink-border);
@@ -101,6 +102,7 @@
   --status-purple-tint: #e7efff;
 
   --ink: #07152d;
+  --ink-raised: #0f2038;
   --ink-foreground: #eef1f7;
   --ink-muted: #9aa0b2;
   --ink-border: rgba(255, 255, 255, 0.12);
@@ -146,6 +148,7 @@
   --status-purple-tint: #16233f;
 
   --ink: #0c1e3d;
+  --ink-raised: #16305a;
   --ink-foreground: #eef1f7;
   --ink-muted: #9aa0b2;
   --ink-border: rgba(255, 255, 255, 0.12);
@@ -189,6 +192,7 @@
     --status-stuck-tint: #3d1f27;
     --status-purple-tint: #16233f;
     --ink: #0c1e3d;
+    --ink-raised: #16305a;
     --ink-foreground: #eef1f7;
     --ink-muted: #9aa0b2;
     --ink-border: rgba(255, 255, 255, 0.12);
