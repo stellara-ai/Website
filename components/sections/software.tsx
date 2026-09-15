@@ -39,12 +39,18 @@ export function Software({ content }: { content: SiteContent }) {
           </div>
 
           <ul className="grid content-start gap-px self-start overflow-hidden rounded-2xl border border-ink-border bg-ink-border sm:grid-cols-2">
-            {software.capabilities.map((capability) => (
-              <li key={capability} className="flex items-start gap-3 bg-ink p-5">
-                <Check className="mt-0.5 size-4 shrink-0 text-brand-strong" />
-                <span className="text-sm leading-relaxed text-ink-foreground">{capability}</span>
-              </li>
-            ))}
+            {software.capabilities.map((capability, index) => {
+              const isOrphanLast = index === software.capabilities.length - 1 && software.capabilities.length % 2 === 1
+              return (
+                <li
+                  key={capability}
+                  className={`flex items-start gap-3 bg-ink p-5 ${isOrphanLast ? "sm:col-span-2" : ""}`}
+                >
+                  <Check className="mt-0.5 size-4 shrink-0 text-brand-strong" />
+                  <span className="text-sm leading-relaxed text-ink-foreground">{capability}</span>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>
