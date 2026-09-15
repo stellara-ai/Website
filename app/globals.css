@@ -100,7 +100,7 @@
   --status-stuck-tint: #fce4e8;
   --status-purple-tint: #e7efff;
 
-  --ink: #070b16;
+  --ink: #04101f;
   --ink-foreground: #eef1f7;
   --ink-muted: #9aa0b2;
   --ink-border: rgba(255, 255, 255, 0.12);
@@ -188,7 +188,7 @@
     --status-work-tint: #2b2514;
     --status-stuck-tint: #3d1f27;
     --status-purple-tint: #16233f;
-    --ink: #070a14;
+    --ink: #04101f;
     --ink-foreground: #eef1f7;
     --ink-muted: #9aa0b2;
     --ink-border: rgba(255, 255, 255, 0.12);
