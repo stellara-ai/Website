@@ -92,7 +92,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
           role="dialog"
           aria-modal="false"
           aria-labelledby={titleId}
-          className="fixed bottom-0 right-0 z-50 flex h-[min(37rem,100svh)] w-full flex-col overflow-hidden border border-border bg-card shadow-2xl animate-in sm:bottom-5 sm:right-5 sm:h-[36rem] sm:w-[24rem] sm:rounded-2xl"
+          className="fixed bottom-0 right-0 z-50 flex h-[min(37rem,100svh)] w-full flex-col overflow-hidden border border-border bg-card shadow-2xl animate-in sm:bottom-5 sm:right-5 sm:h-[36rem] sm:w-[24rem] sm:rounded-2xl dark:bg-card/85 dark:backdrop-blur-xl dark:supports-[backdrop-filter]:bg-card/75"
         >
           <header className="flex items-center justify-between gap-3 border-b border-border bg-ink px-4 py-3.5 text-ink-foreground">
             <div className="flex items-center gap-2.5">

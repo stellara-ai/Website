@@ -110,7 +110,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
 
       {menuOpen && (
         <div className="lg:hidden">
-          <div className="container-editorial flex flex-col gap-1 border-t border-border bg-background pb-6 pt-2">
+          <div className="container-editorial flex flex-col gap-1 border-t border-border bg-background pb-6 pt-2 dark:bg-background/80 dark:backdrop-blur-xl dark:supports-[backdrop-filter]:bg-background/70">
             {content.nav.map((item) => (
               <Link
                 key={item.id}
