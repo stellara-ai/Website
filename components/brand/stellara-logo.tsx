@@ -34,7 +34,7 @@ export function StellaraLogo({
   labelledById?: string
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("inline-flex items-center gap-1", className)}>
       <StellaraSymbol className="h-6" />
       {showWordmark && (
         <span
