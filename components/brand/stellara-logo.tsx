@@ -45,13 +45,13 @@ export function StellaraLogo({
     <span
       id={labelledById}
       className={cn(
-        "inline-flex items-center gap-[0.04em] font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground",
+        "inline-flex items-baseline gap-[0.04em] font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground",
         className,
       )}
     >
       {/* The symbol stands in for the leading "s"; keep it readable for assistive tech. */}
       <span className="sr-only">s</span>
-      <StellaraSymbol className="h-[0.82em] -translate-y-[0.02em]" />
+      <StellaraSymbol className="h-[0.82em] self-center translate-y-[0.06em]" />
       tellara
       <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.ai</span>
     </span>
