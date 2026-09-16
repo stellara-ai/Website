@@ -61,7 +61,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
     >
       <div className="container-editorial flex h-[72px] items-center justify-between gap-4">
         <Link href={homePath} className="rounded-md" aria-label="Stellara">
-          <StellaraLogo />
+          <StellaraLogo className="-translate-y-[3px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden flex-nowrap items-center gap-1 lg:flex">
