@@ -33,18 +33,27 @@ export function StellaraLogo({
   showWordmark?: boolean
   labelledById?: string
 }) {
+  if (!showWordmark) {
+    return (
+      <span className={cn("inline-flex items-center", className)}>
+        <StellaraSymbol className="h-6" />
+      </span>
+    )
+  }
+
   return (
-    <span className={cn("inline-flex items-center gap-1", className)}>
-      <StellaraSymbol className="h-6" />
-      {showWordmark && (
-        <span
-          id={labelledById}
-          className="font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground"
-        >
-          stellara
-          <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.ai</span>
-        </span>
+    <span
+      id={labelledById}
+      className={cn(
+        "inline-flex items-center gap-[0.04em] font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground",
+        className,
       )}
+    >
+      {/* The symbol stands in for the leading "s"; keep it readable for assistive tech. */}
+      <span className="sr-only">s</span>
+      <StellaraSymbol className="h-[0.82em] -translate-y-[0.02em]" />
+      tellara
+      <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.ai</span>
     </span>
   )
 }
