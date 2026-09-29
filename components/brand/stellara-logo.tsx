@@ -42,7 +42,7 @@ export function StellaraLogo({
           className="font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground"
         >
           stellara
-          <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.ai</span>
+          <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.one</span>
         </span>
       )}
     </span>
