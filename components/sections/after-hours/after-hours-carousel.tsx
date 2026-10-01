@@ -194,7 +194,10 @@ export function AfterHoursCarousel() {
           const d = wrapOffset(i - position, n)
           const isActive = i === current && !dragging
           const isCurrent = i === current
-          const hidden = Math.abs(d) > 1.4
+          // A card that only appears adjacent because of looping (e.g. the final
+          // outcome peeking beside the opening scene) would spoil the story order.
+          const wrapped = Math.abs(d - (i - position)) > 0.5
+          const hidden = wrapped || Math.abs(d) > 1.4
           return (
             <div
               key={s.id}
@@ -207,7 +210,7 @@ export function AfterHoursCarousel() {
                 "absolute left-1/2 top-0 aspect-[4/5] w-[70%] will-change-transform [transform-style:preserve-3d] sm:w-[62%] " +
                 (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")
               }
-              style={cardStyle(d, dragging, reduced)}
+              style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
             >
               <article
                 className={
