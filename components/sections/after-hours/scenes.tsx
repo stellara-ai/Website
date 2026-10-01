@@ -31,8 +31,7 @@ function PhotoBackdrop({ src, alt, dim, active }: { src: string; alt: string; di
         className={"object-cover " + (dim ? "brightness-[0.55]" : active ? "ah-lights-off" : "")}
         draggable={false}
       />
-      <div className="absolute inset-0 bg-card/75" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-card/40" aria-hidden="true" />
+  <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" aria-hidden="true" />
     </div>
   )
 }
