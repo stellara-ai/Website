@@ -27,7 +27,7 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const clamped = Math.max(-1, Math.min(1, d))
   const scale = 1 - Math.min(abs, 2) * 0.27
   const opacity = abs <= 1.35 ? 1 : Math.max(0, 1 - (abs - 1.35) * 3)
-  const duration = dragging || reduced ? "0ms" : "650ms"
+  const duration = dragging || reduced ? "0ms" : "900ms"
   return {
     transform: `translateX(-50%) translateX(${d * SPACING}%) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
     filter: `brightness(${1 - near * 0.18}) saturate(${1 - near * 0.15}) blur(${near * 1}px)`,

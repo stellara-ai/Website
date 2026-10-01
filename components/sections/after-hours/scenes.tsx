@@ -194,7 +194,7 @@ export const SCENES: Scene[] = [
     time: "6:59 PM",
     title: "Office closed",
     summary: "Everyone has gone home. The office is closed with no staff available.",
-    durationMs: 1400,
+    durationMs: 2600,
     render: (a) => <OfficeClosed active={a} />,
   },
   {
@@ -203,7 +203,7 @@ export const SCENES: Scene[] = [
     time: "7:14 PM",
     title: "Incoming call",
     summary: "A potential new client calls after hours.",
-    durationMs: 1400,
+    durationMs: 2600,
     render: (a) => <IncomingCall active={a} />,
   },
   {
@@ -212,7 +212,7 @@ export const SCENES: Scene[] = [
     time: "7:14 PM",
     title: "Stellara takes over",
     summary: "Stellara answers the call, qualifies the lead, books a consultation and updates the CRM.",
-    durationMs: 3000,
+    durationMs: 4800,
     render: (a) => <StellaraTakesOver active={a} />,
   },
   {
@@ -221,7 +221,7 @@ export const SCENES: Scene[] = [
     time: "7:20 PM",
     title: "Work is done",
     summary: "A new qualified lead with a consultation booked for tomorrow at 9:30 AM. Your office is closed, your business isn't.",
-    durationMs: 2600,
+    durationMs: 4400,
     render: (a) => <Outcome active={a} />,
   },
 ]
