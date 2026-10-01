@@ -10,19 +10,13 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react"
-import { ChevronLeft, ChevronRight, Sparkle } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SCENES } from "./scenes"
 
 const SCENE_MS = 4800
 const RESUME_AFTER_MS = 9000
 const SPACING = 54
-const EASE = "cubic-bezier(0.34, 1.25, 0.64, 1)"
-
-const SPARKLES = [
-  { top: "14%", left: "82%", size: 14, delay: "0ms" },
-  { top: "26%", left: "8%", size: 9, delay: "900ms" },
-  { top: "58%", left: "90%", size: 8, delay: "1700ms" },
-]
+const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 
 function wrapOffset(d: number, n: number) {
   return ((((d + n / 2) % n) + n) % n) - n / 2
@@ -223,14 +217,6 @@ export function AfterHoursCarousel() {
                   (isCurrent ? " ah-glow" : "")
                 }
               >
-                {SPARKLES.map((sp, k) => (
-                  <Sparkle
-                    key={k}
-                    className={"pointer-events-none absolute fill-current text-scene " + (isActive ? "ah-twinkle" : "opacity-40")}
-                    style={{ top: sp.top, left: sp.left, width: sp.size, height: sp.size, animationDelay: sp.delay }}
-                    aria-hidden="true"
-                  />
-                ))}
                 <header className="relative z-10 flex items-center justify-between">
                   <span className="rounded-full bg-ink-foreground/15 px-2.5 py-1 font-mono text-xs font-medium tabular-nums text-ink-foreground backdrop-blur-md">
                     {s.time}

@@ -462,82 +462,29 @@
   animation: stellara-flow-move 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
-/* After-hours story carousel. Each scene is its own color world. */
-.ah-tone-dusk {
-  --ah-a: #ff7a59;
-  --ah-b: #2a0f45;
-  --ah-c: #d63384;
-  --ah-accent: #ffc9a8;
-}
-.ah-tone-call {
-  --ah-a: #ff4d8d;
-  --ah-b: #3a0a63;
-  --ah-c: #7b3cff;
-  --ah-accent: #ffd36e;
-}
-.ah-tone-night {
-  --ah-a: #3f5bff;
-  --ah-b: #0b1140;
-  --ah-c: #ff5fa2;
-  --ah-accent: #ff9ec8;
-}
-.ah-tone-magic {
-  --ah-a: #7c4dff;
-  --ah-b: #170a4a;
-  --ah-c: #c86bff;
-  --ah-accent: #e8c88a;
-}
-.ah-tone-ocean {
-  --ah-a: #12c2c2;
-  --ah-b: #0a1d5c;
-  --ah-c: #3a6bff;
-  --ah-accent: #8ff5e0;
-}
-.ah-tone-meadow {
-  --ah-a: #19c37d;
-  --ah-b: #052e3a;
-  --ah-c: #0f8fa8;
-  --ah-accent: #c6f77a;
-}
-.ah-tone-sunset {
-  --ah-a: #ff8a3d;
-  --ah-b: #4a0b3a;
-  --ah-c: #ff3d7f;
-  --ah-accent: #ffe08a;
-}
-.ah-tone-sky {
-  --ah-a: #4f8bff;
-  --ah-b: #1c0f5c;
-  --ah-c: #a05cff;
-  --ah-accent: #a9d1ff;
-}
+/* Keep story surfaces on the site theme; color belongs to the small details. */
+.ah-tone-dusk,
+.ah-tone-call,
+.ah-tone-night,
+.ah-tone-magic,
+.ah-tone-ocean,
+.ah-tone-meadow,
+.ah-tone-sunset,
+.ah-tone-sky,
 .ah-tone-starlight {
-  --ah-a: #b04dff;
-  --ah-b: #0d0a33;
-  --ah-c: #ff6fb0;
-  --ah-accent: #e8c88a;
+  --ah-accent: var(--brand);
+  --ah-b: var(--brand-foreground);
 }
 .ah-card {
-  background:
-    radial-gradient(120% 75% at 0% 0%, color-mix(in oklab, var(--ah-a) 85%, transparent), transparent 62%),
-    radial-gradient(110% 80% at 100% 100%, color-mix(in oklab, var(--ah-c) 75%, transparent), transparent 58%),
-    var(--ah-b);
-}
-.ah-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --ink-foreground: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 .ah-glow {
-  box-shadow:
-    0 40px 90px -30px color-mix(in oklab, var(--ah-a) 70%, transparent),
-    0 18px 40px -20px color-mix(in oklab, var(--ah-c) 60%, transparent);
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--ink) 24%, transparent);
 }
 .ah-progress-fill {
-  background: linear-gradient(90deg, var(--ah-a), var(--ah-c), var(--ah-accent));
+  background: var(--brand);
 }
 @keyframes ah-twinkle {
   0%,

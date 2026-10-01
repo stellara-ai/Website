@@ -18,7 +18,7 @@ function reveal(active: boolean) {
   return active ? "ah-reveal" : ""
 }
 
-const glass = "border border-ink-foreground/15 bg-ink-foreground/10 backdrop-blur-md"
+const glass = "border border-border bg-background/90 backdrop-blur-md"
 
 function PhotoBackdrop({ src, alt, dim, active }: { src: string; alt: string; dim?: boolean; active: boolean }) {
   return (
@@ -31,8 +31,8 @@ function PhotoBackdrop({ src, alt, dim, active }: { src: string; alt: string; di
         className={"object-cover " + (dim ? "brightness-[0.55]" : active ? "ah-lights-off" : "")}
         draggable={false}
       />
-      <div className="absolute inset-0 bg-scene-a/45 mix-blend-color" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-scene-b via-scene-b/55 to-scene-b/0" aria-hidden="true" />
+      <div className="absolute inset-0 bg-card/75" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-card/40" aria-hidden="true" />
     </div>
   )
 }
@@ -246,7 +246,7 @@ function TeamUpdated({ active }: { active: boolean }) {
       <div className={"flex flex-col gap-3 rounded-2xl p-4 " + glass + " " + reveal(active)}>
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-2 text-xs font-medium text-ink-foreground">
-            <StellaraSymbol className="h-3.5 text-gilt" />
+            <StellaraSymbol className="h-3.5 text-brand" />
             New intake
           </span>
           <span className="rounded-full bg-scene px-2 py-0.5 text-xs font-semibold text-scene-b">High priority</span>
