@@ -13,8 +13,7 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SCENES } from "./scenes"
 
-const SCENE_MS = 4800
-const RESUME_AFTER_MS = 9000
+const RESUME_AFTER_MS = 6000
 const SPACING = 54
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 
@@ -28,7 +27,7 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const clamped = Math.max(-1, Math.min(1, d))
   const scale = 1 - Math.min(abs, 2) * 0.27
   const opacity = abs <= 1.35 ? 1 : Math.max(0, 1 - (abs - 1.35) * 3)
-  const duration = dragging || reduced ? "0ms" : "1100ms"
+  const duration = dragging || reduced ? "0ms" : "650ms"
   return {
     transform: `translateX(-50%) translateX(${d * SPACING}%) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
     filter: `brightness(${1 - near * 0.18}) saturate(${1 - near * 0.15}) blur(${near * 1}px)`,
@@ -226,12 +225,8 @@ export function AfterHoursCarousel() {
                   </span>
                 </header>
 
-                <div className="relative flex flex-1 flex-col py-4">{s.render(isActive)}</div>
-
-                <footer className="relative z-10 flex flex-col gap-1">
-                  <h3 className="font-display text-xl font-medium tracking-tight text-ink-foreground">{s.title}</h3>
-                  <p className="text-pretty text-sm leading-relaxed text-ink-foreground/75">{s.caption}</p>
-                </footer>
+                <h3 className="sr-only">{s.title}</h3>
+                <div className="relative flex flex-1 flex-col pt-4">{s.render(isActive)}</div>
               </article>
             </div>
           )
@@ -258,7 +253,7 @@ export function AfterHoursCarousel() {
                   className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
                   style={
                     {
-                      "--ah-duration": `${SCENE_MS}ms`,
+                      "--ah-duration": `${s.durationMs}ms`,
                       animationPlayState: playing ? "running" : "paused",
                     } as CSSProperties
                   }
@@ -280,7 +275,7 @@ export function AfterHoursCarousel() {
       </div>
 
       <p className="sr-only" aria-live={playing ? "off" : "polite"}>
-        {`Scene ${current + 1} of ${n}, ${scene.time}: ${scene.title}. ${scene.caption}`}
+        {`Scene ${current + 1} of ${n}, ${scene.time}: ${scene.title}. ${scene.summary}`}
       </p>
     </div>
   )
