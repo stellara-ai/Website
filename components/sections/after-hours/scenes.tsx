@@ -221,7 +221,7 @@ export const SCENES: Scene[] = [
     time: "7:20 PM",
     title: "Work is done",
     summary: "A new qualified lead with a consultation booked for tomorrow at 9:30 AM. Your office is closed, your business isn't.",
-    durationMs: 4400,
+    durationMs: 6400,
     render: (a) => <Outcome active={a} />,
   },
 ]
