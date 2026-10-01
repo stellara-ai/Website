@@ -50,6 +50,10 @@
   --color-paper: var(--paper);
   /* Logo gold for dark fields — stays the light-gold variant in both themes. */
   --color-gilt: #e8c88a;
+  --color-scene-a: var(--ah-a);
+  --color-scene-b: var(--ah-b);
+  --color-scene-c: var(--ah-c);
+  --color-scene: var(--ah-accent);
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -458,7 +462,124 @@
   animation: stellara-flow-move 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
-/* After-hours story carousel. */
+/* After-hours story carousel. Each scene is its own color world. */
+.ah-tone-dusk {
+  --ah-a: #ff7a59;
+  --ah-b: #2a0f45;
+  --ah-c: #d63384;
+  --ah-accent: #ffc9a8;
+}
+.ah-tone-call {
+  --ah-a: #ff4d8d;
+  --ah-b: #3a0a63;
+  --ah-c: #7b3cff;
+  --ah-accent: #ffd36e;
+}
+.ah-tone-night {
+  --ah-a: #3f5bff;
+  --ah-b: #0b1140;
+  --ah-c: #ff5fa2;
+  --ah-accent: #ff9ec8;
+}
+.ah-tone-magic {
+  --ah-a: #7c4dff;
+  --ah-b: #170a4a;
+  --ah-c: #c86bff;
+  --ah-accent: #e8c88a;
+}
+.ah-tone-ocean {
+  --ah-a: #12c2c2;
+  --ah-b: #0a1d5c;
+  --ah-c: #3a6bff;
+  --ah-accent: #8ff5e0;
+}
+.ah-tone-meadow {
+  --ah-a: #19c37d;
+  --ah-b: #052e3a;
+  --ah-c: #0f8fa8;
+  --ah-accent: #c6f77a;
+}
+.ah-tone-sunset {
+  --ah-a: #ff8a3d;
+  --ah-b: #4a0b3a;
+  --ah-c: #ff3d7f;
+  --ah-accent: #ffe08a;
+}
+.ah-tone-sky {
+  --ah-a: #4f8bff;
+  --ah-b: #1c0f5c;
+  --ah-c: #a05cff;
+  --ah-accent: #a9d1ff;
+}
+.ah-tone-starlight {
+  --ah-a: #b04dff;
+  --ah-b: #0d0a33;
+  --ah-c: #ff6fb0;
+  --ah-accent: #e8c88a;
+}
+.ah-card {
+  background:
+    radial-gradient(120% 75% at 0% 0%, color-mix(in oklab, var(--ah-a) 85%, transparent), transparent 62%),
+    radial-gradient(110% 80% at 100% 100%, color-mix(in oklab, var(--ah-c) 75%, transparent), transparent 58%),
+    var(--ah-b);
+}
+.ah-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.ah-glow {
+  box-shadow:
+    0 40px 90px -30px color-mix(in oklab, var(--ah-a) 70%, transparent),
+    0 18px 40px -20px color-mix(in oklab, var(--ah-c) 60%, transparent);
+}
+.ah-progress-fill {
+  background: linear-gradient(90deg, var(--ah-a), var(--ah-c), var(--ah-accent));
+}
+@keyframes ah-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(25deg);
+  }
+}
+@keyframes ah-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes ah-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.ah-twinkle {
+  animation: ah-twinkle 2.8s ease-in-out infinite;
+}
+.ah-float {
+  animation: ah-float 3.6s ease-in-out infinite;
+}
+
 @keyframes ah-progress {
   from {
     transform: scaleX(0);
@@ -542,7 +663,7 @@
 }
 .ah-reveal {
   opacity: 0;
-  animation: ah-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: ah-pop 0.75s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
   animation-delay: var(--ah-delay, 0ms);
 }
 .ah-wave {
@@ -561,7 +682,9 @@
   .ah-buzz,
   .ah-wave,
   .ah-lights-off,
-  .ah-halo {
+  .ah-halo,
+  .ah-twinkle,
+  .ah-float {
     animation: none !important;
   }
   .ah-reveal {

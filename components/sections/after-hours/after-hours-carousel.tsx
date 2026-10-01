@@ -10,13 +10,19 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Sparkle } from "lucide-react"
 import { SCENES } from "./scenes"
 
 const SCENE_MS = 4800
 const RESUME_AFTER_MS = 9000
 const SPACING = 54
-const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
+const EASE = "cubic-bezier(0.34, 1.25, 0.64, 1)"
+
+const SPARKLES = [
+  { top: "14%", left: "82%", size: 14, delay: "0ms" },
+  { top: "26%", left: "8%", size: 9, delay: "900ms" },
+  { top: "58%", left: "90%", size: 8, delay: "1700ms" },
+]
 
 function wrapOffset(d: number, n: number) {
   return ((((d + n / 2) % n) + n) % n) - n / 2
@@ -31,7 +37,7 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const duration = dragging || reduced ? "0ms" : "1100ms"
   return {
     transform: `translateX(-50%) translateX(${d * SPACING}%) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
-    filter: `brightness(${1 - near * 0.5}) saturate(${1 - near * 0.5}) blur(${near * 1.5}px)`,
+    filter: `brightness(${1 - near * 0.18}) saturate(${1 - near * 0.15}) blur(${near * 1}px)`,
     opacity,
     zIndex: 30 - Math.round(abs * 10),
     transition: `transform ${duration} ${EASE}, filter ${duration} ${EASE}, opacity ${duration} ${EASE}`,
@@ -212,13 +218,24 @@ export function AfterHoursCarousel() {
             >
               <article
                 className={
-                  "relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-border bg-ink p-5 text-ink-foreground sm:p-6 " +
-                  (isCurrent ? "shadow-float" : "")
+                  "ah-card relative flex h-full flex-col overflow-hidden rounded-[2rem] p-5 text-ink-foreground transition-shadow duration-700 sm:p-6 " +
+                  s.tone +
+                  (isCurrent ? " ah-glow" : "")
                 }
               >
+                {SPARKLES.map((sp, k) => (
+                  <Sparkle
+                    key={k}
+                    className={"pointer-events-none absolute fill-current text-scene " + (isActive ? "ah-twinkle" : "opacity-40")}
+                    style={{ top: sp.top, left: sp.left, width: sp.size, height: sp.size, animationDelay: sp.delay }}
+                    aria-hidden="true"
+                  />
+                ))}
                 <header className="relative z-10 flex items-center justify-between">
-                  <span className="font-mono text-xs tabular-nums text-gilt">{s.time}</span>
-                  <span className="font-mono text-xs tabular-nums text-ink-muted">
+                  <span className="rounded-full bg-ink-foreground/15 px-2.5 py-1 font-mono text-xs font-medium tabular-nums text-ink-foreground backdrop-blur-md">
+                    {s.time}
+                  </span>
+                  <span className="font-mono text-xs tabular-nums text-ink-foreground/70">
                     {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
                   </span>
                 </header>
@@ -227,7 +244,7 @@ export function AfterHoursCarousel() {
 
                 <footer className="relative z-10 flex flex-col gap-1">
                   <h3 className="font-display text-xl font-medium tracking-tight text-ink-foreground">{s.title}</h3>
-                  <p className="text-pretty text-sm leading-relaxed text-ink-muted">{s.caption}</p>
+                  <p className="text-pretty text-sm leading-relaxed text-ink-foreground/75">{s.caption}</p>
                 </footer>
               </article>
             </div>
@@ -247,12 +264,12 @@ export function AfterHoursCarousel() {
 
         <div className="flex flex-1 items-center gap-1" aria-hidden="true">
           {SCENES.map((s, i) => (
-            <span key={s.id} className="relative h-0.5 flex-1 overflow-hidden rounded-full bg-border">
-              {i < current && <span className="absolute inset-0 bg-foreground/60" />}
+            <span key={s.id} className={"relative h-1 flex-1 overflow-hidden rounded-full bg-border " + s.tone}>
+              {i < current && <span className="ah-progress-fill absolute inset-0" />}
               {i === current && (
                 <span
                   key={`${current}-${reduced}`}
-                  className={"absolute inset-0 bg-brand " + (reduced ? "" : "ah-progress")}
+                  className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
                   style={
                     {
                       "--ah-duration": `${SCENE_MS}ms`,
