@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
  * inherits the brand token: gold (#a8792a) in light mode, its dark-field
  * counterpart (#e8c88a) in dark mode, no theme-swap flash required.
  */
-function StellaraSymbol({ className }: { className?: string }) {
+export function StellaraSymbol({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 614 893"
