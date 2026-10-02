@@ -29,7 +29,7 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const opacity = abs <= 1.35 ? 1 : Math.max(0, 1 - (abs - 1.35) * 3)
   const duration = dragging || reduced ? "0ms" : "900ms"
   return {
-    transform: `translateX(-50%) translateX(${d * SPACING}%) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
+    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 14}px) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
     filter: `brightness(${1 - near * 0.18}) saturate(${1 - near * 0.15}) blur(${near * 1}px)`,
     opacity,
     zIndex: 30 - Math.round(abs * 10),

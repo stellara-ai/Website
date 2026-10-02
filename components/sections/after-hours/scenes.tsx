@@ -129,17 +129,17 @@ function StellaraTakesOver({ active }: { active: boolean }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6">
       <div className="ah-float relative flex size-28 items-center justify-center">
-        <span className="absolute inset-2 rounded-full bg-scene/25 blur-2xl" aria-hidden="true" />
+        <span className="absolute inset-2 rounded-full bg-brand/25 blur-2xl" aria-hidden="true" />
         <span
           className={"absolute inset-0 rounded-full border border-scene/40 " + (active ? "ah-halo" : "")}
           aria-hidden="true"
         />
         <span
-          className={"absolute inset-4 rounded-full border border-scene/70 " + (active ? "ah-halo" : "")}
+          className={"absolute inset-4 rounded-full border border-brand/60 " + (active ? "ah-halo" : "")}
           style={{ animationDelay: "160ms" }}
           aria-hidden="true"
         />
-        <StellaraSymbol className="relative h-12 text-scene" />
+        <StellaraSymbol className="relative h-12 text-brand" />
       </div>
       <p
         className={"font-display text-4xl font-medium tracking-tight text-ink-foreground " + reveal(active)}
@@ -227,7 +227,7 @@ function Outcome({ active }: { active: boolean }) {
           style={delay(650)}
         >
           <span className="text-ink-foreground/70">Your office is closed.</span>{" "}
-          <span className="text-scene">{"Your business isn\u2019t."}</span>
+          <span className="text-brand">{"Your business isn\u2019t."}</span>
         </p>
       </div>
     </>
