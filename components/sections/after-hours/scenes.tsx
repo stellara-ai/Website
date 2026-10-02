@@ -304,7 +304,7 @@ export const SCENES: Scene[] = [
     title: "Stellara screens",
     headline: (
       <>
-        Stellara responds and screens <span className="text-brand">everyone.</span>
+        Stellara Agent responds, qualifies <span className="text-brand">and books.</span>
       </>
     ),
     body: "The same intake questions, asked consistently, against your PIP criteria.",
