@@ -32,9 +32,8 @@ export const es: SiteContent = {
   },
   hero: {
     eyebrow: "Automatización para bufetes de PIP",
-    headline: "Su bufete tiene trabajo que no debería esperar a su personal.",
-    supporting:
-      "Atienda llamadas fuera de horario, capture consultas del sitio web, dé seguimiento a los tratamientos y automatice las solicitudes de reseñas.",
+    headline: "Automatización creada para bufetes de PIP.",
+    supporting: "Llamadas atendidas. Clientes captados. Seguimiento resuelto.",
     selectorQuestion: "¿Qué debería manejar Stellara?",
     services: [
       { id: "after-hours", label: "Llamadas fuera de horario" },

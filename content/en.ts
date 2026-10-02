@@ -32,9 +32,8 @@ export const en: SiteContent = {
   },
   hero: {
     eyebrow: "Automation for PIP law firms",
-    headline: "Your firm has work that shouldn't wait on your staff.",
-    supporting:
-      "Answer after-hours calls, capture website inquiries, follow up on treatment, and automate review requests.",
+    headline: "Automation built for PIP firms.",
+    supporting: "Calls answered. Leads captured. Follow-up handled.",
     selectorQuestion: "What should Stellara handle?",
     services: [
       { id: "after-hours", label: "After-Hours Calls" },
