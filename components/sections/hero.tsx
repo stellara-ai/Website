@@ -38,7 +38,7 @@ export function Hero({ content }: { content: SiteContent }) {
       <div className="container-editorial relative">
         <div className="flex flex-col items-center gap-10 pb-14 pt-6 text-center md:gap-12 md:pb-20 md:pt-10">
           <div className="hero-load flex min-w-0 max-w-4xl flex-col items-center">
-            <h1 className="text-balance text-[clamp(1.7rem,6.5vw,2.6rem)] font-normal leading-[1.18] tracking-monday text-foreground sm:text-6xl md:text-[4.25rem]">
+            <h1 className="whitespace-nowrap text-[clamp(1rem,6.2vw,4.25rem)] font-normal leading-[1.18] tracking-monday text-foreground">
               {hero.headline}
             </h1>
 
