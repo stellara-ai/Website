@@ -1,4 +1,3 @@
-import Image from "next/image"
 import type { CSSProperties, ReactNode } from "react"
 import { Check, Phone, CalendarCheck, Moon } from "lucide-react"
 import { StellaraSymbol } from "@/components/brand/stellara-logo"
@@ -21,30 +20,49 @@ function reveal(active: boolean) {
 
 const glass = "border border-border bg-background/90 backdrop-blur-md"
 
-function PhotoBackdrop({ src, alt, lightsOff }: { src: string; alt: string; lightsOff?: boolean }) {
+function AbstractPanel({ children }: { children: ReactNode }) {
   return (
-    <div className="absolute inset-x-0 bottom-0 top-4 isolate overflow-hidden rounded-[1.25rem] ring-1 ring-inset ring-border [clip-path:inset(0_round_1.25rem)]">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(min-width: 1024px) 34vw, 72vw"
-        className={"object-cover " + (lightsOff ? "ah-lights-off" : "")}
-        draggable={false}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-card/95 via-card/20 to-transparent" aria-hidden="true" />
+    <div
+      className="ah-panel absolute inset-x-0 bottom-0 top-4 isolate overflow-hidden rounded-[1.25rem] ring-1 ring-inset ring-border [clip-path:inset(0_round_1.25rem)]"
+      aria-hidden="true"
+    >
+      {children}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-card via-card/70 to-transparent" />
     </div>
   )
 }
 
+const WINDOW_COUNT = 20
+
 function OfficeClosed({ active }: { active: boolean }) {
   return (
     <>
-      <PhotoBackdrop
-        src="/images/after-hours-office.png"
-        alt="An empty law office at dusk with the lights going off"
-        lightsOff={active}
-      />
+      <AbstractPanel>
+        <span className="ah-moon absolute right-8 top-8 size-9 rounded-full" />
+        {[
+          "left-10 top-12",
+          "left-1/3 top-7",
+          "right-1/4 top-20",
+        ].map((pos, i) => (
+          <span
+            key={pos}
+            className={"ah-twinkle absolute size-1 rounded-full bg-primary/70 " + pos}
+            style={{ animationDelay: `${i * 700}ms` }}
+          />
+        ))}
+        <div className="absolute inset-x-0 top-[22%] flex flex-col items-center">
+          <div className="grid w-44 grid-cols-5 gap-1.5 rounded-t-xl border border-b-0 border-border bg-card p-2.5 shadow-sm">
+            {Array.from({ length: WINDOW_COUNT }, (_, i) => (
+              <span
+                key={i}
+                className={"ah-window h-5 rounded-[4px] " + (active ? "ah-window-off" : "")}
+                style={delay(350 + ((i * 7) % WINDOW_COUNT) * 85)}
+              />
+            ))}
+          </div>
+          <span className="h-px w-4/5 bg-border" />
+        </div>
+      </AbstractPanel>
       <div className="relative flex flex-1 flex-col justify-end gap-3 p-4">
         <span
           className={
@@ -155,7 +173,36 @@ function StellaraTakesOver({ active }: { active: boolean }) {
 function Outcome({ active }: { active: boolean }) {
   return (
     <>
-      <PhotoBackdrop src="/images/after-hours-exterior.png" alt="A quiet law office building at night" />
+      <AbstractPanel>
+        {[
+          { size: "size-[34rem]", orbit: "26s", dot: false, d: 300 },
+          { size: "size-[24rem]", orbit: "18s", dot: true, d: 180 },
+          { size: "size-[15rem]", orbit: "12s", dot: true, d: 60 },
+        ].map((ring) => (
+          <div
+            key={ring.size}
+            className={
+              "absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 " +
+              ring.size +
+              " " +
+              (active ? "ah-reveal" : "opacity-0")
+            }
+            style={delay(ring.d)}
+          >
+            <div
+              className="ah-orbit absolute inset-0 rounded-full border border-border"
+              style={{ "--ah-orbit": ring.orbit } as CSSProperties}
+            >
+              {ring.dot && (
+                <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_12px_2px] shadow-primary/50" />
+              )}
+            </div>
+          </div>
+        ))}
+        <div className="absolute inset-x-0 top-[62%] flex justify-center">
+          <span className={"ah-sun size-24 -translate-y-1/2 rounded-full " + (active ? "ah-rise" : "opacity-0")} />
+        </div>
+      </AbstractPanel>
       <div className="relative flex flex-1 flex-col justify-between gap-4 p-3">
         <div className={"flex flex-col gap-2 rounded-2xl p-3.5 " + glass + " " + reveal(active)} style={delay(150)}>
           <span className="flex items-center gap-2 text-sm font-semibold text-ink-foreground">

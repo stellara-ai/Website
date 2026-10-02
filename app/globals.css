@@ -624,7 +624,63 @@
   animation: ah-halo 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.ah-panel {
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 70%),
+    color-mix(in srgb, var(--muted) 65%, var(--card));
+}
+.ah-moon {
+  box-shadow: inset 9px -5px 0 0 var(--primary);
+  transform: rotate(-20deg);
+}
+.ah-window {
+  background: color-mix(in srgb, var(--primary) 80%, var(--card));
+  box-shadow: 0 0 10px -2px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+.ah-window-off {
+  animation: ah-window-off 0.45s ease-out forwards;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes ah-window-off {
+  to {
+    background: color-mix(in srgb, var(--foreground) 7%, var(--card));
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.ah-orbit {
+  animation: ah-orbit var(--ah-orbit, 16s) linear infinite;
+}
+@keyframes ah-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ah-sun {
+  background: radial-gradient(circle, var(--primary) 0%, color-mix(in srgb, var(--primary) 35%, transparent) 45%, transparent 70%);
+}
+.ah-rise {
+  animation: ah-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+@keyframes ah-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ah-window-off {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+  .ah-rise {
+    animation-duration: 1ms !important;
+  }
+  .ah-orbit,
   .ah-ring,
   .ah-buzz,
   .ah-wave,
