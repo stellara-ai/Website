@@ -24,14 +24,18 @@ const WINDOW_COUNT = 20
 function OfficeClosed({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
-      <span className="ah-moon absolute right-7 top-6 size-8 rounded-full" />
-      {["left-8 top-10", "left-1/3 top-6", "right-1/3 top-16", "left-1/4 top-20"].map((pos, i) => (
-        <span
-          key={pos}
-          className={"ah-twinkle absolute size-1 rounded-full bg-scene " + pos}
-          style={{ animationDelay: `${i * 600}ms` }}
-        />
-      ))}
+      <span className={"ah-dusk absolute inset-0 " + (active ? "ah-dusk-fall" : "")} />
+      <span className={"ah-sun-set absolute left-[22%] top-10 size-16 rounded-full " + (active ? "ah-setting" : "")} />
+      <span className={"ah-moon absolute right-7 top-6 size-8 rounded-full " + (active ? "ah-moonrise" : "")} />
+      <div className={"ah-stars absolute inset-0 " + (active ? "ah-stars-in" : "")}>
+        {["left-8 top-10", "left-1/3 top-6", "right-1/3 top-16", "left-1/4 top-20"].map((pos, i) => (
+          <span
+            key={pos}
+            className={"ah-twinkle absolute size-1 rounded-full bg-scene " + pos}
+            style={{ animationDelay: `${i * 600}ms` }}
+          />
+        ))}
+      </div>
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
         <div className="grid w-[56%] grid-cols-5 gap-1.5 rounded-t-xl border border-b-0 border-border bg-card p-2.5 shadow-sm">
           {Array.from({ length: WINDOW_COUNT }, (_, i) => (

@@ -684,7 +684,64 @@
 }
 .ah-moon {
   box-shadow: inset 8px -5px 0 0 var(--ah-accent);
-  transform: rotate(-20deg);
+  transform: translateY(70px) rotate(-20deg);
+  opacity: 0;
+}
+.ah-moonrise {
+  animation: ah-moonrise 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+@keyframes ah-moonrise {
+  to {
+    transform: translateY(0) rotate(-20deg);
+    opacity: 1;
+  }
+}
+.ah-sun-set {
+  background: radial-gradient(circle, var(--brand) 0%, color-mix(in srgb, var(--brand) 40%, transparent) 38%, transparent 68%);
+}
+.ah-setting {
+  animation: ah-setting 2s cubic-bezier(0.55, 0, 0.45, 1) 0.15s forwards;
+}
+@keyframes ah-setting {
+  to {
+    transform: translateY(150%) scale(0.85);
+    opacity: 0;
+  }
+}
+.ah-dusk {
+  --ah-night: oklch(0.2 0.05 270);
+  background: linear-gradient(to bottom, var(--ah-night), color-mix(in srgb, var(--ah-night) 55%, transparent));
+  opacity: 0;
+}
+.ah-dusk-fall {
+  animation: ah-dusk-fall 2.4s ease-in-out 0.2s forwards;
+}
+@keyframes ah-dusk-fall {
+  to {
+    opacity: 0.55;
+  }
+}
+:root:not(.dark) .ah-dusk {
+  --ah-night: oklch(0.32 0.06 268);
+}
+:root:not(.dark) .ah-dusk-fall {
+  animation-name: ah-dusk-fall-light;
+}
+@keyframes ah-dusk-fall-light {
+  to {
+    opacity: 0.32;
+  }
+}
+.ah-stars {
+  opacity: 0;
+}
+.ah-stars-in {
+  animation: ah-stars-in 1.2s ease-out 1.6s forwards;
+}
+@keyframes ah-stars-in {
+  to {
+    opacity: 1;
+  }
 }
 .ah-window {
   --ah-win: oklch(0.6 0.13 275);
@@ -746,8 +803,13 @@
     animation-duration: 1ms !important;
     animation-delay: 0ms !important;
   }
-  .ah-rise {
+  .ah-rise,
+  .ah-moonrise,
+  .ah-setting,
+  .ah-dusk-fall,
+  .ah-stars-in {
     animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
   }
   .ah-orbit,
   .ah-ring,
