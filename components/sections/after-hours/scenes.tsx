@@ -130,7 +130,7 @@ function StellaraScreens({ active }: { active: boolean }) {
           </div>
           <div className="relative py-1">
             <span
-              className={"absolute left-2 top-1 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
+              className={"absolute left-2 top-1 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
             >
               <span
                 className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
