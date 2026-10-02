@@ -31,6 +31,17 @@ export const en: SiteContent = {
     menuTitle: "Menu",
   },
   hero: {
+    eyebrow: "Automation for PIP law firms",
+    headline: "Automation built for PIP firms.",
+    supporting: "Calls answered. Leads captured. Follow-up handled.",
+    selectorQuestion: "What should Stellara handle?",
+    services: [
+      { id: "after-hours", label: "After-Hours Calls" },
+      { id: "reviews", label: "Reviews" },
+      { id: "website-intake", label: "Website Intake" },
+      { id: "treatment-follow-up", label: "Treatment Follow-Up" },
+    ],
+    demoCta: "See Stellara in action",
     origin: "AI automation + custom software",
     headlinePrefix: "We automate the",
     headlineWord: "work",
