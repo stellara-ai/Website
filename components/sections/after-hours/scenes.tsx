@@ -60,12 +60,12 @@ function IncomingCall({ active }: { active: boolean }) {
             />
           ))}
         <span className="relative flex size-20 items-center justify-center rounded-full border border-border bg-card font-display text-2xl font-medium text-scene shadow-sm">
-          JM
+          ML
         </span>
       </div>
       <div className="flex flex-col items-center gap-1 text-center">
-        <span className="text-sm font-semibold text-foreground">Jordan Miles</span>
-        <span className="text-xs text-muted-foreground">{"New caller \u00B7 Kitchen remodel"}</span>
+        <span className="text-sm font-semibold text-foreground">Maria Lopez</span>
+        <span className="text-xs text-muted-foreground">{"New caller \u00B7 Car accident"}</span>
       </div>
       <span className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm">
         <Phone className={"size-3.5 text-scene " + (active ? "ah-buzz" : "")} />
@@ -76,9 +76,9 @@ function IncomingCall({ active }: { active: boolean }) {
 }
 
 const TRANSCRIPT = [
-  { from: "caller", text: "Hi, can I get a quote for a kitchen remodel?", at: 350 },
-  { from: "stellara", text: "Of course. What timeline are you thinking?", at: 1350 },
-  { from: "caller", text: "Next month. Budget is around $40k.", at: 2450 },
+  { from: "caller", text: "I was rear-ended tonight. Is my treatment covered?", at: 350 },
+  { from: "stellara", text: "I'm sorry. Are you hurt, and have you seen a doctor yet?", at: 1350 },
+  { from: "caller", text: "My neck hurts. I haven't seen anyone.", at: 2450 },
 ] as const
 
 function StellaraAnswers({ active }: { active: boolean }) {
@@ -129,7 +129,7 @@ function StellaraAnswers({ active }: { active: boolean }) {
           <span className="flex size-4 items-center justify-center rounded-full bg-scene text-background">
             <Check className="size-3" strokeWidth={3} />
           </span>
-          Lead qualified
+          PIP case qualified
         </span>
       </div>
     </div>
@@ -172,8 +172,8 @@ function Booked({ active }: { active: boolean }) {
             <Check className="size-3.5" strokeWidth={3} />
           </span>
           <span className="flex flex-col">
-            <span className="text-xs font-semibold text-foreground">Lead qualified</span>
-            <span className="text-xs text-muted-foreground">{"Jordan Miles \u00B7 $40k"}</span>
+            <span className="text-xs font-semibold text-foreground">PIP case qualified</span>
+            <span className="text-xs text-muted-foreground">{"Maria Lopez \u00B7 Rear-end collision"}</span>
           </span>
         </span>
         <span
@@ -187,7 +187,7 @@ function Booked({ active }: { active: boolean }) {
             <CalendarCheck className="size-3.5" />
           </span>
           <span className="flex flex-col">
-            <span className="text-xs font-semibold text-foreground">Consultation booked</span>
+            <span className="text-xs font-semibold text-foreground">Free consultation booked</span>
             <span className="text-xs tabular-nums text-muted-foreground">{"Tomorrow \u00B7 9:30 AM"}</span>
           </span>
         </span>
@@ -202,10 +202,10 @@ export const SCENES: Scene[] = [
     tone: "ah-tone-dusk",
     time: "6:59 PM",
     step: "Closed",
-    title: "Office closed",
-    headline: "Your team clocks out.",
-    body: "The lights go off. The phone keeps ringing.",
-    summary: "Your team has gone home and the office is closed.",
+    title: "Firm closed",
+    headline: "Your firm closes for the night.",
+    body: "Accidents don\u2019t keep office hours.",
+    summary: "Your attorneys and intake staff have gone home and the firm is closed.",
     durationMs: 3400,
     visual: (a) => <OfficeClosed active={a} />,
   },
@@ -215,9 +215,9 @@ export const SCENES: Scene[] = [
     time: "7:14 PM",
     step: "Call",
     title: "Incoming call",
-    headline: "A new client calls.",
-    body: "After hours, most calls hit voicemail and never call back.",
-    summary: "A potential new client, Jordan Miles, calls about a kitchen remodel after hours.",
+    headline: "An injured driver calls.",
+    body: "Accident victims sign with the first firm that answers.",
+    summary: "Maria Lopez, injured in a rear-end collision, calls the firm after hours.",
     durationMs: 3600,
     visual: (a) => <IncomingCall active={a} />,
   },
@@ -232,8 +232,8 @@ export const SCENES: Scene[] = [
         Stellara <span className="text-brand">picks up.</span>
       </>
     ),
-    body: "Answers on the first ring, asks the right questions, qualifies the lead.",
-    summary: "Stellara answers on the first ring, talks with the caller and qualifies the lead.",
+    body: "Answers on the first ring, gathers the accident details, qualifies the PIP case.",
+    summary: "Stellara answers on the first ring, gathers the accident and injury details and qualifies the PIP case.",
     durationMs: 6000,
     visual: (a) => <StellaraAnswers active={a} />,
   },
@@ -245,12 +245,12 @@ export const SCENES: Scene[] = [
     title: "Consultation booked",
     headline: (
       <>
-        Your office is closed. <span className="text-brand">{"Your business isn\u2019t."}</span>
+        Your firm is closed. <span className="text-brand">{"Your intake isn\u2019t."}</span>
       </>
     ),
-    body: "Booked for 9:30 AM and logged in your CRM.",
+    body: "Free consultation at 9:30 AM, case file in your CRM.",
     summary:
-      "A qualified lead with a consultation booked for tomorrow at 9:30 AM, logged in your CRM. Your office is closed, your business isn't.",
+      "A qualified PIP case with a free consultation booked for tomorrow at 9:30 AM and the case file logged in your CRM. Your firm is closed, your intake isn't.",
     durationMs: 6400,
     visual: (a) => <Booked active={a} />,
   },
