@@ -212,6 +212,14 @@ export function AfterHoursCarousel() {
               }
               style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
             >
+              {/* Shadow lives outside the article because its clip-path would clip box-shadow. */}
+              <div
+                aria-hidden="true"
+                className={
+                  "ah-lift pointer-events-none absolute inset-0 rounded-[1.75rem] transition-opacity duration-700 " +
+                  (isCurrent ? "opacity-100" : "opacity-0")
+                }
+              />
               <article
                 className={
                   "ah-card relative isolate flex h-full flex-col gap-4 overflow-hidden rounded-[1.75rem] p-3.5 text-foreground [clip-path:inset(0_round_1.75rem)] transition-shadow duration-700 sm:p-4 " +
