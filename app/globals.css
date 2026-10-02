@@ -503,6 +503,7 @@
 .ah-card {
   background: var(--card);
   border: 1px solid var(--border);
+  box-shadow: 0 0 0 0 transparent;
 }
 .ah-glow {
   border-color: color-mix(in srgb, var(--ah-accent) 30%, var(--border));
@@ -513,9 +514,9 @@
 }
 :root:not(.dark) .ah-glow {
   box-shadow:
-    0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent),
-    0 6px 14px -6px color-mix(in srgb, var(--ink) 12%, transparent),
-    0 28px 56px -24px color-mix(in srgb, var(--ink) 26%, transparent);
+    0 2px 4px color-mix(in srgb, var(--ink) 6%, transparent),
+    0 12px 24px -10px color-mix(in srgb, var(--ink) 16%, transparent),
+    0 36px 64px -28px color-mix(in srgb, var(--ink) 30%, transparent);
 }
 .ah-stage {
   background:
