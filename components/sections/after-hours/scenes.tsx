@@ -211,10 +211,8 @@ function Outcome({ active }: { active: boolean }) {
             </span>
             New qualified lead
           </span>
-          <span className="flex items-center gap-2.5 text-sm text-ink-foreground">
-            <span className="ah-cal flex size-8 shrink-0 items-center justify-center rounded-lg">
-              <CalendarCheck className="size-4" aria-hidden="true" />
-            </span>
+          <span className="flex items-start gap-2 text-sm text-ink-foreground">
+            <CalendarCheck className="mt-0.5 size-4 shrink-0 text-scene" aria-hidden="true" />
             <span className="flex flex-col">
               <span className="font-medium">Consultation booked</span>
               <span className="text-xs tabular-nums text-ink-foreground/70">{"Tomorrow \u00B7 9:30 AM"}</span>

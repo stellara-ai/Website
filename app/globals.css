@@ -500,15 +500,6 @@
 .dark .ah-tone-starlight {
   --ah-accent: oklch(0.78 0.075 165);
 }
-.ah-cal {
-  --ah-cal: oklch(0.56 0.12 245);
-  color: var(--ah-cal);
-  background: color-mix(in srgb, var(--ah-cal) 14%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ah-cal) 26%, transparent);
-}
-.dark .ah-cal {
-  --ah-cal: oklch(0.78 0.1 245);
-}
 .ah-card {
   --ink-foreground: var(--foreground);
   background: linear-gradient(
