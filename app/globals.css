@@ -841,8 +841,98 @@
     filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 50%, transparent));
   }
 }
+.ah-scan {
+  animation: ah-scan 3.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes ah-scan {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  8%,
+  27.8% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  33.3%,
+  50% {
+    transform: translateY(2rem);
+  }
+  55.6%,
+  72.2% {
+    transform: translateY(4rem);
+  }
+  77.8%,
+  100% {
+    transform: translateY(6rem);
+    opacity: 1;
+  }
+}
+.ah-inspect {
+  opacity: 0;
+  animation: ah-inspect 0.8s ease-in-out forwards;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes ah-inspect {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.96);
+  }
+  25%,
+  75% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.ah-blip {
+  opacity: 0;
+  animation: ah-blip 0.6s linear forwards;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes ah-blip {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+}
+.ah-spin {
+  animation: ah-orbit 0.7s linear infinite;
+}
+.ah-done {
+  opacity: 0;
+  animation: ah-done 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes ah-done {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
+  .ah-scan {
+    animation: none !important;
+    transform: translateY(6rem);
+  }
+  .ah-inspect,
+  .ah-blip,
+  .ah-done,
+  .ah-spin {
+    animation: none !important;
+    opacity: 0;
+  }
   .ah-window-off {
     animation-duration: 1ms !important;
     animation-delay: 0ms !important;

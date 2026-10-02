@@ -19,6 +19,13 @@ const delay = (ms: number) => ({ "--ah-delay": `${ms}ms` }) as CSSProperties
 
 const enter = (active: boolean) => (active ? "ah-reveal" : "")
 
+const CRITERIA = [
+  { label: "Accident date", value: "Sep 24", at: 400 },
+  { label: "Auto insurer", value: "On file", at: 1200 },
+  { label: "Seeing a provider", value: "Yes", at: 2000 },
+  { label: "Current attorney", value: "None", at: 2800 },
+] as const
+
 const WINDOW_COUNT = 20
 
 function OfficeClosed({ active }: { active: boolean }) {
@@ -115,23 +122,63 @@ function StellaraScreens({ active }: { active: boolean }) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-4">
-        <span className="relative flex size-28 items-center justify-center">
-          {[0, 1000, 2000].map((ms) => (
+      <div className="flex flex-1 flex-col justify-center gap-2">
+        <div className="flex flex-col rounded-xl border border-border bg-card shadow-sm">
+          <div className="flex items-center justify-between border-b border-border px-3 py-2">
+            <span className="text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
+            <span className="text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
+          </div>
+          <div className="relative py-1.5">
             <span
-              key={ms}
-              className={
-                "absolute inset-0 rounded-full border border-brand/50 " + (active ? "ah-pulse-ring" : "opacity-0")
-              }
-              style={{ animationDelay: `${ms}ms` }}
-            />
-          ))}
-          <span className={"absolute inset-5 rounded-full bg-brand-tint " + (active ? "ah-breathe" : "")} />
-          <StellaraSymbol className={"relative h-12 text-brand " + (active ? "ah-alive" : "")} />
-        </span>
+              className={"absolute left-2 top-1.5 flex size-8 items-center justify-center " + (active ? "ah-scan" : "")}
+            >
+              <span
+                className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
+              />
+              <span
+                className={"absolute inset-0 rounded-full border border-brand " + (active ? "ah-done" : "opacity-0")}
+                style={delay(3400)}
+              />
+              <span className="absolute inset-1 rounded-full bg-brand-tint" />
+              <StellaraSymbol className={"relative h-3.5 text-brand " + (active ? "ah-alive" : "")} />
+            </span>
+            <ul className="flex flex-col">
+              {CRITERIA.map((row) => (
+                <li key={row.label} className="relative flex h-8 items-center gap-2 pl-12 pr-3 text-xs">
+                  <span
+                    className={"absolute inset-y-0.5 left-1 right-1 rounded-lg bg-brand-tint " + (active ? "ah-inspect" : "opacity-0")}
+                    style={delay(row.at)}
+                  />
+                  <span className="relative flex-1 text-muted-foreground">{row.label}</span>
+                  <span
+                    className={"relative font-medium tabular-nums text-foreground " + enter(active)}
+                    style={delay(row.at + 600)}
+                  >
+                    {row.value}
+                  </span>
+                  <span className="relative flex size-4 shrink-0 items-center justify-center">
+                    <span className="absolute inset-0 rounded-full border border-dashed border-border" />
+                    <span
+                      className={"absolute inset-0 " + (active ? "ah-blip" : "opacity-0")}
+                      style={delay(row.at)}
+                    >
+                      <span className="ah-spin absolute inset-0 rounded-full border-2 border-brand border-t-transparent" />
+                    </span>
+                    <span
+                      className={"relative flex size-4 items-center justify-center rounded-full bg-brand text-background " + enter(active)}
+                      style={delay(row.at + 600)}
+                    >
+                      <Check className="size-2.5" strokeWidth={3} />
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <span
           className={
-            "flex items-center gap-2 rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
+            "flex items-center gap-2 self-start rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
             enter(active)
           }
           style={delay(3800)}
