@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
-import { CalendarCheck, Check, Phone } from "lucide-react"
+import { CalendarCheck, Check, Database, Globe, MessageSquare, Phone } from "lucide-react"
 import { StellaraSymbol } from "@/components/brand/stellara-logo"
 
 export type Scene = {
@@ -19,19 +19,30 @@ const delay = (ms: number) => ({ "--ah-delay": `${ms}ms` }) as CSSProperties
 
 const enter = (active: boolean) => (active ? "ah-reveal" : "")
 
+const CRITERIA = [
+  { label: "Accident date", value: "Sep 24", at: 400 },
+  { label: "Auto insurer", value: "On file", at: 1200 },
+  { label: "Seeing a provider", value: "Yes", at: 2000 },
+  { label: "Current attorney", value: "None", at: 2800 },
+] as const
+
 const WINDOW_COUNT = 20
 
 function OfficeClosed({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
-      <span className="ah-moon absolute right-7 top-6 size-8 rounded-full" />
-      {["left-8 top-10", "left-1/3 top-6", "right-1/3 top-16", "left-1/4 top-20"].map((pos, i) => (
-        <span
-          key={pos}
-          className={"ah-twinkle absolute size-1 rounded-full bg-scene " + pos}
-          style={{ animationDelay: `${i * 600}ms` }}
-        />
-      ))}
+      <span className={"ah-dusk absolute inset-0 " + (active ? "ah-dusk-fall" : "")} />
+      <span className={"ah-sun-set absolute left-[22%] top-10 size-16 rounded-full " + (active ? "ah-setting" : "")} />
+      <span className={"ah-moon absolute right-7 top-6 size-8 rounded-full " + (active ? "ah-moonrise" : "")} />
+      <div className={"ah-stars absolute inset-0 " + (active ? "ah-stars-in" : "")}>
+        {["left-8 top-10", "left-1/3 top-6", "right-1/3 top-16", "left-1/4 top-20"].map((pos, i) => (
+          <span
+            key={pos}
+            className={"ah-twinkle absolute size-1 rounded-full bg-scene " + pos}
+            style={{ animationDelay: `${i * 600}ms` }}
+          />
+        ))}
+      </div>
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
         <div className="grid w-[56%] grid-cols-5 gap-1.5 rounded-t-xl border border-b-0 border-border bg-card p-2.5 shadow-sm">
           {Array.from({ length: WINDOW_COUNT }, (_, i) => (
@@ -47,48 +58,56 @@ function OfficeClosed({ active }: { active: boolean }) {
   )
 }
 
-function IncomingCall({ active }: { active: boolean }) {
+const INQUIRIES = [
+  { icon: Phone, channel: "Call", time: "7:42 PM", note: "Rear-end collision last week", at: 300 },
+  { icon: Globe, channel: "Web form", time: "9:15 PM", note: "PIP claim for physical therapy", at: 1100 },
+  { icon: MessageSquare, channel: "Text", time: "10:58 PM", note: "Question about PIP coverage", at: 1900 },
+  { icon: Phone, channel: "Call", time: "6:47 AM", note: "Spanish-speaking caller", at: 2700 },
+] as const
+
+function InquiriesArrive({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4" aria-hidden="true">
-      <div className="relative flex size-20 items-center justify-center">
-        {active &&
-          [0, 600, 1200].map((ms) => (
-            <span
-              key={ms}
-              className="ah-ring absolute inset-0 rounded-full border border-scene"
-              style={{ animationDelay: `${ms}ms` }}
-            />
-          ))}
-        <span className="relative flex size-20 items-center justify-center rounded-full border border-border bg-card font-display text-2xl font-medium text-scene shadow-sm">
-          ML
+    <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-semibold text-foreground">After-hours inbox</span>
+        <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <span className={"size-1.5 rounded-full bg-scene " + (active ? "ah-twinkle" : "")} />
+          Receiving
         </span>
       </div>
-      <div className="flex flex-col items-center gap-1 text-center">
-        <span className="text-sm font-semibold text-foreground">Maria Lopez</span>
-        <span className="text-xs text-muted-foreground">{"New caller \u00B7 Car accident"}</span>
-      </div>
-      <span className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm">
-        <Phone className={"size-3.5 text-scene " + (active ? "ah-buzz" : "")} />
-        {"Ringing\u2026"}
-      </span>
+      <ul className="flex flex-1 flex-col justify-center gap-2">
+        {INQUIRIES.map((item) => {
+          const Icon = item.icon
+          return (
+            <li
+              key={item.time}
+              className={
+                "flex items-center gap-2.5 rounded-xl border border-border bg-card px-3 py-2 shadow-sm " +
+                enter(active)
+              }
+              style={delay(item.at)}
+            >
+              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-scene/10 text-scene">
+                <Icon className="size-3.5" />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="text-xs font-semibold text-foreground">{item.channel}</span>
+                <span className="truncate text-xs text-muted-foreground">{item.note}</span>
+              </span>
+              <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{item.time}</span>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
 
-const TRANSCRIPT = [
-  { from: "caller", text: "I was rear-ended tonight. Is my treatment covered?", at: 350 },
-  { from: "stellara", text: "I'm sorry. Are you hurt, and have you seen a doctor yet?", at: 1350 },
-  { from: "caller", text: "My neck hurts. I haven't seen anyone.", at: 2450 },
-] as const
-
-function StellaraAnswers({ active }: { active: boolean }) {
+function StellaraScreens({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
+    <div className="absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-xs font-semibold text-foreground">
-          <StellaraSymbol className="h-4 text-brand" />
-          Stellara
-        </span>
+        <span className="text-xs font-semibold text-foreground">Stellara</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className="flex h-3 items-center gap-0.5">
             {[0, 150, 300, 450].map((ms) => (
@@ -99,44 +118,88 @@ function StellaraAnswers({ active }: { active: boolean }) {
               />
             ))}
           </span>
-          Live
+          Screening
         </span>
       </div>
-      <div className="flex flex-1 flex-col justify-end gap-2">
-        {TRANSCRIPT.map((line) => (
-          <p
-            key={line.text}
-            className={
-              "max-w-[86%] rounded-2xl px-3 py-2 text-xs leading-snug text-foreground " +
-              (line.from === "stellara"
-                ? "self-start rounded-tl-sm border border-brand/25 bg-brand-tint"
-                : "self-end rounded-tr-sm border border-border bg-card") +
-              " " +
-              (active ? "ah-reveal" : "")
-            }
-            style={delay(line.at)}
-          >
-            {line.text}
-          </p>
-        ))}
+
+      <div className="flex min-h-0 flex-1 flex-col justify-center gap-2">
+        <div className="flex flex-col rounded-xl border border-border bg-card shadow-sm">
+          <div className="flex items-center justify-between border-b border-border px-3 py-1.5">
+            <span className="text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
+            <span className="text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
+          </div>
+          <div className="relative py-1">
+            <span
+              className={"absolute left-2 top-1 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
+            >
+              <span
+                className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
+              />
+              <span
+                className={"absolute inset-0 rounded-full border border-brand " + (active ? "ah-done" : "opacity-0")}
+                style={delay(3400)}
+              />
+              <span className="absolute inset-1 rounded-full bg-brand-tint" />
+              <StellaraSymbol className={"relative h-3.5 text-brand " + (active ? "ah-alive" : "")} />
+            </span>
+            <ul className="flex flex-col">
+              {CRITERIA.map((row) => (
+                <li key={row.label} className="relative flex h-7 items-center gap-2 pl-11 pr-3 text-xs">
+                  <span
+                    className={"absolute inset-y-0.5 left-1 right-1 rounded-lg bg-brand-tint " + (active ? "ah-inspect" : "opacity-0")}
+                    style={delay(row.at)}
+                  />
+                  <span className="relative flex-1 text-muted-foreground">{row.label}</span>
+                  <span
+                    className={"relative font-medium tabular-nums text-foreground " + enter(active)}
+                    style={delay(row.at + 600)}
+                  >
+                    {row.value}
+                  </span>
+                  <span className="relative flex size-4 shrink-0 items-center justify-center">
+                    <span className="absolute inset-0 rounded-full border border-dashed border-border" />
+                    <span
+                      className={"absolute inset-0 " + (active ? "ah-blip" : "opacity-0")}
+                      style={delay(row.at)}
+                    >
+                      <span className="ah-spin absolute inset-0 rounded-full border-2 border-brand border-t-transparent" />
+                    </span>
+                    <span
+                      className={"relative flex size-4 items-center justify-center rounded-full bg-approve text-background " + enter(active)}
+                      style={delay(row.at + 600)}
+                    >
+                      <Check className="size-2.5" strokeWidth={3} />
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <span
           className={
-            "flex items-center gap-2 self-start rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
-            (active ? "ah-reveal" : "")
+            "flex items-center gap-2 self-start rounded-full border border-approve/30 bg-approve-tint px-2.5 py-1 text-xs font-medium text-approve shadow-sm " +
+            enter(active)
           }
-          style={delay(3500)}
+          style={delay(3800)}
         >
-          <span className="flex size-4 items-center justify-center rounded-full bg-scene text-background">
+          <span className="flex size-4 items-center justify-center rounded-full bg-approve text-background">
             <Check className="size-3" strokeWidth={3} />
           </span>
-          PIP case qualified
+          Meets your PIP intake criteria
         </span>
       </div>
     </div>
   )
 }
 
-function Booked({ active }: { active: boolean }) {
+const BRIEF = [
+  { value: "4", label: "Inquiries screened", at: 500 },
+  { value: "3", label: "PIP matters qualified", at: 800 },
+  { value: "2", label: "Consultations booked", at: 1100 },
+] as const
+
+function MorningBrief({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
       {[
@@ -145,7 +208,7 @@ function Booked({ active }: { active: boolean }) {
       ].map((ring) => (
         <div
           key={ring.size}
-          className={"absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 " + ring.size}
+          className={"absolute left-1/2 top-[82%] -translate-x-1/2 -translate-y-1/2 " + ring.size}
         >
           <div
             className="ah-orbit absolute inset-0 rounded-full border border-border"
@@ -155,42 +218,53 @@ function Booked({ active }: { active: boolean }) {
           </div>
         </div>
       ))}
-      <div className="absolute inset-x-0 top-[78%] flex justify-center">
+      <div className="absolute inset-x-0 top-[82%] flex justify-center">
         <span className={"ah-sun size-28 rounded-full " + (active ? "ah-rise" : "-translate-y-1/2")} />
       </div>
-      <span className="ah-horizon absolute inset-x-6 top-[78%] h-px" />
+      <span className="ah-horizon absolute inset-x-6 top-[82%] h-px" />
 
-      <div className="absolute inset-x-0 top-0 flex flex-col items-center gap-2 p-4">
-        <span
+      <div className="absolute inset-x-0 top-0 flex justify-center p-4">
+        <div
           className={
-            "flex w-full max-w-60 items-center gap-2.5 rounded-xl border border-border bg-card px-3 py-2 shadow-sm " +
-            enter(active)
+            "flex w-full max-w-64 flex-col rounded-xl border border-border bg-card shadow-sm " + enter(active)
           }
-          style={delay(450)}
+          style={delay(250)}
         >
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-scene text-background">
-            <Check className="size-3.5" strokeWidth={3} />
-          </span>
-          <span className="flex flex-col">
-            <span className="text-xs font-semibold text-foreground">PIP case qualified</span>
-            <span className="text-xs text-muted-foreground">{"Maria Lopez \u00B7 Rear-end collision"}</span>
-          </span>
-        </span>
-        <span
-          className={
-            "flex w-full max-w-60 items-center gap-2.5 rounded-xl border border-border bg-card px-3 py-2 shadow-sm " +
-            enter(active)
-          }
-          style={delay(900)}
-        >
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-            <CalendarCheck className="size-3.5" />
-          </span>
-          <span className="flex flex-col">
-            <span className="text-xs font-semibold text-foreground">Free consultation booked</span>
-            <span className="text-xs tabular-nums text-muted-foreground">{"Tomorrow \u00B7 9:30 AM"}</span>
-          </span>
-        </span>
+          <div className="flex items-center justify-between border-b border-border px-3 py-2">
+            <span className="text-xs font-semibold text-foreground">Overnight intake</span>
+            <span className="text-xs tabular-nums text-muted-foreground">8:00 AM</span>
+          </div>
+          <ul className="flex flex-col gap-1.5 px-3 py-2.5">
+            {BRIEF.map((row) => (
+              <li
+                key={row.label}
+                className={"flex items-center gap-2.5 text-xs " + enter(active)}
+                style={delay(row.at)}
+              >
+                <span className="w-4 text-right font-display text-sm font-medium tabular-nums text-brand">
+                  {row.value}
+                </span>
+                <span className="text-foreground">{row.label}</span>
+              </li>
+            ))}
+          </ul>
+          <div
+            className={
+              "flex items-center gap-3 border-t border-border px-3 py-2 text-xs text-muted-foreground " +
+              enter(active)
+            }
+            style={delay(1500)}
+          >
+            <span className="flex items-center gap-1.5">
+              <CalendarCheck className="size-3.5 text-scene" />
+              On your calendar
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Database className="size-3.5 text-scene" />
+              Logged in CRM
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -200,58 +274,60 @@ export const SCENES: Scene[] = [
   {
     id: "closed",
     tone: "ah-tone-dusk",
-    time: "6:59 PM",
+    time: "6:00 PM",
     step: "Closed",
-    title: "Firm closed",
-    headline: "Your firm closes for the night.",
-    body: "Accidents don\u2019t keep office hours.",
-    summary: "Your attorneys and intake staff have gone home and the firm is closed.",
+    title: "Office closes",
+    headline: "The office goes dark at six.",
+    body: "Your attorneys and intake team head home.",
+    summary: "The firm closes for the evening and the attorneys and intake team head home.",
     durationMs: 3400,
     visual: (a) => <OfficeClosed active={a} />,
   },
   {
-    id: "call",
+    id: "inquiries",
     tone: "ah-tone-call",
-    time: "7:14 PM",
-    step: "Call",
-    title: "Incoming call",
-    headline: "An injured driver calls.",
-    body: "Accident victims sign with the first firm that answers.",
-    summary: "Maria Lopez, injured in a rear-end collision, calls the firm after hours.",
-    durationMs: 3600,
-    visual: (a) => <IncomingCall active={a} />,
-  },
-  {
-    id: "stellara",
-    tone: "ah-tone-magic",
-    time: "7:14 PM",
-    step: "Stellara",
-    title: "Stellara answers",
-    headline: (
-      <>
-        Stellara <span className="text-brand">picks up.</span>
-      </>
-    ),
-    body: "Answers on the first ring, gathers the accident details, qualifies the PIP case.",
-    summary: "Stellara answers on the first ring, gathers the accident and injury details and qualifies the PIP case.",
-    durationMs: 6000,
-    visual: (a) => <StellaraAnswers active={a} />,
-  },
-  {
-    id: "booked",
-    tone: "ah-tone-starlight",
-    time: "7:20 PM",
-    step: "Booked",
-    title: "Consultation booked",
-    headline: (
-      <>
-        Your firm is closed. <span className="text-brand">{"Your intake isn\u2019t."}</span>
-      </>
-    ),
-    body: "Free consultation at 9:30 AM, case file in your CRM.",
+    time: "Overnight",
+    step: "Inquiries",
+    title: "Inquiries arrive",
+    headline: "Inquiries keep arriving.",
+    body: "Calls, web forms and texts, through the evening and into the morning.",
     summary:
-      "A qualified PIP case with a free consultation booked for tomorrow at 9:30 AM and the case file logged in your CRM. Your firm is closed, your intake isn't.",
+      "Through the night, four inquiries arrive by phone, web form and text, including a PIP therapy claim and a Spanish-speaking caller.",
+    durationMs: 5000,
+    visual: (a) => <InquiriesArrive active={a} />,
+  },
+  {
+    id: "screening",
+    tone: "ah-tone-magic",
+    time: "Overnight",
+    step: "Screening",
+    title: "Stellara screens",
+    headline: (
+      <>
+        Stellara responds, qualifies <span className="text-brand">and books.</span>
+      </>
+    ),
+    body: "The same intake questions, asked consistently, against your PIP criteria.",
+    summary:
+      "Stellara screens each inquiry against the firm's PIP intake criteria: accident date, auto insurer, treatment status and current representation.",
+    durationMs: 6000,
+    visual: (a) => <StellaraScreens active={a} />,
+  },
+  {
+    id: "brief",
+    tone: "ah-tone-starlight",
+    time: "8:00 AM",
+    step: "Brief",
+    title: "Morning brief",
+    headline: (
+      <>
+        Your office is closed. <span className="text-brand">{"Your intake isn\u2019t."}</span>
+      </>
+    ),
+    body: "Qualified matters and booked consultations, waiting when you arrive.",
+    summary:
+      "By 8 AM, four inquiries are screened, three PIP matters qualified and two consultations booked, all logged in the CRM.",
     durationMs: 6400,
-    visual: (a) => <Booked active={a} />,
+    visual: (a) => <MorningBrief active={a} />,
   },
 ]

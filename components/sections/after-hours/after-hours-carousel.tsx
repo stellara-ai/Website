@@ -10,7 +10,6 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SCENES } from "./scenes"
 
 const RESUME_AFTER_MS = 6000
@@ -29,7 +28,7 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const fade = abs <= 1.35 ? 1 - near * 0.45 : Math.max(0, 0.55 - (abs - 1.35) * 2)
   const duration = dragging || reduced ? "0ms" : "900ms"
   return {
-    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 18}px) translateZ(${-abs * 120}px) rotateY(${-clamped * 16}deg) scale(${scale})`,
+    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 26}px) translateZ(${-abs * 120}px) rotateY(${-clamped * 16}deg) scale(${scale})`,
     filter: `saturate(${1 - near * 0.5})`,
     opacity: fade,
     zIndex: 30 - Math.round(abs * 10),
@@ -90,6 +89,12 @@ export function AfterHoursCarousel() {
     },
     [n, holdAutoplay],
   )
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = window.setTimeout(() => goTo(current + 1, false), SCENES[current].durationMs)
+    return () => window.clearTimeout(timer)
+  }, [playing, current, goTo])
 
   const cardWidth = () => {
     const card = stageRef.current?.querySelector<HTMLElement>("[data-sizer]")
@@ -160,8 +165,8 @@ export function AfterHoursCarousel() {
       ref={rootRef}
       role="region"
       aria-roledescription="carousel"
-      aria-label="After hours: how Stellara handles a call when your office is closed"
-      className="flex w-full flex-col gap-6"
+      aria-label="After hours: how Stellara Agent handles a call when your office is closed"
+      className="w-full"
     >
       <div
         ref={stageRef}
@@ -212,11 +217,18 @@ export function AfterHoursCarousel() {
               }
               style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
             >
+              {/* Shadow lives outside the article because its clip-path would clip box-shadow. */}
+              <div
+                aria-hidden="true"
+                className={
+                  "ah-lift pointer-events-none absolute inset-0 rounded-[1.75rem] transition-opacity duration-700 " +
+                  (isCurrent ? "opacity-100" : "opacity-0")
+                }
+              />
               <article
                 className={
                   "ah-card relative isolate flex h-full flex-col gap-4 overflow-hidden rounded-[1.75rem] p-3.5 text-foreground [clip-path:inset(0_round_1.75rem)] transition-shadow duration-700 sm:p-4 " +
-                  s.tone +
-                  (isCurrent ? " ah-glow" : "")
+                  s.tone
                 }
               >
                 <header className="flex items-center justify-between px-1.5 pt-1">
@@ -247,56 +259,6 @@ export function AfterHoursCarousel() {
             </div>
           )
         })}
-      </div>
-
-      <div className="mx-auto flex w-[70%] items-center gap-3 sm:w-[62%]">
-        <button
-          type="button"
-          onClick={() => goTo(current - 1)}
-          aria-label="Previous scene"
-          className="flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-foreground/30"
-        >
-          <ChevronLeft className="size-4" aria-hidden="true" />
-        </button>
-
-        <div className="flex flex-1 items-start gap-1.5">
-          {SCENES.map((s, i) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => goTo(i)}
-              aria-label={`Go to scene ${i + 1}: ${s.title}`}
-              aria-current={i === current ? "step" : undefined}
-              className="group flex flex-1 flex-col py-2 text-left"
-            >
-              <span className="relative h-1 w-full overflow-hidden rounded-full bg-border">
-                {i < current && <span className="ah-progress-fill absolute inset-0" />}
-                {i === current && (
-                  <span
-                    key={`${current}-${reduced}`}
-                    className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
-                    style={
-                      {
-                        "--ah-duration": `${s.durationMs}ms`,
-                        animationPlayState: playing ? "running" : "paused",
-                      } as CSSProperties
-                    }
-                    onAnimationEnd={() => goTo(current + 1, false)}
-                  />
-                )}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => goTo(current + 1)}
-          aria-label="Next scene"
-          className="flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-foreground/30"
-        >
-          <ChevronRight className="size-4" aria-hidden="true" />
-        </button>
       </div>
 
       <p className="sr-only" aria-live={playing ? "off" : "polite"}>
