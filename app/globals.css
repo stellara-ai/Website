@@ -665,8 +665,24 @@
   transform: rotate(-20deg);
 }
 .ah-window {
-  background: color-mix(in srgb, var(--primary) 80%, var(--card));
-  box-shadow: 0 0 10px -2px color-mix(in srgb, var(--primary) 60%, transparent);
+  --ah-win: oklch(0.6 0.13 275);
+  background: color-mix(in srgb, var(--ah-win) 82%, var(--card));
+  box-shadow: 0 0 10px -2px color-mix(in srgb, var(--ah-win) 60%, transparent);
+}
+.ah-window:nth-child(3n + 1) {
+  --ah-win: oklch(0.62 0.12 250);
+}
+.ah-window:nth-child(3n + 2) {
+  --ah-win: oklch(0.58 0.14 295);
+}
+.dark .ah-window {
+  --ah-win: oklch(0.72 0.12 275);
+}
+.dark .ah-window:nth-child(3n + 1) {
+  --ah-win: oklch(0.74 0.11 250);
+}
+.dark .ah-window:nth-child(3n + 2) {
+  --ah-win: oklch(0.7 0.13 295);
 }
 .ah-window-off {
   animation: ah-window-off 0.45s ease-out forwards;
