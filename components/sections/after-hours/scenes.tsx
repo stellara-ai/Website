@@ -23,7 +23,7 @@ const glass = "border border-border bg-background/90 backdrop-blur-md"
 
 function PhotoBackdrop({ src, alt, lightsOff }: { src: string; alt: string; lightsOff?: boolean }) {
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-x-0 bottom-0 top-4 isolate overflow-hidden rounded-[1.25rem] ring-1 ring-inset ring-border [clip-path:inset(0_round_1.25rem)]">
       <Image
         src={src}
         alt={alt}
@@ -45,7 +45,7 @@ function OfficeClosed({ active }: { active: boolean }) {
         alt="An empty law office at dusk with the lights going off"
         lightsOff={active}
       />
-      <div className="relative flex flex-1 flex-col justify-end gap-3">
+      <div className="relative flex flex-1 flex-col justify-end gap-3 p-4">
         <span
           className={
             "flex items-center gap-2 self-start rounded-full px-3 py-1 text-xs font-medium text-ink-foreground " +
@@ -156,7 +156,7 @@ function Outcome({ active }: { active: boolean }) {
   return (
     <>
       <PhotoBackdrop src="/images/after-hours-exterior.png" alt="A quiet law office building at night" />
-      <div className="relative flex flex-1 flex-col justify-between gap-4">
+      <div className="relative flex flex-1 flex-col justify-between gap-4 p-3">
         <div className={"flex flex-col gap-2 rounded-2xl p-3.5 " + glass + " " + reveal(active)} style={delay(150)}>
           <span className="flex items-center gap-2 text-sm font-semibold text-ink-foreground">
             <span className="flex size-4 items-center justify-center rounded-full bg-scene text-scene-b">

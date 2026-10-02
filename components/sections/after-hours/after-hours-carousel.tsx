@@ -214,7 +214,7 @@ export function AfterHoursCarousel() {
             >
               <article
                 className={
-                  "ah-card relative flex h-full flex-col overflow-hidden rounded-[2rem] p-5 text-ink-foreground transition-shadow duration-700 sm:p-6 " +
+                  "ah-card relative isolate flex h-full flex-col overflow-hidden rounded-[2rem] p-5 [clip-path:inset(0_round_2rem)] text-ink-foreground transition-shadow duration-700 sm:p-6 " +
                   s.tone +
                   (isCurrent ? " ah-glow" : "")
                 }
