@@ -165,7 +165,7 @@ function StellaraScreens({ active }: { active: boolean }) {
                       <span className="ah-spin absolute inset-0 rounded-full border-2 border-brand border-t-transparent" />
                     </span>
                     <span
-                      className={"relative flex size-4 items-center justify-center rounded-full bg-brand text-background " + enter(active)}
+                      className={"relative flex size-4 items-center justify-center rounded-full bg-approve text-background " + enter(active)}
                       style={delay(row.at + 600)}
                     >
                       <Check className="size-2.5" strokeWidth={3} />
