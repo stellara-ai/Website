@@ -50,6 +50,10 @@
   --color-paper: var(--paper);
   /* Logo gold for dark fields — stays the light-gold variant in both themes. */
   --color-gilt: #e8c88a;
+  --color-scene-a: var(--ah-a);
+  --color-scene-b: var(--ah-b);
+  --color-scene-c: var(--ah-c);
+  --color-scene: var(--ah-accent);
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -458,7 +462,108 @@
   animation: stellara-flow-move 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
-/* After-hours story carousel. */
+/* Keep story surfaces on the site theme; color belongs to the small details. */
+.ah-tone-dusk,
+.ah-tone-call,
+.ah-tone-night,
+.ah-tone-magic,
+.ah-tone-ocean,
+.ah-tone-meadow,
+.ah-tone-sunset,
+.ah-tone-sky,
+.ah-tone-starlight {
+  --ah-accent: var(--brand);
+  --ah-b: var(--background);
+}
+/* Muted, low-chroma accents per card so each scene has its own hue next to the brand gold. */
+.ah-tone-dusk {
+  --ah-accent: oklch(0.52 0.09 268);
+}
+.ah-tone-call {
+  --ah-accent: oklch(0.58 0.11 30);
+}
+.ah-tone-magic {
+  --ah-accent: oklch(0.52 0.09 300);
+}
+.ah-tone-starlight {
+  --ah-accent: oklch(0.54 0.085 165);
+}
+.dark .ah-tone-dusk {
+  --ah-accent: oklch(0.76 0.075 268);
+}
+.dark .ah-tone-call {
+  --ah-accent: oklch(0.76 0.09 30);
+}
+.dark .ah-tone-magic {
+  --ah-accent: oklch(0.76 0.075 300);
+}
+.dark .ah-tone-starlight {
+  --ah-accent: oklch(0.78 0.075 165);
+}
+.ah-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+.ah-glow {
+  border-color: color-mix(in srgb, var(--ah-accent) 30%, var(--border));
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent),
+    0 40px 70px -32px color-mix(in srgb, var(--ink) 38%, transparent),
+    0 18px 48px -24px color-mix(in srgb, var(--ah-accent) 40%, transparent);
+}
+.ah-stage {
+  background:
+    radial-gradient(110% 75% at 50% 0%, color-mix(in srgb, var(--ah-accent) 16%, transparent), transparent 72%),
+    color-mix(in srgb, var(--muted) 60%, var(--card));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ah-accent) 14%, var(--border));
+}
+.ah-horizon {
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--brand) 60%, transparent), transparent);
+}
+.ah-progress-fill {
+  background: var(--brand);
+}
+@keyframes ah-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(25deg);
+  }
+}
+@keyframes ah-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes ah-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.ah-twinkle {
+  animation: ah-twinkle 2.8s ease-in-out infinite;
+}
+.ah-float {
+  animation: ah-float 3.6s ease-in-out infinite;
+}
+
 @keyframes ah-progress {
   from {
     transform: scaleX(0);
@@ -542,7 +647,7 @@
 }
 .ah-reveal {
   opacity: 0;
-  animation: ah-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: ah-pop 0.75s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
   animation-delay: var(--ah-delay, 0ms);
 }
 .ah-wave {
@@ -556,12 +661,86 @@
   animation: ah-halo 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.ah-panel {
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 70%),
+    color-mix(in srgb, var(--muted) 65%, var(--card));
+}
+.ah-moon {
+  box-shadow: inset 8px -5px 0 0 var(--ah-accent);
+  transform: rotate(-20deg);
+}
+.ah-window {
+  --ah-win: oklch(0.6 0.13 275);
+  background: color-mix(in srgb, var(--ah-win) 82%, var(--card));
+  box-shadow: 0 0 10px -2px color-mix(in srgb, var(--ah-win) 60%, transparent);
+}
+.ah-window:nth-child(3n + 1) {
+  --ah-win: oklch(0.62 0.12 250);
+}
+.ah-window:nth-child(3n + 2) {
+  --ah-win: oklch(0.58 0.14 295);
+}
+.dark .ah-window {
+  --ah-win: oklch(0.72 0.12 275);
+}
+.dark .ah-window:nth-child(3n + 1) {
+  --ah-win: oklch(0.74 0.11 250);
+}
+.dark .ah-window:nth-child(3n + 2) {
+  --ah-win: oklch(0.7 0.13 295);
+}
+.ah-window-off {
+  animation: ah-window-off 0.45s ease-out forwards;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes ah-window-off {
+  to {
+    background: color-mix(in srgb, var(--foreground) 7%, var(--card));
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.ah-orbit {
+  animation: ah-orbit var(--ah-orbit, 16s) linear infinite;
+}
+@keyframes ah-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ah-sun {
+  background: radial-gradient(circle, var(--brand) 0%, color-mix(in srgb, var(--brand) 35%, transparent) 42%, transparent 70%);
+}
+.ah-rise {
+  animation: ah-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+@keyframes ah-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ah-window-off {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+  .ah-rise {
+    animation-duration: 1ms !important;
+  }
+  .ah-orbit,
   .ah-ring,
   .ah-buzz,
   .ah-wave,
   .ah-lights-off,
-  .ah-halo {
+  .ah-halo,
+  .ah-twinkle,
+  .ah-float {
     animation: none !important;
   }
   .ah-reveal {

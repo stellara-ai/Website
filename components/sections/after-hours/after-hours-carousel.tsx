@@ -13,8 +13,7 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SCENES } from "./scenes"
 
-const SCENE_MS = 4800
-const RESUME_AFTER_MS = 9000
+const RESUME_AFTER_MS = 6000
 const SPACING = 54
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 
@@ -26,13 +25,13 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const abs = Math.abs(d)
   const near = Math.min(abs, 1)
   const clamped = Math.max(-1, Math.min(1, d))
-  const scale = 1 - Math.min(abs, 2) * 0.27
-  const opacity = abs <= 1.35 ? 1 : Math.max(0, 1 - (abs - 1.35) * 3)
-  const duration = dragging || reduced ? "0ms" : "1100ms"
+  const scale = 1 - Math.min(abs, 2) * 0.2
+  const fade = abs <= 1.35 ? 1 - near * 0.45 : Math.max(0, 0.55 - (abs - 1.35) * 2)
+  const duration = dragging || reduced ? "0ms" : "900ms"
   return {
-    transform: `translateX(-50%) translateX(${d * SPACING}%) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
-    filter: `brightness(${1 - near * 0.5}) saturate(${1 - near * 0.5}) blur(${near * 1.5}px)`,
-    opacity,
+    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 18}px) translateZ(${-abs * 120}px) rotateY(${-clamped * 16}deg) scale(${scale})`,
+    filter: `saturate(${1 - near * 0.5})`,
+    opacity: fade,
     zIndex: 30 - Math.round(abs * 10),
     transition: `transform ${duration} ${EASE}, filter ${duration} ${EASE}, opacity ${duration} ${EASE}`,
   }
@@ -189,13 +188,16 @@ export function AfterHoursCarousel() {
           (dragging ? "cursor-grabbing" : "cursor-grab")
         }
       >
-        <div data-sizer aria-hidden="true" className="invisible mx-auto aspect-[4/5] w-[70%] sm:w-[62%]" />
+        <div data-sizer aria-hidden="true" className="invisible mx-auto aspect-[4/5] w-[80%] sm:w-[62%]" />
 
         {SCENES.map((s, i) => {
           const d = wrapOffset(i - position, n)
           const isActive = i === current && !dragging
           const isCurrent = i === current
-          const hidden = Math.abs(d) > 1.4
+          // A card that only appears adjacent because of looping (e.g. the final
+          // outcome peeking beside the opening scene) would spoil the story order.
+          const wrapped = Math.abs(d - (i - position)) > 0.5
+          const hidden = wrapped || Math.abs(d) > 1.4
           return (
             <div
               key={s.id}
@@ -208,27 +210,39 @@ export function AfterHoursCarousel() {
                 "absolute left-1/2 top-0 aspect-[4/5] w-[70%] will-change-transform [transform-style:preserve-3d] sm:w-[62%] " +
                 (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")
               }
-              style={cardStyle(d, dragging, reduced)}
+              style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
             >
               <article
                 className={
-                  "relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-border bg-ink p-5 text-ink-foreground sm:p-6 " +
-                  (isCurrent ? "shadow-float" : "")
+                  "ah-card relative isolate flex h-full flex-col gap-4 overflow-hidden rounded-[1.75rem] p-3.5 text-foreground [clip-path:inset(0_round_1.75rem)] transition-shadow duration-700 sm:p-4 " +
+                  s.tone +
+                  (isCurrent ? " ah-glow" : "")
                 }
               >
-                <header className="relative z-10 flex items-center justify-between">
-                  <span className="font-mono text-xs tabular-nums text-gilt">{s.time}</span>
-                  <span className="font-mono text-xs tabular-nums text-ink-muted">
-                    {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
+                <header className="flex items-center justify-between px-1.5 pt-1">
+                  <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    <span className="size-1.5 rounded-full bg-scene" aria-hidden="true" />
+                    {s.step}
                   </span>
+                  <span className="font-mono text-xs font-medium tabular-nums text-foreground">{s.time}</span>
                 </header>
 
-                <div className="relative flex flex-1 flex-col py-4">{s.render(isActive)}</div>
+                <div className="ah-stage relative isolate flex-1 overflow-hidden rounded-[1.25rem] [clip-path:inset(0_round_1.25rem)]">
+                  {s.visual(isActive)}
+                </div>
 
-                <footer className="relative z-10 flex flex-col gap-1">
-                  <h3 className="font-display text-xl font-medium tracking-tight text-ink-foreground">{s.title}</h3>
-                  <p className="text-pretty text-sm leading-relaxed text-ink-muted">{s.caption}</p>
-                </footer>
+                <div className="flex flex-col gap-1.5 px-1.5 pb-1.5">
+                  <h3
+                    className={
+                      "text-balance font-display text-xl font-medium leading-tight tracking-tight text-foreground sm:text-2xl " +
+                      (isActive ? "ah-reveal" : "")
+                    }
+                    style={{ "--ah-delay": "120ms" } as CSSProperties}
+                  >
+                    {s.headline}
+                  </h3>
+                  <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
               </article>
             </div>
           )
@@ -245,24 +259,33 @@ export function AfterHoursCarousel() {
           <ChevronLeft className="size-4" aria-hidden="true" />
         </button>
 
-        <div className="flex flex-1 items-center gap-1" aria-hidden="true">
+        <div className="flex flex-1 items-start gap-1.5">
           {SCENES.map((s, i) => (
-            <span key={s.id} className="relative h-0.5 flex-1 overflow-hidden rounded-full bg-border">
-              {i < current && <span className="absolute inset-0 bg-foreground/60" />}
-              {i === current && (
-                <span
-                  key={`${current}-${reduced}`}
-                  className={"absolute inset-0 bg-brand " + (reduced ? "" : "ah-progress")}
-                  style={
-                    {
-                      "--ah-duration": `${SCENE_MS}ms`,
-                      animationPlayState: playing ? "running" : "paused",
-                    } as CSSProperties
-                  }
-                  onAnimationEnd={() => goTo(current + 1, false)}
-                />
-              )}
-            </span>
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Go to scene ${i + 1}: ${s.title}`}
+              aria-current={i === current ? "step" : undefined}
+              className="group flex flex-1 flex-col py-2 text-left"
+            >
+              <span className="relative h-1 w-full overflow-hidden rounded-full bg-border">
+                {i < current && <span className="ah-progress-fill absolute inset-0" />}
+                {i === current && (
+                  <span
+                    key={`${current}-${reduced}`}
+                    className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
+                    style={
+                      {
+                        "--ah-duration": `${s.durationMs}ms`,
+                        animationPlayState: playing ? "running" : "paused",
+                      } as CSSProperties
+                    }
+                    onAnimationEnd={() => goTo(current + 1, false)}
+                  />
+                )}
+              </span>
+            </button>
           ))}
         </div>
 
@@ -277,7 +300,7 @@ export function AfterHoursCarousel() {
       </div>
 
       <p className="sr-only" aria-live={playing ? "off" : "polite"}>
-        {`Scene ${current + 1} of ${n}, ${scene.time}: ${scene.title}. ${scene.caption}`}
+        {`Scene ${current + 1} of ${n}, ${scene.time}: ${scene.title}. ${scene.summary}`}
       </p>
     </div>
   )
