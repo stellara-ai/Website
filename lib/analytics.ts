@@ -4,6 +4,7 @@
 export type AnalyticsEvent =
   | "hero_cta_selected"
   | "hero_industry_selected"
+  | "hero_service_selected"
   | "explorer_started"
   | "explorer_answer_selected"
   | "explorer_completed"

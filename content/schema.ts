@@ -23,7 +23,20 @@ export interface MetaContent {
   ogDescription: string
 }
 
+export type HeroServiceId = "after-hours" | "reviews" | "website-intake" | "treatment-follow-up"
+
+export interface HeroService {
+  id: HeroServiceId
+  label: string
+}
+
 export interface HeroContent {
+  eyebrow: string
+  headline: string
+  supporting: string
+  selectorQuestion: string
+  services: HeroService[]
+  demoCta: string
   origin: string
   headlinePrefix: string
   headlineWord: string
