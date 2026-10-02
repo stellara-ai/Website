@@ -501,18 +501,24 @@
   --ah-accent: oklch(0.78 0.075 165);
 }
 .ah-card {
-  --ink-foreground: var(--foreground);
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--ah-accent) 7%, var(--card)),
-    var(--card) 55%
-  );
-  border: 1px solid color-mix(in srgb, var(--ah-accent) 14%, var(--border));
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 .ah-glow {
+  border-color: color-mix(in srgb, var(--ah-accent) 30%, var(--border));
   box-shadow:
-    0 36px 64px -28px color-mix(in srgb, var(--ink) 34%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--ah-accent) 22%, transparent);
+    0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent),
+    0 40px 70px -32px color-mix(in srgb, var(--ink) 38%, transparent),
+    0 18px 48px -24px color-mix(in srgb, var(--ah-accent) 40%, transparent);
+}
+.ah-stage {
+  background:
+    radial-gradient(110% 75% at 50% 0%, color-mix(in srgb, var(--ah-accent) 16%, transparent), transparent 72%),
+    color-mix(in srgb, var(--muted) 60%, var(--card));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ah-accent) 14%, var(--border));
+}
+.ah-horizon {
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--brand) 60%, transparent), transparent);
 }
 .ah-progress-fill {
   background: var(--brand);
@@ -661,7 +667,7 @@
     color-mix(in srgb, var(--muted) 65%, var(--card));
 }
 .ah-moon {
-  box-shadow: inset 9px -5px 0 0 var(--primary);
+  box-shadow: inset 8px -5px 0 0 var(--ah-accent);
   transform: rotate(-20deg);
 }
 .ah-window {
@@ -703,7 +709,7 @@
   }
 }
 .ah-sun {
-  background: radial-gradient(circle, var(--primary) 0%, color-mix(in srgb, var(--primary) 35%, transparent) 45%, transparent 70%);
+  background: radial-gradient(circle, var(--brand) 0%, color-mix(in srgb, var(--brand) 35%, transparent) 42%, transparent 70%);
 }
 .ah-rise {
   animation: ah-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;

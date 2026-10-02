@@ -25,13 +25,13 @@ function cardStyle(d: number, dragging: boolean, reduced: boolean): CSSPropertie
   const abs = Math.abs(d)
   const near = Math.min(abs, 1)
   const clamped = Math.max(-1, Math.min(1, d))
-  const scale = 1 - Math.min(abs, 2) * 0.27
-  const opacity = abs <= 1.35 ? 1 : Math.max(0, 1 - (abs - 1.35) * 3)
+  const scale = 1 - Math.min(abs, 2) * 0.2
+  const fade = abs <= 1.35 ? 1 - near * 0.45 : Math.max(0, 0.55 - (abs - 1.35) * 2)
   const duration = dragging || reduced ? "0ms" : "900ms"
   return {
-    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 14}px) translateZ(${-abs * 140}px) rotateY(${-clamped * 26}deg) scale(${scale})`,
-    filter: `brightness(${1 - near * 0.18}) saturate(${1 - near * 0.15}) blur(${near * 1}px)`,
-    opacity,
+    transform: `translateX(-50%) translateX(${d * SPACING}%) translateY(${-(1 - near) * 18}px) translateZ(${-abs * 120}px) rotateY(${-clamped * 16}deg) scale(${scale})`,
+    filter: `saturate(${1 - near * 0.5})`,
+    opacity: fade,
     zIndex: 30 - Math.round(abs * 10),
     transition: `transform ${duration} ${EASE}, filter ${duration} ${EASE}, opacity ${duration} ${EASE}`,
   }
@@ -188,7 +188,7 @@ export function AfterHoursCarousel() {
           (dragging ? "cursor-grabbing" : "cursor-grab")
         }
       >
-        <div data-sizer aria-hidden="true" className="invisible mx-auto aspect-[4/5] w-[70%] sm:w-[62%]" />
+        <div data-sizer aria-hidden="true" className="invisible mx-auto aspect-[4/5] w-[80%] sm:w-[62%]" />
 
         {SCENES.map((s, i) => {
           const d = wrapOffset(i - position, n)
@@ -214,22 +214,35 @@ export function AfterHoursCarousel() {
             >
               <article
                 className={
-                  "ah-card relative isolate flex h-full flex-col overflow-hidden rounded-[2rem] p-5 [clip-path:inset(0_round_2rem)] text-ink-foreground transition-shadow duration-700 sm:p-6 " +
+                  "ah-card relative isolate flex h-full flex-col gap-4 overflow-hidden rounded-[1.75rem] p-3.5 text-foreground [clip-path:inset(0_round_1.75rem)] transition-shadow duration-700 sm:p-4 " +
                   s.tone +
                   (isCurrent ? " ah-glow" : "")
                 }
               >
-                <header className="relative z-10 flex items-center justify-between">
-                  <span className="rounded-full bg-ink-foreground/15 px-2.5 py-1 font-mono text-xs font-medium tabular-nums text-ink-foreground backdrop-blur-md">
-                    {s.time}
+                <header className="flex items-center justify-between px-1.5 pt-1">
+                  <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    <span className="size-1.5 rounded-full bg-scene" aria-hidden="true" />
+                    {s.step}
                   </span>
-                  <span className="font-mono text-xs tabular-nums text-ink-foreground/70">
-                    {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
-                  </span>
+                  <span className="font-mono text-xs font-medium tabular-nums text-foreground">{s.time}</span>
                 </header>
 
-                <h3 className="sr-only">{s.title}</h3>
-                <div className="relative flex flex-1 flex-col pt-4">{s.render(isActive)}</div>
+                <div className="ah-stage relative isolate flex-1 overflow-hidden rounded-[1.25rem] [clip-path:inset(0_round_1.25rem)]">
+                  {s.visual(isActive)}
+                </div>
+
+                <div className="flex flex-col gap-1.5 px-1.5 pb-1.5">
+                  <h3
+                    className={
+                      "text-balance font-display text-xl font-medium leading-tight tracking-tight text-foreground sm:text-2xl " +
+                      (isActive ? "ah-reveal" : "")
+                    }
+                    style={{ "--ah-delay": "120ms" } as CSSProperties}
+                  >
+                    {s.headline}
+                  </h3>
+                  <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
               </article>
             </div>
           )
@@ -246,24 +259,41 @@ export function AfterHoursCarousel() {
           <ChevronLeft className="size-4" aria-hidden="true" />
         </button>
 
-        <div className="flex flex-1 items-center gap-1" aria-hidden="true">
+        <div className="flex flex-1 items-start gap-1.5">
           {SCENES.map((s, i) => (
-            <span key={s.id} className={"relative h-1 flex-1 overflow-hidden rounded-full bg-border " + s.tone}>
-              {i < current && <span className="ah-progress-fill absolute inset-0" />}
-              {i === current && (
-                <span
-                  key={`${current}-${reduced}`}
-                  className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
-                  style={
-                    {
-                      "--ah-duration": `${s.durationMs}ms`,
-                      animationPlayState: playing ? "running" : "paused",
-                    } as CSSProperties
-                  }
-                  onAnimationEnd={() => goTo(current + 1, false)}
-                />
-              )}
-            </span>
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Go to scene ${i + 1}: ${s.title}`}
+              aria-current={i === current ? "step" : undefined}
+              className="group flex flex-1 flex-col gap-2 py-1 text-left"
+            >
+              <span className="relative h-1 w-full overflow-hidden rounded-full bg-border">
+                {i < current && <span className="ah-progress-fill absolute inset-0" />}
+                {i === current && (
+                  <span
+                    key={`${current}-${reduced}`}
+                    className={"ah-progress-fill absolute inset-0 " + (reduced ? "" : "ah-progress")}
+                    style={
+                      {
+                        "--ah-duration": `${s.durationMs}ms`,
+                        animationPlayState: playing ? "running" : "paused",
+                      } as CSSProperties
+                    }
+                    onAnimationEnd={() => goTo(current + 1, false)}
+                  />
+                )}
+              </span>
+              <span
+                className={
+                  "hidden text-xs font-medium transition-colors sm:block " +
+                  (i === current ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")
+                }
+              >
+                {s.step}
+              </span>
+            </button>
           ))}
         </div>
 
