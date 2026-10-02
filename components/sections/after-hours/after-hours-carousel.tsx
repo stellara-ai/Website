@@ -267,7 +267,7 @@ export function AfterHoursCarousel() {
               onClick={() => goTo(i)}
               aria-label={`Go to scene ${i + 1}: ${s.title}`}
               aria-current={i === current ? "step" : undefined}
-              className="group flex flex-1 flex-col gap-2 py-1 text-left"
+              className="group flex flex-1 flex-col py-2 text-left"
             >
               <span className="relative h-1 w-full overflow-hidden rounded-full bg-border">
                 {i < current && <span className="ah-progress-fill absolute inset-0" />}
@@ -284,14 +284,6 @@ export function AfterHoursCarousel() {
                     onAnimationEnd={() => goTo(current + 1, false)}
                   />
                 )}
-              </span>
-              <span
-                className={
-                  "hidden text-xs font-medium transition-colors sm:block " +
-                  (i === current ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")
-                }
-              >
-                {s.step}
               </span>
             </button>
           ))}
