@@ -1,28 +1,31 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
-import { Manrope, Geist_Mono, Space_Grotesk } from "next/font/google"
+import { Geist_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import { headers } from "next/headers"
 import { ThemeProvider, themeScript } from "@/components/providers/theme-provider"
 import { isLocale } from "@/lib/locale"
 import { siteUrl } from "@/lib/routes"
 import "./globals.css"
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["400", "500", "600", "700", "800"],
+const poppins = localFont({
+  src: [
+    { path: "./fonts/poppins/Poppins-Light.ttf", weight: "300", style: "normal" },
+    { path: "./fonts/poppins/Poppins-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/poppins/Poppins-Italic.ttf", weight: "400", style: "italic" },
+    { path: "./fonts/poppins/Poppins-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./fonts/poppins/Poppins-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "./fonts/poppins/Poppins-Bold.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/poppins/Poppins-ExtraBold.ttf", weight: "800", style: "normal" },
+  ],
+  variable: "--font-poppins",
+  display: "swap",
 })
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
   weight: ["400", "500", "600"],
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -59,7 +62,7 @@ export default async function RootLayout({
   const lang = isLocale(headerLocale) ? headerLocale : "en"
 
   return (
-    <html lang={lang} className={`${manrope.variable} ${geistMono.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${poppins.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
