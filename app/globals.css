@@ -511,6 +511,12 @@
     0 40px 70px -32px color-mix(in srgb, var(--ink) 38%, transparent),
     0 18px 48px -24px color-mix(in srgb, var(--ah-accent) 40%, transparent);
 }
+:root:not(.dark) .ah-glow {
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent),
+    0 6px 14px -6px color-mix(in srgb, var(--ink) 12%, transparent),
+    0 28px 56px -24px color-mix(in srgb, var(--ink) 26%, transparent);
+}
 .ah-stage {
   background:
     radial-gradient(110% 75% at 50% 0%, color-mix(in srgb, var(--ah-accent) 16%, transparent), transparent 72%),
