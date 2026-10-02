@@ -304,12 +304,12 @@ export const SCENES: Scene[] = [
     title: "Stellara screens",
     headline: (
       <>
-        Stellara Agent responds, qualifies <span className="text-brand">and books.</span>
+        Stellara responds, qualifies <span className="text-brand">and books.</span>
       </>
     ),
     body: "The same intake questions, asked consistently, against your PIP criteria.",
     summary:
-      "Stellara Agent screens each inquiry against the firm's PIP intake criteria: accident date, auto insurer, treatment status and current representation.",
+      "Stellara screens each inquiry against the firm's PIP intake criteria: accident date, auto insurer, treatment status and current representation.",
     durationMs: 6000,
     visual: (a) => <StellaraScreens active={a} />,
   },
