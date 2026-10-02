@@ -105,9 +105,9 @@ function InquiriesArrive({ active }: { active: boolean }) {
 
 function StellaraScreens({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
+    <div className="absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-foreground">Stellara Agent</span>
+        <span className="text-xs font-semibold text-foreground">Stellara</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className="flex h-3 items-center gap-0.5">
             {[0, 150, 300, 450].map((ms) => (
@@ -122,15 +122,15 @@ function StellaraScreens({ active }: { active: boolean }) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col justify-center gap-2">
+      <div className="flex min-h-0 flex-1 flex-col justify-center gap-2">
         <div className="flex flex-col rounded-xl border border-border bg-card shadow-sm">
-          <div className="flex items-center justify-between border-b border-border px-3 py-2">
+          <div className="flex items-center justify-between border-b border-border px-3 py-1.5">
             <span className="text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
             <span className="text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
           </div>
-          <div className="relative py-1.5">
+          <div className="relative py-1">
             <span
-              className={"absolute left-2 top-1.5 flex size-8 items-center justify-center " + (active ? "ah-scan" : "")}
+              className={"absolute left-2 top-1 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
             >
               <span
                 className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
@@ -144,7 +144,7 @@ function StellaraScreens({ active }: { active: boolean }) {
             </span>
             <ul className="flex flex-col">
               {CRITERIA.map((row) => (
-                <li key={row.label} className="relative flex h-8 items-center gap-2 pl-12 pr-3 text-xs">
+                <li key={row.label} className="relative flex h-7 items-center gap-2 pl-11 pr-3 text-xs">
                   <span
                     className={"absolute inset-y-0.5 left-1 right-1 rounded-lg bg-brand-tint " + (active ? "ah-inspect" : "opacity-0")}
                     style={delay(row.at)}
