@@ -797,6 +797,50 @@
     transform: translateY(-50%) scale(1);
   }
 }
+.ah-pulse-ring {
+  animation: ah-pulse-ring 3s cubic-bezier(0.22, 1, 0.36, 1) infinite both;
+}
+@keyframes ah-pulse-ring {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.ah-breathe {
+  animation: ah-breathe 3s ease-in-out infinite;
+}
+@keyframes ah-breathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+.ah-alive {
+  animation: ah-alive 3s ease-in-out infinite;
+}
+@keyframes ah-alive {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 50%, transparent));
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .ah-window-off {
@@ -818,8 +862,14 @@
   .ah-lights-off,
   .ah-halo,
   .ah-twinkle,
-  .ah-float {
+  .ah-float,
+  .ah-breathe,
+  .ah-alive {
     animation: none !important;
+  }
+  .ah-pulse-ring {
+    animation: none !important;
+    opacity: 0 !important;
   }
   .ah-reveal {
     opacity: 1;

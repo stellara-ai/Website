@@ -96,21 +96,11 @@ function InquiriesArrive({ active }: { active: boolean }) {
   )
 }
 
-const CRITERIA = [
-  { label: "Accident date", value: "Sep 24", at: 500 },
-  { label: "Auto insurer", value: "On file", at: 1300 },
-  { label: "Seeing a provider", value: "Yes", at: 2100 },
-  { label: "Current attorney", value: "None", at: 2900 },
-] as const
-
 function StellaraScreens({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-xs font-semibold text-foreground">
-          <StellaraSymbol className="h-4 text-brand" />
-          Stellara
-        </span>
+        <span className="text-xs font-semibold text-foreground">Stellara</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className="flex h-3 items-center gap-0.5">
             {[0, 150, 300, 450].map((ms) => (
@@ -125,31 +115,23 @@ function StellaraScreens({ active }: { active: boolean }) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col justify-center gap-2">
-        <div className="flex flex-col rounded-xl border border-border bg-card shadow-sm">
-          <div className="flex items-center justify-between border-b border-border px-3 py-2">
-            <span className="text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
-            <span className="text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
-          </div>
-          <ul className="flex flex-col gap-1.5 px-3 py-2.5">
-            {CRITERIA.map((row) => (
-              <li
-                key={row.label}
-                className={"flex items-center gap-2 text-xs " + enter(active)}
-                style={delay(row.at)}
-              >
-                <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-                  <Check className="size-2.5" strokeWidth={3} />
-                </span>
-                <span className="flex-1 text-muted-foreground">{row.label}</span>
-                <span className="font-medium tabular-nums text-foreground">{row.value}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="flex flex-1 flex-col items-center justify-center gap-4">
+        <span className="relative flex size-28 items-center justify-center">
+          {[0, 1000, 2000].map((ms) => (
+            <span
+              key={ms}
+              className={
+                "absolute inset-0 rounded-full border border-brand/50 " + (active ? "ah-pulse-ring" : "opacity-0")
+              }
+              style={{ animationDelay: `${ms}ms` }}
+            />
+          ))}
+          <span className={"absolute inset-5 rounded-full bg-brand-tint " + (active ? "ah-breathe" : "")} />
+          <StellaraSymbol className={"relative h-12 text-brand " + (active ? "ah-alive" : "")} />
+        </span>
         <span
           className={
-            "flex items-center gap-2 self-start rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
+            "flex items-center gap-2 rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
             enter(active)
           }
           style={delay(3800)}
