@@ -1,9 +1,7 @@
 "use client"
 
 import { useState, type ComponentType } from "react"
-import { ArrowRight } from "lucide-react"
 import type { HeroServiceId, SiteContent } from "@/content/schema"
-import { ActionButton } from "@/components/ui/action"
 import { StellaraField } from "@/components/util/stellara-field"
 import { AfterHoursCarousel } from "@/components/sections/after-hours/after-hours-carousel"
 import {
@@ -20,10 +18,6 @@ const serviceDemos: Record<HeroServiceId, ComponentType> = {
   reviews: AfterHoursCarousel,
   "website-intake": AfterHoursCarousel,
   "treatment-follow-up": AfterHoursCarousel,
-}
-
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
 }
 
 export function Hero({ content }: { content: SiteContent }) {
@@ -71,18 +65,6 @@ export function Hero({ content }: { content: SiteContent }) {
             >
               <Demo />
             </div>
-
-            <ActionButton
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                track("hero_cta_selected", { cta: "primary", service: selectedService })
-                scrollToId("explorer")
-              }}
-            >
-              {hero.demoCta}
-              <ArrowRight className="size-4" />
-            </ActionButton>
           </div>
         </div>
       </div>

@@ -79,10 +79,9 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
           type="button"
           onClick={onOpen}
           aria-label={a.launcherLabel}
-          className="group fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 rounded-full bg-brand px-4 py-3 text-sm font-medium text-brand-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-brand/90 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="group fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full bg-brand text-brand-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-brand/90 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <MessageSquare className="size-5" />
-          <span className="hidden sm:inline">{a.status}</span>
+          <MessageSquare className="size-5" aria-hidden="true" />
         </button>
       )}
 
