@@ -31,6 +31,8 @@
   --color-brand-strong-foreground: var(--brand-strong-foreground);
   --color-brand-tint: var(--brand-tint);
   --color-brand-tint-strong: var(--brand-tint-strong);
+  --color-approve: var(--approve);
+  --color-approve-tint: var(--approve-tint);
 
   /* Status colors — the signature colored labels. */
   --color-status-done: var(--status-done);
@@ -96,6 +98,8 @@
   --brand-strong-foreground: #ffffff;
   --brand-tint: #f6ecd6;
   --brand-tint-strong: #efe0c2;
+  --approve: #3b7a55;
+  --approve-tint: #e2efe6;
 
   --status-done: #12a150;
   --status-work: #c98a1e;
@@ -141,6 +145,8 @@
   --brand-strong-foreground: #0a0e1a;
   --brand-tint: #241f12;
   --brand-tint-strong: #2b2514;
+  --approve: #8cc7a1;
+  --approve-tint: #14251b;
 
   --status-done: #2bb673;
   --status-work: #e8c88a;
@@ -186,6 +192,8 @@
     --brand-strong-foreground: #0a0e1a;
     --brand-tint: #241f12;
     --brand-tint-strong: #2b2514;
+  --approve: #8cc7a1;
+  --approve-tint: #14251b;
     --status-done: #2bb673;
     --status-work: #e8c88a;
     --status-stuck: #ff6b7f;

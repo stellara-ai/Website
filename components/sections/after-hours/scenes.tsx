@@ -107,7 +107,7 @@ function StellaraScreens({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-foreground">Stellara</span>
+        <span className="text-xs font-semibold text-foreground">Stellara Agent</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className="flex h-3 items-center gap-0.5">
             {[0, 150, 300, 450].map((ms) => (
@@ -178,12 +178,12 @@ function StellaraScreens({ active }: { active: boolean }) {
         </div>
         <span
           className={
-            "flex items-center gap-2 self-start rounded-full border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-sm " +
+            "flex items-center gap-2 self-start rounded-full border border-approve/30 bg-approve-tint px-2.5 py-1 text-xs font-medium text-approve shadow-sm " +
             enter(active)
           }
           style={delay(3800)}
         >
-          <span className="flex size-4 items-center justify-center rounded-full bg-scene text-background">
+          <span className="flex size-4 items-center justify-center rounded-full bg-approve text-background">
             <Check className="size-3" strokeWidth={3} />
           </span>
           Meets your PIP intake criteria
@@ -304,12 +304,12 @@ export const SCENES: Scene[] = [
     title: "Stellara screens",
     headline: (
       <>
-        Stellara screens <span className="text-brand">every one.</span>
+        Stellara Agent screens <span className="text-brand">every one.</span>
       </>
     ),
     body: "The same intake questions, asked consistently, against your PIP criteria.",
     summary:
-      "Stellara screens each inquiry against the firm's PIP intake criteria: accident date, auto insurer, treatment status and current representation.",
+      "Stellara Agent screens each inquiry against the firm's PIP intake criteria: accident date, auto insurer, treatment status and current representation.",
     durationMs: 6000,
     visual: (a) => <StellaraScreens active={a} />,
   },

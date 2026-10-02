@@ -160,7 +160,7 @@ export function AfterHoursCarousel() {
       ref={rootRef}
       role="region"
       aria-roledescription="carousel"
-      aria-label="After hours: how Stellara handles a call when your office is closed"
+      aria-label="After hours: how Stellara Agent handles a call when your office is closed"
       className="flex w-full flex-col gap-6"
     >
       <div
