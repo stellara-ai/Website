@@ -36,16 +36,16 @@ export function HowItFits({ content }: { content: SiteContent }) {
   const scenario = section.scenarios.find((s) => s.id === scenarioId) ?? section.scenarios[0]
 
   return (
-    <section id="fit" className="scroll-mt-20 border-t border-border">
+    <section id="fit" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
-        <Reveal className="mt-12 flex flex-col gap-6 rounded-3xl border border-border bg-card/40 p-4 shadow-soft sm:p-6 lg:p-8">
+        <Reveal className="mt-12 flex flex-col gap-6 rounded-2xl bg-card p-4 sm:p-6 lg:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div
               role="radiogroup"
               aria-label={section.scenarioLabel}
-              className="flex w-full gap-1 overflow-x-auto rounded-full border border-border bg-background/70 p-1 sm:w-auto"
+              className="flex w-full gap-1 overflow-x-auto rounded-full bg-surface-alt p-1 sm:w-auto"
             >
               {section.scenarios.map((s) => {
                 const selected = s.id === scenario.id
@@ -141,7 +141,7 @@ function StepCard({
         />
       </div>
 
-      <div className={cn("flex flex-1 flex-col gap-3 rounded-2xl border bg-background/80 p-4", style.card)}>
+      <div className={cn("flex flex-1 flex-col gap-3 rounded-2xl border bg-card p-4", style.card)}>
         <span
           className={cn(
             "inline-flex max-w-full items-center gap-1.5 self-start rounded-full border px-2 py-0.5 text-xs font-medium",

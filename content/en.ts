@@ -746,7 +746,7 @@ export const en: SiteContent = {
     guideNote: "Guided demonstration",
   },
   footer: {
-    descriptor: "AI automation and custom software for the work behind your business.",
+    descriptor: "More opportunities captured. Less busywork for your firm.",
     navTitle: "Explore",
     contactTitle: "Contact",
     contactPlaceholder: "Start a conversation",

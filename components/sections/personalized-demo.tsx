@@ -43,7 +43,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
   }
 
   return (
-    <section id="personalized-demo" className="scroll-mt-20 border-t border-border">
+    <section id="personalized-demo" className="scroll-mt-20">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading
           eyebrow={section.eyebrow}
@@ -52,7 +52,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-          <Reveal className="rounded-3xl border border-border bg-card/70 p-5 shadow-soft backdrop-blur sm:p-7">
+          <Reveal className="rounded-2xl bg-surface-alt p-5 sm:p-7">
             <form className="space-y-4" onSubmit={onSubmit}>
               <Field
                 label={section.fields.websiteLabel}
@@ -116,7 +116,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
               </div>
               <p className="text-xs text-muted-foreground">{section.helperText}</p>
               {submitted && (
-                <p className="rounded-xl border border-border bg-background/80 px-3 py-2 text-xs text-muted-foreground">
+                <p className="rounded-xl bg-background px-3 py-2 text-xs text-muted-foreground">
                   {section.submittedText}
                 </p>
               )}
@@ -130,15 +130,13 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                 <Reveal
                   key={step.index}
                   delay={index * 90}
-                  className="rounded-2xl border border-border bg-card/40 p-4 shadow-soft sm:p-5"
+                  className="rounded-2xl bg-surface-alt p-4 sm:p-5"
                 >
                   <div className="flex items-start gap-4">
-                    <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-brand/35 bg-brand-tint text-xs font-semibold text-brand">
-                      {step.index}
-                    </span>
+                    <Icon weight="duotone" className="mt-0.5 size-7 shrink-0 text-brand" aria-hidden="true" />
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <Icon weight="fill" className="size-4 text-brand" aria-hidden="true" />
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xs font-semibold tabular-nums text-brand">{step.index}</span>
                         <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
                       </div>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>

@@ -99,7 +99,7 @@ function Card({
   children: React.ReactNode
 }) {
   return (
-    <div className={cn("rounded-2xl border border-border bg-background/70 p-4 sm:p-5", className)} style={style}>
+    <div className={cn("rounded-xl bg-card p-4 sm:p-5", className)} style={style}>
       {children}
     </div>
   )
@@ -137,7 +137,7 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
   })
 
   return (
-    <section id="measurement" className="scroll-mt-20 border-t border-border">
+    <section id="measurement" className="scroll-mt-20">
       <div className="container-editorial grid gap-12 py-20 md:py-24 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
@@ -148,11 +148,7 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
             inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
           )}
         >
-          <div
-            className="absolute inset-x-6 -bottom-3 h-full rounded-3xl border border-border bg-card/30"
-            aria-hidden="true"
-          />
-          <div className="relative flex flex-col gap-3 rounded-3xl border border-border bg-card p-4 shadow-soft sm:p-6">
+          <div className="relative flex flex-col gap-3 rounded-2xl bg-surface-alt p-4 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
               <p className="flex items-center gap-2.5 text-sm font-semibold text-foreground">
                 <span className="relative flex size-2.5" aria-hidden="true">

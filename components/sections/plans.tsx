@@ -16,7 +16,7 @@ export function Plans({ content }: { content: SiteContent }) {
   const section = content.plans
 
   return (
-    <section id="plans" className="scroll-mt-20 border-y border-border bg-surface-alt">
+    <section id="plans" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
@@ -47,7 +47,7 @@ export function Plans({ content }: { content: SiteContent }) {
               return (
                 <li
                   key={addon}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground transition-colors hover:border-status-purple/40"
+                  className="flex items-center gap-3 rounded-xl border border-transparent bg-card px-4 py-3 text-sm text-foreground transition-colors hover:border-status-purple/40"
                 >
                   <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-status-purple-tint text-status-purple">
                     <Icon weight="fill" className="size-4" aria-hidden="true" />
@@ -83,7 +83,7 @@ function PriceBlock({ plan, section }: { plan: PlanCardData; section: PlansSecti
         <span className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">{plan.monthly}</span>
         <span className="text-base font-medium text-muted-foreground">{section.perMonthLabel}</span>
       </p>
-      <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs text-muted-foreground">
+      <p className="inline-flex w-fit items-center gap-2 rounded-full bg-surface-alt px-3 py-1 text-xs text-muted-foreground">
         <span>{section.implementationLabel}</span>
         <span className="font-semibold text-foreground">{plan.implementation}</span>
       </p>
@@ -93,7 +93,7 @@ function PriceBlock({ plan, section }: { plan: PlanCardData; section: PlansSecti
 
 function PlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
   return (
-    <article className="flex w-full flex-col rounded-2xl border border-border bg-card p-6 shadow-soft transition-colors hover:border-brand/30 md:p-8">
+    <article className="flex w-full flex-col rounded-2xl border border-transparent bg-card p-6 transition-colors hover:border-brand/30 md:p-8">
       <h3 className="text-xl font-semibold tracking-tight text-foreground">{plan.name}</h3>
       <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">{plan.summary}</p>
       <PriceBlock plan={plan} section={section} />
@@ -118,9 +118,9 @@ function ComparisonTable({ section }: { section: PlansSection }) {
   const proOnly = section.features.filter((feature) => !feature.essentials)
 
   return (
-    <Reveal className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
+    <Reveal className="mt-8 overflow-hidden rounded-2xl bg-card">
       <div
-        className={`grid ${TABLE_COLS} gap-x-2 border-b border-border bg-background/80 px-4 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground sm:px-5`}
+        className={`grid ${TABLE_COLS} gap-x-2 border-b border-border bg-card px-4 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground sm:px-5`}
       >
         <span className="py-3">{section.featureHeader}</span>
         <span className="py-3 text-center">{section.essentialsLabel}</span>
@@ -151,7 +151,7 @@ function FeatureGroup({
 
   return (
     <div>
-      <div className={`grid ${TABLE_COLS} gap-x-2 border-b border-border bg-background/40 px-4 sm:px-5`}>
+      <div className={`grid ${TABLE_COLS} gap-x-2 border-b border-border bg-surface-alt px-4 sm:px-5`}>
         <span className="flex items-center gap-2 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-foreground">
           <span className={`size-1.5 rounded-full ${dotColor}`} aria-hidden="true" />
           {label}
@@ -163,7 +163,7 @@ function FeatureGroup({
         {rows.map((feature) => (
           <div
             key={feature.label}
-            className={`grid ${TABLE_COLS} items-stretch gap-x-2 px-4 text-sm transition-colors hover:bg-background/60 sm:px-5`}
+            className={`grid ${TABLE_COLS} items-stretch gap-x-2 px-4 text-sm transition-colors hover:bg-surface-alt sm:px-5`}
           >
             <span className="text-pretty py-3 pr-1 text-foreground">{feature.label}</span>
             <span className="flex items-center justify-center py-3">

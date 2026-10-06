@@ -15,13 +15,13 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
   const section = content.faqFinalCta
 
   return (
-    <section id="faq" className="scroll-mt-20 border-y border-border bg-surface-alt">
+    <section id="faq" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
         <FaqExplorer faqs={section.faqs} />
 
-        <Reveal className="mt-14 rounded-3xl border border-border bg-card p-7 text-center shadow-soft sm:p-10">
+        <Reveal className="mt-14 rounded-2xl bg-card p-7 text-center sm:p-10">
           <h2 className="text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl">
             {section.finalTitle}
           </h2>
@@ -65,8 +65,8 @@ function FaqExplorer({ faqs }: { faqs: Faq[] }) {
                 className={
                   "group flex w-full items-center justify-between gap-4 rounded-full border px-5 py-3.5 text-left text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface-alt sm:text-base " +
                   (selected
-                    ? "border-foreground bg-foreground text-background shadow-soft"
-                    : "border-border bg-card text-foreground hover:border-foreground/30")
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-transparent bg-card text-foreground hover:border-foreground/30")
                 }
               >
                 <span className="text-pretty">{item.q}</span>
@@ -98,7 +98,7 @@ function FaqExplorer({ faqs }: { faqs: Faq[] }) {
                 }
               >
                 <div className="overflow-hidden">
-                  <p className="mx-2 mt-2.5 rounded-2xl border border-border bg-card px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mx-2 mt-2.5 rounded-2xl bg-card px-5 py-4 text-sm leading-relaxed text-muted-foreground">
                     {item.a}
                   </p>
                 </div>
@@ -111,7 +111,7 @@ function FaqExplorer({ faqs }: { faqs: Faq[] }) {
       <div
         id="faq-answer-panel"
         aria-live="polite"
-        className="sticky top-24 hidden min-h-80 flex-col rounded-3xl border border-border bg-card p-10 shadow-soft lg:flex"
+        className="sticky top-24 hidden min-h-80 flex-col rounded-2xl bg-card p-10 lg:flex"
       >
         <div key={active} className="animate-in fade-in slide-in-from-bottom-2 duration-300 motion-reduce:animate-none">
           <span className="block h-1 w-10 rounded-full bg-brand" aria-hidden="true" />
