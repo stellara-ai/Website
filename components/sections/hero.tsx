@@ -39,7 +39,7 @@ function ServiceDemo({ service, content }: { service: HeroServiceId; content: Si
   const storyControls =
     service === "reviews" ? { ...controls, illustrative: stories.reviews.illustrative } : controls
 
-  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={storyControls} layout="hero" />
+  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={storyControls} layout="hero" autoplay loop />
 }
 
 export function Hero({ content }: { content: SiteContent }) {
