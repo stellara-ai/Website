@@ -287,7 +287,7 @@ export function StoryCarousel({
                 <div className="flex flex-col gap-1.5 px-1.5 pb-1.5">
                   <h3
                     className={
-                      "text-balance font-display text-xl font-medium leading-tight tracking-tight text-foreground sm:text-2xl " +
+                      "text-balance font-display text-xl font-medium leading-tight tracking-tight text-primary sm:text-2xl " +
                       (isActive ? "ah-reveal" : "")
                     }
                     style={{ "--ah-delay": "120ms" } as CSSProperties}
