@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Check, Minus, Plug, RotateCcw, Sparkles, type LucideIcon } from "lucide-react"
+import { ArrowRightIcon, CheckIcon, MinusIcon, PlugIcon, ArrowCounterClockwiseIcon, SparkleIcon, type Icon as PhosphorIcon } from "@phosphor-icons/react"
 import type { PlanCard as PlanCardData, PlanFeatureRow, SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -9,7 +9,7 @@ import { useInteraction } from "@/components/providers/interaction-context"
 
 type PlansSection = SiteContent["plans"]
 
-const ADD_ON_ICONS: LucideIcon[] = [Sparkles, RotateCcw, Plug]
+const ADD_ON_ICONS: PhosphorIcon[] = [SparkleIcon, ArrowCounterClockwiseIcon, PlugIcon]
 
 export function Plans({ content }: { content: SiteContent }) {
   const { openAppointment } = useInteraction()
@@ -54,7 +54,7 @@ export function Plans({ content }: { content: SiteContent }) {
                   className="flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 text-sm text-foreground transition-colors hover:border-status-purple/40"
                 >
                   <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-status-purple-tint text-status-purple">
-                    <Icon className="size-4" aria-hidden="true" />
+                    <Icon weight="fill" className="size-4" aria-hidden="true" />
                   </span>
                   {addon}
                 </li>
@@ -67,7 +67,7 @@ export function Plans({ content }: { content: SiteContent }) {
           <a href="#personalized-demo" className="inline-flex">
             <ActionButton variant="primary" size="lg">
               {section.primaryCta}
-              <ArrowRight className="size-4" aria-hidden="true" />
+              <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
             </ActionButton>
           </a>
           <ActionButton variant="outline" size="lg" onClick={() => openAppointment({ source: "plans" })}>
@@ -112,7 +112,7 @@ function StandardPlanCard({ plan, section }: { plan: PlanCardData; section: Plan
         {plan.points.map((point) => (
           <li key={point} className="flex items-start gap-3">
             <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-              <Check className="size-3" aria-hidden="true" />
+              <CheckIcon weight="fill" className="size-3" aria-hidden="true" />
             </span>
             <span className="leading-relaxed">{point}</span>
           </li>
@@ -129,7 +129,7 @@ function ProPlanCard({ plan, section }: { plan: PlanCardData; section: PlansSect
     <div className="plan-pro-frame w-full rounded-2xl p-px shadow-soft">
       <article className="plan-pro-glow relative flex h-full flex-col overflow-hidden rounded-[calc(1rem-1px)] p-6 md:p-8">
         <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-brand px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-brand-foreground">
-          <Sparkles className="size-3" aria-hidden="true" />
+          <SparkleIcon weight="fill" className="size-3" aria-hidden="true" />
           {section.recommendedLabel}
           <span
             className="plan-sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-brand-foreground/30"
@@ -145,7 +145,7 @@ function ProPlanCard({ plan, section }: { plan: PlanCardData; section: PlansSect
           {inherited ? (
             <p className="flex items-center gap-3 font-medium">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-                <Check className="size-3" aria-hidden="true" />
+                <CheckIcon weight="fill" className="size-3" aria-hidden="true" />
               </span>
               {inherited}
             </p>
@@ -154,7 +154,7 @@ function ProPlanCard({ plan, section }: { plan: PlanCardData; section: PlansSect
             {exclusive.map((point) => (
               <li key={point} className="flex items-start gap-3">
                 <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-status-teal-tint text-status-teal">
-                  <Sparkles className="size-3" aria-hidden="true" />
+                  <SparkleIcon weight="fill" className="size-3" aria-hidden="true" />
                 </span>
                 <span className="leading-relaxed">{point}</span>
               </li>
@@ -223,16 +223,16 @@ function FeatureGroup({
             <span className="text-pretty py-3 pr-1 text-foreground">{feature.label}</span>
             <span className="flex items-center justify-center py-3">
               {feature.essentials ? (
-                <Check className="size-4 text-brand" aria-label={section.includedEssentialsAria} />
+                <CheckIcon weight="fill" className="size-4 text-brand" aria-label={section.includedEssentialsAria} />
               ) : (
-                <Minus className="size-4 text-muted-foreground/60" aria-label={section.notIncludedEssentialsAria} />
+                <MinusIcon weight="fill" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedEssentialsAria} />
               )}
             </span>
             <span className="plan-pro-col flex items-center justify-center py-3">
               {feature.pro ? (
-                <Check className={`size-4 ${checkColor}`} strokeWidth={2.5} aria-label={section.includedProAria} />
+                <CheckIcon weight="fill" className={`size-4 ${checkColor}`} aria-label={section.includedProAria} />
               ) : (
-                <Minus className="size-4 text-muted-foreground/60" aria-label={section.notIncludedProAria} />
+                <MinusIcon weight="fill" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedProAria} />
               )}
             </span>
           </div>

@@ -9,7 +9,7 @@ Tailwind CSS.
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript + React 19
 - **Styling:** Tailwind CSS v4
-- **UI:** shadcn / base-ui components, lucide-react icons
+- **UI:** shadcn / base-ui components, Phosphor icons (@phosphor-icons/react, weight="fill")
 - **Analytics:** Vercel Analytics
 - **Package manager:** pnpm
 

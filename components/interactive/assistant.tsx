@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useId, useRef, useState } from "react"
-import { MessageSquare, X, RotateCcw, ArrowRight } from "lucide-react"
+import { ChatIcon, XIcon, ArrowCounterClockwiseIcon, ArrowRightIcon } from "@phosphor-icons/react"
 import type { ExplorerOption, SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { track } from "@/lib/analytics"
@@ -81,7 +81,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
           aria-label={a.launcherLabel}
           className="group fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full bg-brand text-brand-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-brand/90 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <MessageSquare className="size-5" aria-hidden="true" />
+          <ChatIcon weight="fill" className="size-5" aria-hidden="true" />
         </button>
       )}
 
@@ -96,7 +96,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
           <header className="flex items-center justify-between gap-3 border-b border-border bg-ink px-4 py-3.5 text-ink-foreground">
             <div className="flex items-center gap-2.5">
               <span className="grid size-8 place-items-center rounded-full bg-brand">
-                <MessageSquare className="size-4 text-white" />
+                <ChatIcon weight="fill" className="size-4 text-white" />
               </span>
               <div>
                 <p id={titleId} className="text-sm font-semibold leading-tight">
@@ -112,7 +112,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 aria-label={a.restartLabel}
                 className="grid size-8 place-items-center rounded-md text-ink-muted transition-colors hover:bg-white/10 hover:text-ink-foreground"
               >
-                <RotateCcw className="size-4" />
+                <ArrowCounterClockwiseIcon weight="fill" className="size-4" />
               </button>
               <button
                 type="button"
@@ -120,7 +120,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 aria-label={a.closeLabel}
                 className="grid size-8 place-items-center rounded-md text-ink-muted transition-colors hover:bg-white/10 hover:text-ink-foreground"
               >
-                <X className="size-4" />
+                <XIcon weight="fill" className="size-4" />
               </button>
             </div>
           </header>
@@ -150,7 +150,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                   onClick={() => onBook(recommendation.id)}
                 >
                   {a.bookCta}
-                  <ArrowRight className="size-4" />
+                  <ArrowRightIcon weight="fill" className="size-4" />
                 </ActionButton>
               </div>
             )}
@@ -176,7 +176,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 onClick={restart}
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
-                <RotateCcw className="size-3.5" />
+                <ArrowCounterClockwiseIcon weight="fill" className="size-3.5" />
                 {a.restart}
               </button>
             )}

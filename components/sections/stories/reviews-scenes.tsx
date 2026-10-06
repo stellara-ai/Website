@@ -1,4 +1,4 @@
-import { BellRing, CheckCheck, ExternalLink, Flag, MessageSquareText } from "lucide-react"
+import { BellRingingIcon, ChecksIcon, ArrowSquareOutIcon, FlagIcon, ChatTextIcon } from "@phosphor-icons/react/dist/ssr"
 import type { ReviewsStoryContent } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { Bubble, CheckDot, Chip, Panel, StageFrame, StageHeader, buildScenes, delay, enter } from "./story-ui"
@@ -14,7 +14,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
       visual: (active) => (
         <StageFrame className="justify-center">
           <Panel className={"flex flex-col gap-2 p-3 " + enter(active)} style={delay(150)}>
-            <StageHeader title={ui.ruleTitle} aside={<Flag className="size-3.5" />} />
+            <StageHeader title={ui.ruleTitle} aside={<FlagIcon weight="fill" className="size-3.5" />} />
             <div className="flex flex-col gap-1.5 rounded-lg bg-muted/70 p-2.5 text-xs">
               <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                 {ui.ruleWhen}
@@ -39,7 +39,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
       durationMs: 5200,
       visual: (active) => (
         <StageFrame className="justify-center">
-          <StageHeader title={ui.smsFrom} aside={<MessageSquareText className="size-3.5" />} />
+          <StageHeader title={ui.smsFrom} aside={<ChatTextIcon weight="fill" className="size-3.5" />} />
           <div className="flex flex-col gap-2">
             <Bubble side="out" className={enter(active)} style={delay(250)}>
               {ui.request}
@@ -48,7 +48,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
               className={"flex items-center gap-1 self-end text-[11px] text-muted-foreground " + enter(active)}
               style={delay(950)}
             >
-              <CheckCheck className="size-3.5 text-approve" />
+              <ChecksIcon weight="fill" className="size-3.5 text-approve" />
               {ui.delivered}
             </span>
           </div>
@@ -75,7 +75,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
               style={delay(700)}
             >
               {ui.linkCta}
-              <ExternalLink className="size-3" />
+              <ArrowSquareOutIcon weight="fill" className="size-3" />
             </span>
             <span className="text-[11px] text-muted-foreground underline underline-offset-2">{ui.linkContact}</span>
           </Panel>
@@ -92,7 +92,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
             title={ui.reminderTitle}
             aside={
               <>
-                <BellRing className="size-3.5" />
+                <BellRingingIcon weight="fill" className="size-3.5" />
                 {ui.reminderWhen}
               </>
             }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { CalendarCheck, HeartPulse, Star, Timer, type LucideIcon } from "lucide-react"
+import { CalendarCheckIcon, HeartbeatIcon, StarIcon, TimerIcon, type Icon as PhosphorIcon } from "@phosphor-icons/react"
 import type { MeasurableWorkMetric, SiteContent } from "@/content/schema"
 import { SectionHeading } from "@/components/sections/section-parts"
 import { Chip } from "@/components/sections/stories/story-ui"
@@ -116,11 +116,11 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
     { metric: booked, accent: "work" },
   ]
   const funnelMax = parseMetric(handled.value).target || 1
-  const tiles: { metric: MeasurableWorkMetric; accent: Accent; icon: LucideIcon }[] = [
-    { metric: response, accent: "done", icon: Timer },
-    { metric: followUps, accent: "purple", icon: CalendarCheck },
-    { metric: treatment, accent: "teal", icon: HeartPulse },
-    { metric: reviews, accent: "work", icon: Star },
+  const tiles: { metric: MeasurableWorkMetric; accent: Accent; icon: PhosphorIcon }[] = [
+    { metric: response, accent: "done", icon: TimerIcon },
+    { metric: followUps, accent: "purple", icon: CalendarCheckIcon },
+    { metric: treatment, accent: "teal", icon: HeartbeatIcon },
+    { metric: reviews, accent: "work", icon: StarIcon },
   ]
   const handoffCount = section.attention.filter((item) => item.tone === "handoff").length
   const rotating = inView && !reduced
@@ -233,7 +233,7 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
                     className={cn("flex size-8 items-center justify-center rounded-lg", ACCENT[accent].tint, ACCENT[accent].text)}
                     aria-hidden="true"
                   >
-                    <Icon className="size-4" />
+                    <Icon weight="fill" className="size-4" />
                   </span>
                   <div>
                     <p className="text-2xl font-semibold tracking-tight text-foreground">

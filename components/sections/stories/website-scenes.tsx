@@ -1,4 +1,4 @@
-import { ArrowRight, Globe, Lock, MessageCircle } from "lucide-react"
+import { ArrowRightIcon, GlobeIcon, LockIcon, ChatCircleIcon } from "@phosphor-icons/react/dist/ssr"
 import type { StoryControlsContent, WebsiteStoryContent } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { StellaraSymbol } from "@/components/brand/stellara-logo"
@@ -13,7 +13,7 @@ function BrowserBar({ url }: { url: string }) {
         <span className="size-1.5 rounded-full bg-border" />
       </span>
       <span className="flex min-w-0 flex-1 items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">
-        <Lock className="size-2.5 shrink-0" />
+        <LockIcon weight="fill" className="size-2.5 shrink-0" />
         <span className="truncate">{url}</span>
       </span>
     </div>
@@ -53,7 +53,7 @@ export function buildWebsiteScenes(story: WebsiteStoryContent, controls: StoryCo
           </Panel>
           <div className="flex items-center justify-between gap-2">
             <Chip tone="auto" className={enter(active)} style={delay(700)}>
-              <Globe className="mr-0.5 inline size-3" />
+              <GlobeIcon weight="fill" className="mr-0.5 inline size-3" />
               {ui.visitor}
             </Chip>
             <span
@@ -63,7 +63,7 @@ export function buildWebsiteScenes(story: WebsiteStoryContent, controls: StoryCo
               }
               style={delay(1200)}
             >
-              <MessageCircle className="size-3" />
+              <ChatCircleIcon weight="fill" className="size-3" />
               <span className="hidden sm:inline">{ui.chatPrompt}</span>
             </span>
           </div>
@@ -182,7 +182,7 @@ export function buildWebsiteScenes(story: WebsiteStoryContent, controls: StoryCo
               }
               style={delay(1150)}
             >
-              <ArrowRight className="size-3.5 shrink-0 text-brand" />
+              <ArrowRightIcon weight="fill" className="size-3.5 shrink-0 text-brand" />
               <span className="truncate">{ui.summaryNext}</span>
             </div>
           </Panel>

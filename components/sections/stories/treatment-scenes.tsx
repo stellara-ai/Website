@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, CheckCheck, PhoneCall } from "lucide-react"
+import { ArrowRightIcon, CalendarDotsIcon, ChecksIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
 import type { StoryControlsContent, TreatmentStoryContent } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { Bubble, CheckDot, Chip, Initials, Panel, StageFrame, StageHeader, buildScenes, delay, enter } from "./story-ui"
@@ -13,7 +13,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
       durationMs: 5200,
       visual: (active) => (
         <StageFrame>
-          <StageHeader title={ui.queueTitle} aside={<CalendarClock className="size-3.5" />} />
+          <StageHeader title={ui.queueTitle} aside={<CalendarDotsIcon weight="fill" className="size-3.5" />} />
           <div className="flex flex-col gap-2">
             {ui.queue.map((row, i) => (
               <Panel
@@ -53,7 +53,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
               className={"flex items-center gap-1 self-end text-[11px] text-muted-foreground " + enter(active)}
               style={delay(900)}
             >
-              <CheckCheck className="size-3.5 text-approve" />
+              <ChecksIcon weight="fill" className="size-3.5 text-approve" />
               {ui.delivered}
             </span>
           </div>
@@ -111,7 +111,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
               }
               style={delay(1200)}
             >
-              <ArrowRight className="size-3.5 shrink-0 text-brand" />
+              <ArrowRightIcon weight="fill" className="size-3.5 shrink-0 text-brand" />
               <span className="truncate">{ui.alertNext}</span>
             </div>
           </Panel>
@@ -131,7 +131,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
                 <span className="truncate text-xs font-semibold">{ui.takeoverTitle}</span>
                 <span className="truncate text-[11px] text-muted-foreground">{ui.assignee}</span>
               </div>
-              <PhoneCall className="ml-auto size-4 shrink-0 text-scene" />
+              <PhoneCallIcon weight="fill" className="ml-auto size-4 shrink-0 text-scene" />
             </div>
             <ul className="flex flex-col gap-2">
               {ui.takeoverLines.map((line, i) => (

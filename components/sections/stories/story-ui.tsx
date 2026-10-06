@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
-import { Check } from "lucide-react"
+import { CheckIcon } from "@phosphor-icons/react/dist/ssr"
 import type { AttentionTone, StorySceneCopy } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { cn } from "@/lib/utils"
@@ -142,7 +142,7 @@ export function CheckDot({ className }: { className?: string }) {
         className,
       )}
     >
-      <Check className="size-2.5" strokeWidth={3} />
+      <CheckIcon weight="fill" className="size-2.5" />
     </span>
   )
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRightIcon, CaretDownIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -37,7 +37,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
                     onClick={() => setOpen(expanded ? -1 : index)}
                   >
                     <span className="text-sm font-medium text-foreground sm:text-base">{item.q}</span>
-                    <ChevronDown
+                    <CaretDownIcon weight="fill"
                       className={
                         "size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none " +
                         (expanded ? "rotate-180 text-brand" : "text-muted-foreground")
@@ -75,7 +75,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
             <a href="#personalized-demo" className="inline-flex">
               <ActionButton variant="primary" size="lg">
                 {section.primaryCta}
-                <ArrowRight className="size-4" aria-hidden="true" />
+                <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
               </ActionButton>
             </a>
             <ActionButton variant="outline" size="lg" onClick={() => openAppointment({ source: "faq-final-cta" })}>

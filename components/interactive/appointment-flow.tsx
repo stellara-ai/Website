@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useId, useMemo, useRef, useState } from "react"
-import { Check, X, ArrowLeft, ArrowRight, CalendarDays } from "lucide-react"
+import { CheckIcon, XIcon, ArrowLeftIcon, ArrowRightIcon, CalendarBlankIcon } from "@phosphor-icons/react"
 import type { ExplorerOption, Locale, SiteContent } from "@/content/schema"
 import type { AppointmentContext } from "@/components/providers/interaction-context"
 import { ActionButton } from "@/components/ui/action"
@@ -168,7 +168,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
             aria-label={t.close}
             className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground"
           >
-            <X className="size-4" />
+            <XIcon weight="fill" className="size-4" />
           </button>
         </header>
 
@@ -197,7 +197,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
           {confirmed ? (
             <div className="space-y-6">
               <div className="mx-auto grid size-14 place-items-center rounded-full bg-brand/10 text-brand">
-                <Check className="size-7" />
+                <CheckIcon weight="fill" className="size-7" />
               </div>
               <dl className="divide-y divide-border rounded-2xl border border-border">
                 <SummaryRow label={t.confirmReason} value={reasonLabel} />
@@ -343,7 +343,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
                     </div>
                   </div>
                   <p className="flex items-start gap-2 rounded-xl bg-muted/60 p-3 text-xs leading-relaxed text-muted-foreground">
-                    <CalendarDays className="mt-0.5 size-4 shrink-0" />
+                    <CalendarBlankIcon weight="fill" className="mt-0.5 size-4 shrink-0" />
                     {t.timeNote}
                   </p>
                   {errors.time && <FieldError>{errors.time}</FieldError>}
@@ -393,7 +393,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
                 onClick={goBack}
                 className={cn(step === 0 && "pointer-events-none opacity-0")}
               >
-                <ArrowLeft className="size-4" />
+                <ArrowLeftIcon weight="fill" className="size-4" />
                 {t.back}
               </ActionButton>
               {step === 3 ? (
@@ -403,7 +403,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
               ) : (
                 <ActionButton variant="primary" size="md" onClick={goNext}>
                   {t.next}
-                  <ArrowRight className="size-4" />
+                  <ArrowRightIcon weight="fill" className="size-4" />
                 </ActionButton>
               )}
             </>
@@ -443,7 +443,7 @@ function RadioCard({
         )}
         aria-hidden="true"
       >
-        {checked && <Check className="size-3" />}
+        {checked && <CheckIcon weight="fill" className="size-3" />}
       </span>
       <span className="text-sm font-medium text-foreground">{option.label}</span>
     </button>

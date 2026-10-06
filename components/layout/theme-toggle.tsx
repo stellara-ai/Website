@@ -1,6 +1,6 @@
 "use client"
 
-import { Monitor, Moon, Sun } from "lucide-react"
+import { MonitorIcon, MoonIcon, SunIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { useTheme, type Theme } from "@/components/providers/theme-provider"
 import { cn } from "@/lib/utils"
@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils"
 export function ThemeToggle({ content, className }: { content: SiteContent; className?: string }) {
   const { theme, setTheme } = useTheme()
 
-  const options: { value: Theme; label: string; icon: typeof Sun }[] = [
-    { value: "system", label: content.common.themeSystem, icon: Monitor },
-    { value: "light", label: content.common.themeLight, icon: Sun },
-    { value: "dark", label: content.common.themeDark, icon: Moon },
+  const options: { value: Theme; label: string; icon: typeof SunIcon }[] = [
+    { value: "system", label: content.common.themeSystem, icon: MonitorIcon },
+    { value: "light", label: content.common.themeLight, icon: SunIcon },
+    { value: "dark", label: content.common.themeDark, icon: MoonIcon },
   ]
 
   return (
@@ -35,7 +35,7 @@ export function ThemeToggle({ content, className }: { content: SiteContent; clas
               active ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
             )}
           >
-            <Icon className="size-3.5" />
+            <Icon weight="fill" className="size-3.5" />
             <span className="sr-only">{option.label}</span>
           </button>
         )

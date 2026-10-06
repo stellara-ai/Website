@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
+import { ListIcon, XIcon, CaretDownIcon, ArrowRightIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { pathFor } from "@/lib/routes"
 import { useInteraction } from "@/components/providers/interaction-context"
@@ -81,7 +81,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
                 )}
               >
                 {item.label}
-                <ChevronDown className="size-4 opacity-60" aria-hidden="true" />
+                <CaretDownIcon weight="fill" className="size-4 opacity-60" aria-hidden="true" />
               </Link>
             )
           })}
@@ -108,7 +108,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
             }}
           >
             {content.navCta}
-            <ArrowRight className="size-4" aria-hidden="true" />
+            <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
           </ActionButton>
         </div>
 
@@ -119,7 +119,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
           aria-label={menuOpen ? content.common.closeMenu : content.common.openMenu}
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          {menuOpen ? <XIcon weight="fill" className="size-5" /> : <ListIcon weight="fill" className="size-5" />}
         </button>
       </div>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, RotateCcw } from "lucide-react"
+import { ArrowRightIcon, ArrowCounterClockwiseIcon } from "@phosphor-icons/react"
 import type { SiteContent, WorkflowOwner, WorkflowStep } from "@/content/schema"
 import { SectionHeading } from "@/components/sections/section-parts"
 import { Reveal } from "@/components/util/reveal"
@@ -80,7 +80,7 @@ export function HowItFits({ content }: { content: SiteContent }) {
                 aria-label={section.replayLabel}
                 className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <RotateCcw className="size-3.5" aria-hidden="true" />
+                <ArrowCounterClockwiseIcon weight="fill" className="size-3.5" aria-hidden="true" />
                 {section.replay}
               </button>
             </div>
@@ -167,7 +167,7 @@ function StepCard({
 
         {step.next && (
           <div className="mt-auto flex items-center gap-2 rounded-lg bg-brand-tint px-3 py-2 text-xs font-medium text-foreground">
-            <ArrowRight className="size-3.5 shrink-0 text-brand" aria-hidden="true" />
+            <ArrowRightIcon weight="fill" className="size-3.5 shrink-0 text-brand" aria-hidden="true" />
             <span>
               <span className="sr-only">{nextLabel}: </span>
               {step.next}
