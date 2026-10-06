@@ -39,12 +39,12 @@ export function HeroServiceSelector({
   }
 
   return (
-    <div className="flex w-full justify-center">
+    <div className="-mx-5 -my-6 flex max-w-[100vw] justify-start overflow-x-auto px-5 py-6 [scrollbar-width:none] sm:-mx-6 sm:justify-center sm:px-6 [&::-webkit-scrollbar]:hidden">
       <div
         role="tablist"
         aria-label={label}
         onKeyDown={handleKeyDown}
-        className="grid w-full max-w-md grid-cols-2 gap-1.5 rounded-[1.75rem] bg-card p-1.5 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(0,0,0,0.45)] dark:ring-1 dark:ring-border lg:inline-flex lg:w-auto lg:max-w-none lg:items-center lg:justify-center lg:gap-2 lg:rounded-full lg:p-2"
+        className="mx-auto inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-card p-2 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(0,0,0,0.45)] dark:ring-1 dark:ring-border"
       >
         {services.map((service) => {
           const active = service.id === selected
@@ -63,7 +63,7 @@ export function HeroServiceSelector({
               data-service-theme={service.id}
               onClick={() => onSelect(service.id)}
               className={cn(
-                "inline-flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-full px-3 py-2 text-center text-sm font-medium leading-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card active:scale-[0.97] motion-reduce:active:scale-100 lg:min-h-10 lg:whitespace-nowrap lg:px-5",
+                "inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.97] sm:px-5",
                 active
                   ? "bg-brand text-brand-foreground shadow-soft"
                   : "text-muted-foreground hover:bg-brand-tint hover:text-foreground",
