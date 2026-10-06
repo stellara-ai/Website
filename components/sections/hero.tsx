@@ -1,6 +1,8 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, type CSSProperties } from "react"
+import { ArrowRightIcon } from "@phosphor-icons/react"
+import { ActionButton } from "@/components/ui/action"
 import type { HeroServiceId, SiteContent } from "@/content/schema"
 import { StellaraField } from "@/components/util/stellara-field"
 import { AfterHoursCarousel } from "@/components/sections/after-hours/after-hours-carousel"
@@ -51,22 +53,37 @@ export function Hero({ content }: { content: SiteContent }) {
       <StellaraField />
       <div className="container-editorial relative">
         <div className="flex flex-col items-center gap-10 pb-14 pt-6 text-center md:gap-12 md:pb-20 md:pt-10">
-          <div className="hero-load flex min-w-0 max-w-4xl flex-col items-center">
+          <div className="hero-load flex w-full min-w-0 max-w-4xl flex-col items-center">
             <h1
-              className="whitespace-nowrap font-normal leading-[1.18] tracking-monday text-foreground"
-              style={{
-                // Scales with the line length so the headline stays on one line in every locale.
-                fontSize: `min(3.5rem, calc(min(100vw - 2.5rem, 56rem) / ${(hero.headline.length * 0.49).toFixed(2)}))`,
-              }}
+              className="text-balance text-[clamp(1.75rem,1.1rem+3.2vw,2.25rem)] font-normal leading-[1.18] tracking-monday text-foreground sm:whitespace-nowrap sm:text-[length:var(--hero-fit)]"
+              style={
+                {
+                  // From sm up, scale with line length so the headline stays on one line in every locale;
+                  // on phones it wraps instead so it never shrinks below a readable size.
+                  "--hero-fit": `min(3.5rem, calc(min(100vw - 2.5rem, 56rem) / ${(hero.headline.length * 0.49).toFixed(2)}))`,
+                } as CSSProperties
+              }
             >
               {hero.headline}
             </h1>
 
-  <p className="mt-6 max-w-[44ch] text-pretty text-[clamp(1rem,.8664rem+0.2155vw,1.125rem)] font-normal leading-relaxed text-foreground">
- {hero.supporting}
-  </p>
-  
-  <div className="mt-8 flex w-full flex-col items-center gap-4">
+            <p className="mt-5 max-w-[44ch] text-pretty text-[clamp(1rem,.8664rem+0.2155vw,1.125rem)] font-normal leading-relaxed text-foreground sm:mt-6">
+              {hero.supporting}
+            </p>
+
+            <ActionButton
+              variant="primary"
+              className="mt-6 h-auto min-h-11 max-w-full whitespace-normal py-2.5 text-center lg:hidden"
+              onClick={() => {
+                track("hero_cta_clicked", { source: "hero-mobile" })
+                document.getElementById("personalized-demo")?.scrollIntoView({ behavior: "smooth", block: "start" })
+              }}
+            >
+              {content.navCta}
+              <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
+            </ActionButton>
+
+            <div className="mt-8 flex w-full flex-col items-center gap-4">
               <p className="text-sm font-medium text-foreground">{hero.selectorQuestion}</p>
               <HeroServiceSelector
                 services={hero.services}
