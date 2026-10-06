@@ -109,7 +109,7 @@ export function Hero({ content }: { content: SiteContent }) {
               variant="primary"
               className="mt-6 h-auto min-h-11 max-w-full whitespace-normal py-2.5 text-center lg:hidden"
               onClick={() => {
-                track("hero_cta_clicked", { source: "hero-mobile" })
+                track("hero_cta_selected", { source: "hero-mobile" })
                 document.getElementById("personalized-demo")?.scrollIntoView({ behavior: "smooth", block: "start" })
               }}
             >
