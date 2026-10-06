@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import { ArrowRight, CheckCircle2, Link2, Smartphone } from "lucide-react"
 import type { SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
@@ -32,6 +32,11 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
   const [submitted, setSubmitted] = useState(false)
   const section = content.personalizedDemo
 
+  useEffect(() => {
+    // Fast Refresh can keep older state shapes; normalize to keep all inputs controlled.
+    setForm((prev) => ({ ...INITIAL_STATE, ...prev }))
+  }, [])
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitted(true)
@@ -53,7 +58,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                 label={section.fields.websiteLabel}
                 type="url"
                 required
-                value={form.website}
+                value={form.website ?? ""}
                 placeholder={section.fields.websitePlaceholder}
                 onChange={(value) => setForm((prev) => ({ ...prev, website: value }))}
               />
@@ -62,7 +67,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                   label={section.fields.firstNameLabel}
                   type="text"
                   required
-                  value={form.firstName}
+                  value={form.firstName ?? ""}
                   placeholder={section.fields.firstNamePlaceholder}
                   onChange={(value) => setForm((prev) => ({ ...prev, firstName: value }))}
                 />
@@ -70,7 +75,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                   label={section.fields.lastNameLabel}
                   type="text"
                   required
-                  value={form.lastName}
+                  value={form.lastName ?? ""}
                   placeholder={section.fields.lastNamePlaceholder}
                   onChange={(value) => setForm((prev) => ({ ...prev, lastName: value }))}
                 />
@@ -80,7 +85,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                   label={section.fields.mobileLabel}
                   type="tel"
                   required
-                  value={form.mobile}
+                  value={form.mobile ?? ""}
                   placeholder={section.fields.mobilePlaceholder}
                   onChange={(value) => setForm((prev) => ({ ...prev, mobile: value }))}
                 />
@@ -89,7 +94,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                 label={section.fields.emailLabel}
                 type="email"
                 required
-                value={form.email}
+                value={form.email ?? ""}
                 placeholder={section.fields.emailPlaceholder}
                 onChange={(value) => setForm((prev) => ({ ...prev, email: value }))}
               />
@@ -159,7 +164,7 @@ function Field({
 }: {
   label: string
   type: string
-  value: string
+  value?: string
   placeholder: string
   required?: boolean
   onChange: (value: string) => void
@@ -170,7 +175,7 @@ function Field({
       <input
         type={type}
         required={required}
-        value={value}
+        value={value ?? ""}
         placeholder={placeholder}
         onChange={(event) => onChange(event.target.value)}
         className="h-12 w-full rounded-xl border border-border bg-background px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-brand/60 focus:ring-2 focus:ring-brand/20"
