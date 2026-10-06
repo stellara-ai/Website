@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils"
 import { AFTER_HOURS_LAYOUT_CLASSES, type CarouselLayout } from "./carousel-layout"
 import type { Scene } from "./scenes"
 
+/** Prev/next buttons and progress bar. Set to true to show them again. */
+const SHOW_CONTROLS = false
 const RESUME_AFTER_MS = 6000
 const SPACING = 54
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
@@ -302,7 +304,10 @@ export function StoryCarousel({
         })}
       </div>
 
-      <div className="mx-auto mt-6 flex w-full max-w-sm items-center justify-between gap-4">
+      <div
+        hidden={!SHOW_CONTROLS}
+        className="mx-auto mt-6 flex w-full max-w-sm items-center justify-between gap-4 [&[hidden]]:hidden"
+      >
         <CarouselButton label={controls.previous} disabled={atStart} onClick={() => goTo(current - 1)}>
           <CaretLeftIcon weight="bold" className="size-4" aria-hidden="true" />
         </CarouselButton>
