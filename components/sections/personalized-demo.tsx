@@ -133,12 +133,10 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                   className="rounded-2xl bg-surface-alt p-4 sm:p-5"
                 >
                   <div className="flex items-start gap-4">
-                    <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-brand/35 bg-brand-tint text-xs font-semibold text-brand">
-                      {step.index}
-                    </span>
+                    <Icon weight="duotone" className="mt-0.5 size-7 shrink-0 text-brand" aria-hidden="true" />
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <Icon weight="fill" className="size-4 text-brand" aria-hidden="true" />
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xs font-semibold tabular-nums text-brand">{step.index}</span>
                         <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
                       </div>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
