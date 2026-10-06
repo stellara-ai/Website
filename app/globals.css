@@ -45,6 +45,10 @@
   --color-status-purple-tint: var(--status-purple-tint);
   --color-status-teal: var(--status-teal);
   --color-status-teal-tint: var(--status-teal-tint);
+  --color-svc-intake: var(--svc-intake);
+  --color-svc-intake-tint: var(--svc-intake-tint);
+  --color-svc-treatment: var(--svc-treatment);
+  --color-svc-treatment-tint: var(--svc-treatment-tint);
 
   /* Dark feature surface. */
   --color-ink: var(--ink);
@@ -113,6 +117,10 @@
   --status-purple-tint: #e7efff;
   --status-teal: #0d8f8a;
   --status-teal-tint: #dcf3f1;
+  --svc-intake: #7a4fe0;
+  --svc-intake-tint: #efe9fc;
+  --svc-treatment: #d6337f;
+  --svc-treatment-tint: #fce6f0;
 
   --ink: #070b16;
   --ink-foreground: #eef1f7;
@@ -162,6 +170,10 @@
   --status-purple-tint: #16233f;
   --status-teal: #4fd1c5;
   --status-teal-tint: #0e2c2b;
+  --svc-intake: #b49cff;
+  --svc-intake-tint: #1d1733;
+  --svc-treatment: #ff7eb6;
+  --svc-treatment-tint: #2a1220;
 
   --ink: #070a14;
   --ink-foreground: #eef1f7;
@@ -210,6 +222,10 @@
     --status-purple-tint: #16233f;
     --status-teal: #4fd1c5;
     --status-teal-tint: #0e2c2b;
+    --svc-intake: #b49cff;
+    --svc-intake-tint: #1d1733;
+    --svc-treatment: #ff7eb6;
+    --svc-treatment-tint: #2a1220;
     --ink: #070a14;
     --ink-foreground: #eef1f7;
     --ink-muted: #9aa0b2;
@@ -537,17 +553,17 @@
 
 /* Each hero service re-points the brand tokens so its tab and carousel share one primary. Reviews keeps the default gold. */
 [data-service-theme="after-hours"] {
-  --brand: #7a4fe0;
+  --brand: var(--svc-intake);
   --brand-strong: #6539c9;
-  --brand-tint: #efe9fc;
+  --brand-tint: var(--svc-intake-tint);
   --brand-tint-strong: #e2d8f8;
   --brand-foreground: #ffffff;
   --brand-strong-foreground: #ffffff;
 }
 [data-service-theme="treatment-follow-up"] {
-  --brand: #d6337f;
+  --brand: var(--svc-treatment);
   --brand-strong: #b8256a;
-  --brand-tint: #fce6f0;
+  --brand-tint: var(--svc-treatment-tint);
   --brand-tint-strong: #f8d2e3;
   --brand-foreground: #ffffff;
   --brand-strong-foreground: #ffffff;
@@ -561,17 +577,17 @@
   --brand-strong-foreground: #ffffff;
 }
 .dark [data-service-theme="after-hours"] {
-  --brand: #b49cff;
+  --brand: var(--svc-intake);
   --brand-strong: #c9b8ff;
-  --brand-tint: #1d1733;
+  --brand-tint: var(--svc-intake-tint);
   --brand-tint-strong: #251d40;
   --brand-foreground: #0a0e1a;
   --brand-strong-foreground: #0a0e1a;
 }
 .dark [data-service-theme="treatment-follow-up"] {
-  --brand: #ff7eb6;
+  --brand: var(--svc-treatment);
   --brand-strong: #ffa3cb;
-  --brand-tint: #2a1220;
+  --brand-tint: var(--svc-treatment-tint);
   --brand-tint-strong: #341629;
   --brand-foreground: #0a0e1a;
   --brand-strong-foreground: #0a0e1a;
