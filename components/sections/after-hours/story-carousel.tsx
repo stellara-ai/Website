@@ -20,6 +20,33 @@ const SHOW_CONTROLS = false
 const RESUME_AFTER_MS = 6000
 const SPACING = 54
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
+const ENTER_FOCUS_MS = 560
+const ENTER_SIDE_MS = 620
+const ENTER_SIDE_DELAY_MS = 160
+
+type EntrancePhase = "pre" | "enter" | "done"
+
+/** Starting pose: focused card sits low and small, neighbours are tucked directly behind it. */
+function preEntranceStyle(d: number): CSSProperties {
+  const abs = Math.abs(d)
+  const isFocus = abs < 0.5
+  return {
+    transform: isFocus
+      ? "translateX(-50%) translateX(0%) translateY(56px) translateZ(0px) rotateY(0deg) scale(0.86)"
+      : `translateX(-50%) translateX(0%) translateY(-26px) translateZ(${-abs * 120 - 60}px) rotateY(0deg) scale(0.78)`,
+    filter: "saturate(0.5)",
+    opacity: 0,
+    zIndex: 30 - Math.round(abs * 10),
+    transition: "none",
+  }
+}
+
+function entranceTransition(d: number): string {
+  const isFocus = Math.abs(d) < 0.5
+  const ms = isFocus ? ENTER_FOCUS_MS : ENTER_SIDE_MS
+  const delay = isFocus ? 0 : ENTER_SIDE_DELAY_MS
+  return ["transform", "filter", "opacity"].map((p) => `${p} ${ms}ms ${EASE} ${delay}ms`).join(", ")
+}
 
 export type StoryControlLabels = {
   previous: string
@@ -88,7 +115,26 @@ export function StoryCarousel({
   const [inView, setInView] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [holding, setHolding] = useState(false)
+  const [phase, setPhase] = useState<EntrancePhase>("pre")
   const reduced = usePrefersReducedMotion()
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setPhase("done")
+      return
+    }
+    let second = 0
+    // Two frames so the starting pose is painted before transitions kick in.
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => setPhase("enter"))
+    })
+    const done = window.setTimeout(() => setPhase("done"), ENTER_SIDE_DELAY_MS + ENTER_SIDE_MS + 60)
+    return () => {
+      cancelAnimationFrame(first)
+      cancelAnimationFrame(second)
+      window.clearTimeout(done)
+    }
+  }, [])
 
   const rootRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
@@ -96,7 +142,7 @@ export function StoryCarousel({
   const wheel = useRef({ acc: 0, lockedUntil: 0 })
   const holdTimer = useRef<number | undefined>(undefined)
 
-  const playing = autoplay && inView && !hovered && !holding && !dragging && !reduced
+  const playing = autoplay && phase === "done" && inView && !hovered && !holding && !dragging && !reduced
   const atStart = !loop && current === 0
   const atEnd = !loop && current === n - 1
 
@@ -245,12 +291,19 @@ export function StoryCarousel({
         {scenes.map((s, i) => {
           const raw = i - position
           const d = loop ? wrapOffset(raw, n) : raw
-          const isActive = i === current && !dragging
+          const isActive = i === current && !dragging && phase !== "pre"
           const isCurrent = i === current
-          // A card that only appears adjacent because of looping (e.g. the final
-          // outcome peeking beside the opening scene) would spoil the story order.
+          // A card adjacent only because of looping (e.g. the final outcome beside
+          // the opening scene) stays visible so both sides are always filled, but is
+          // pushed further into the distance so it doesn't read as the next step.
           const wrapped = loop && Math.abs(d - raw) > 0.5
-          const hidden = wrapped || Math.abs(d) > 1.4
+          const hidden = Math.abs(d) > 1.4
+          const style =
+            phase === "pre"
+              ? preEntranceStyle(d)
+              : phase === "enter"
+                ? { ...cardStyle(d, false, false), transition: entranceTransition(d) }
+                : cardStyle(d, dragging, reduced)
           return (
             <div
               key={s.id}
@@ -258,9 +311,15 @@ export function StoryCarousel({
               aria-roledescription="slide"
               aria-label={`${i + 1} / ${n}: ${s.title}`}
               aria-hidden={!isCurrent}
-              onClick={isCurrent || hidden ? undefined : () => goTo(i)}
-              className={layoutClasses.card + " " + (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")}
-              style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
+              onClick={isCurrent || hidden || wrapped ? undefined : () => goTo(i)}
+              className={
+                layoutClasses.card + " " + (hidden || wrapped ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")
+              }
+              style={
+                wrapped
+                  ? { ...style, opacity: Number(style.opacity) * 0.5, filter: phase === "pre" ? style.filter : "saturate(0.3)" }
+                  : style
+              }
             >
               {/* Shadow lives outside the article because its clip-path would clip box-shadow. */}
               <div
