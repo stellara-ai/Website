@@ -56,6 +56,7 @@
   --color-ink-muted: var(--ink-muted);
   --color-ink-border: var(--ink-border);
   --color-paper: var(--paper);
+  --color-surface-alt: var(--surface-alt);
   /* Logo gold for dark fields — stays the light-gold variant in both themes. */
   --color-gilt: #e8c88a;
   --color-scene-a: var(--ah-a);
@@ -78,6 +79,7 @@
   color-scheme: light;
 
   --paper: #ffffff;
+  --surface-alt: rgb(243, 244, 245);
   --background: #ffffff;
   --foreground: #12172a;
   --card: #ffffff;
@@ -132,6 +134,7 @@
   color-scheme: dark;
 
   --paper: #0a0e1a;
+  --surface-alt: #0e1322;
   --background: #0a0e1a;
   --foreground: #eef1f7;
   --card: #111726;
@@ -186,6 +189,7 @@
   :root:not(.light):not(.dark) {
     color-scheme: dark;
     --paper: #0a0e1a;
+    --surface-alt: #0e1322;
     --background: #0a0e1a;
     --foreground: #eef1f7;
     --card: #111726;
