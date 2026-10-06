@@ -553,10 +553,10 @@
   --brand-strong-foreground: #ffffff;
 }
 [data-service-theme="website-intake"] {
-  --brand: #138a52;
-  --brand-strong: #0f7244;
-  --brand-tint: #e2f4ea;
-  --brand-tint-strong: #cdebda;
+  --brand: var(--status-purple);
+  --brand-strong: #2a64e0;
+  --brand-tint: var(--status-purple-tint);
+  --brand-tint-strong: #d6e3ff;
   --brand-foreground: #ffffff;
   --brand-strong-foreground: #ffffff;
 }
@@ -577,10 +577,10 @@
   --brand-strong-foreground: #0a0e1a;
 }
 .dark [data-service-theme="website-intake"] {
-  --brand: #5fd59a;
-  --brand-strong: #86e2b3;
-  --brand-tint: #10241a;
-  --brand-tint-strong: #142d20;
+  --brand: var(--status-purple);
+  --brand-strong: #a3bcff;
+  --brand-tint: var(--status-purple-tint);
+  --brand-tint-strong: #1c2c4f;
   --brand-foreground: #0a0e1a;
   --brand-strong-foreground: #0a0e1a;
 }
