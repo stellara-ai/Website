@@ -64,6 +64,8 @@ export type StoryCarouselProps = {
   className?: string
   autoplay?: boolean
   loop?: boolean
+  /** Called instead of wrapping when autoplay finishes the last scene. */
+  onCycleComplete?: () => void
 }
 
 function wrapOffset(d: number, n: number) {
@@ -106,6 +108,7 @@ export function StoryCarousel({
   className,
   autoplay = false,
   loop = false,
+  onCycleComplete,
 }: StoryCarouselProps) {
   const layoutClasses = AFTER_HOURS_LAYOUT_CLASSES[layout]
   const n = scenes.length
@@ -173,9 +176,13 @@ export function StoryCarousel({
 
   useEffect(() => {
     if (!playing) return
-    const timer = window.setTimeout(() => goTo(current + 1, false), scenes[current].durationMs)
+    const isLast = current === n - 1
+    const timer = window.setTimeout(() => {
+      if (isLast && onCycleComplete) onCycleComplete()
+      else goTo(current + 1, false)
+    }, scenes[current].durationMs)
     return () => window.clearTimeout(timer)
-  }, [playing, current, goTo, scenes])
+  }, [playing, current, goTo, scenes, n, onCycleComplete])
 
   const cardWidth = () => {
     const card = stageRef.current?.querySelector<HTMLElement>("[data-sizer]")

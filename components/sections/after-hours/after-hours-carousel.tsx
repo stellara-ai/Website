@@ -9,6 +9,7 @@ type AfterHoursCarouselProps = {
   layout?: CarouselLayout
   className?: string
   ariaLabel?: string
+  onCycleComplete?: () => void
 }
 
 /** The original 24/7 intake story: looping with autoplay, as it has always behaved. */
@@ -17,6 +18,7 @@ export function AfterHoursCarousel({
   layout = "hero",
   className,
   ariaLabel = "After hours: how Stellara Agent handles a call when your office is closed",
+  onCycleComplete,
 }: AfterHoursCarouselProps) {
   return (
     <StoryCarousel
@@ -27,6 +29,7 @@ export function AfterHoursCarousel({
       className={className}
       autoplay
       loop
+      onCycleComplete={onCycleComplete}
     />
   )
 }

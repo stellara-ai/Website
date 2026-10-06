@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState, type CSSProperties } from "react"
+import { useCallback, useMemo, useState, type CSSProperties } from "react"
 import { ArrowRightIcon } from "@phosphor-icons/react"
 import { ActionButton } from "@/components/ui/action"
 import type { HeroServiceId, SiteContent } from "@/content/schema"
@@ -17,7 +17,15 @@ import {
 } from "@/components/sections/hero-service-selector"
 import { track } from "@/lib/analytics"
 
-function ServiceDemo({ service, content }: { service: HeroServiceId; content: SiteContent }) {
+function ServiceDemo({
+  service,
+  content,
+  onCycleComplete,
+}: {
+  service: HeroServiceId
+  content: SiteContent
+  onCycleComplete?: () => void
+}) {
   const { stories } = content
   const { controls } = stories
   const scenes = useMemo(() => {
@@ -28,7 +36,14 @@ function ServiceDemo({ service, content }: { service: HeroServiceId; content: Si
   }, [service, stories])
 
   if (!scenes) {
-    return <AfterHoursCarousel layout="hero" controls={controls} ariaLabel={controls.intakeAriaLabel} />
+    return (
+      <AfterHoursCarousel
+        layout="hero"
+        controls={controls}
+        ariaLabel={controls.intakeAriaLabel}
+        onCycleComplete={onCycleComplete}
+      />
+    )
   }
 
   const ariaLabel =
@@ -41,12 +56,31 @@ function ServiceDemo({ service, content }: { service: HeroServiceId; content: Si
   const storyControls =
     service === "reviews" ? { ...controls, illustrative: stories.reviews.illustrative } : controls
 
-  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={storyControls} layout="hero" autoplay loop />
+  return (
+    <StoryCarousel
+      key={service}
+      scenes={scenes}
+      ariaLabel={ariaLabel}
+      controls={storyControls}
+      layout="hero"
+      autoplay
+      loop
+      onCycleComplete={onCycleComplete}
+    />
+  )
 }
 
 export function Hero({ content }: { content: SiteContent }) {
   const { hero } = content
   const [selectedService, setSelectedService] = useState<HeroServiceId>("after-hours")
+  const [autoCycle, setAutoCycle] = useState(true)
+
+  const advanceService = useCallback(() => {
+    setSelectedService((prev) => {
+      const ids = hero.services.map((s) => s.id)
+      return ids[(ids.indexOf(prev) + 1) % ids.length] ?? prev
+    })
+  }, [hero.services])
 
   return (
     <section className="relative overflow-hidden bg-background">
@@ -90,6 +124,7 @@ export function Hero({ content }: { content: SiteContent }) {
                 selected={selectedService}
                 label={hero.selectorQuestion}
                 onSelect={(id) => {
+                  setAutoCycle(false)
                   if (id === selectedService) return
                   setSelectedService(id)
                   track("hero_service_selected", { service: id })
@@ -107,7 +142,11 @@ export function Hero({ content }: { content: SiteContent }) {
               data-service-theme={selectedService}
               className="relative w-full min-w-0"
             >
-              <ServiceDemo service={selectedService} content={content} />
+              <ServiceDemo
+                service={selectedService}
+                content={content}
+                onCycleComplete={autoCycle ? advanceService : undefined}
+              />
             </div>
           </div>
         </div>
