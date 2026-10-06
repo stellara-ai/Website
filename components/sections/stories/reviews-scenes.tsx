@@ -48,7 +48,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
               className={"flex items-center gap-1 self-end text-[11px] text-muted-foreground " + enter(active)}
               style={delay(950)}
             >
-              <ChecksIcon weight="fill" className="size-3.5 text-approve" />
+              <ChecksIcon weight="bold" className="size-3.5 text-approve" />
               {ui.delivered}
             </span>
           </div>
@@ -75,7 +75,7 @@ export function buildReviewsScenes(story: ReviewsStoryContent): Scene[] {
               style={delay(700)}
             >
               {ui.linkCta}
-              <ArrowSquareOutIcon weight="fill" className="size-3" />
+              <ArrowSquareOutIcon weight="bold" className="size-3" />
             </span>
             <span className="text-[11px] text-muted-foreground underline underline-offset-2">{ui.linkContact}</span>
           </Panel>

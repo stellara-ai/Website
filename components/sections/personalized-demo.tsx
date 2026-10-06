@@ -102,7 +102,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
                 <ActionButton type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
                   {section.cta}
-                  <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
+                  <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
                 </ActionButton>
                 <ActionButton
                   type="button"

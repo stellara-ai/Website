@@ -168,7 +168,7 @@ function StellaraScreens({ active }: { active: boolean }) {
                       className={"relative flex size-4 items-center justify-center rounded-full bg-approve text-background " + enter(active)}
                       style={delay(row.at + 600)}
                     >
-                      <CheckIcon weight="fill" className="size-2.5" />
+                      <CheckIcon weight="bold" className="size-3" />
                     </span>
                   </span>
                 </li>
@@ -184,7 +184,7 @@ function StellaraScreens({ active }: { active: boolean }) {
           style={delay(3800)}
         >
           <span className="flex size-4 items-center justify-center rounded-full bg-approve text-background">
-            <CheckIcon weight="fill" className="size-3" />
+            <CheckIcon weight="bold" className="size-3" />
           </span>
           Meets your PIP intake criteria
         </span>

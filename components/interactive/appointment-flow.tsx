@@ -168,7 +168,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
             aria-label={t.close}
             className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground"
           >
-            <XIcon weight="fill" className="size-4" />
+            <XIcon weight="bold" className="size-4" />
           </button>
         </header>
 
@@ -197,7 +197,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
           {confirmed ? (
             <div className="space-y-6">
               <div className="mx-auto grid size-14 place-items-center rounded-full bg-brand/10 text-brand">
-                <CheckIcon weight="fill" className="size-7" />
+                <CheckIcon weight="bold" className="size-7" />
               </div>
               <dl className="divide-y divide-border rounded-2xl border border-border">
                 <SummaryRow label={t.confirmReason} value={reasonLabel} />
@@ -393,7 +393,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
                 onClick={goBack}
                 className={cn(step === 0 && "pointer-events-none opacity-0")}
               >
-                <ArrowLeftIcon weight="fill" className="size-4" />
+                <ArrowLeftIcon weight="bold" className="size-4" />
                 {t.back}
               </ActionButton>
               {step === 3 ? (
@@ -403,7 +403,7 @@ export function AppointmentFlow({ content, context, onClose }: AppointmentFlowPr
               ) : (
                 <ActionButton variant="primary" size="md" onClick={goNext}>
                   {t.next}
-                  <ArrowRightIcon weight="fill" className="size-4" />
+                  <ArrowRightIcon weight="bold" className="size-4" />
                 </ActionButton>
               )}
             </>
@@ -443,7 +443,7 @@ function RadioCard({
         )}
         aria-hidden="true"
       >
-        {checked && <CheckIcon weight="fill" className="size-3" />}
+        {checked && <CheckIcon weight="bold" className="size-3" />}
       </span>
       <span className="text-sm font-medium text-foreground">{option.label}</span>
     </button>

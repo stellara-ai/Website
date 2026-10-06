@@ -142,7 +142,7 @@ export function CheckDot({ className }: { className?: string }) {
         className,
       )}
     >
-      <CheckIcon weight="fill" className="size-2.5" />
+      <CheckIcon weight="bold" className="size-3" />
     </span>
   )
 }

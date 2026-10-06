@@ -81,7 +81,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
                 )}
               >
                 {item.label}
-                <CaretDownIcon weight="fill" className="size-4 opacity-60" aria-hidden="true" />
+                <CaretDownIcon weight="bold" className="size-4 opacity-60" aria-hidden="true" />
               </Link>
             )
           })}
@@ -108,7 +108,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
             }}
           >
             {content.navCta}
-            <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
+            <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
           </ActionButton>
         </div>
 
@@ -119,7 +119,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
           aria-label={menuOpen ? content.common.closeMenu : content.common.openMenu}
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          {menuOpen ? <XIcon weight="fill" className="size-5" /> : <ListIcon weight="fill" className="size-5" />}
+          {menuOpen ? <XIcon weight="bold" className="size-5" /> : <ListIcon weight="bold" className="size-5" />}
         </button>
       </div>
 

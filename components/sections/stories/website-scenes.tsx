@@ -182,7 +182,7 @@ export function buildWebsiteScenes(story: WebsiteStoryContent, controls: StoryCo
               }
               style={delay(1150)}
             >
-              <ArrowRightIcon weight="fill" className="size-3.5 shrink-0 text-brand" />
+              <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
               <span className="truncate">{ui.summaryNext}</span>
             </div>
           </Panel>

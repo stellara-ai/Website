@@ -112,7 +112,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 aria-label={a.restartLabel}
                 className="grid size-8 place-items-center rounded-md text-ink-muted transition-colors hover:bg-white/10 hover:text-ink-foreground"
               >
-                <ArrowCounterClockwiseIcon weight="fill" className="size-4" />
+                <ArrowCounterClockwiseIcon weight="bold" className="size-4" />
               </button>
               <button
                 type="button"
@@ -120,7 +120,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 aria-label={a.closeLabel}
                 className="grid size-8 place-items-center rounded-md text-ink-muted transition-colors hover:bg-white/10 hover:text-ink-foreground"
               >
-                <XIcon weight="fill" className="size-4" />
+                <XIcon weight="bold" className="size-4" />
               </button>
             </div>
           </header>
@@ -150,7 +150,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                   onClick={() => onBook(recommendation.id)}
                 >
                   {a.bookCta}
-                  <ArrowRightIcon weight="fill" className="size-4" />
+                  <ArrowRightIcon weight="bold" className="size-4" />
                 </ActionButton>
               </div>
             )}
@@ -176,7 +176,7 @@ export function Assistant({ content, open, onOpen, onClose, onBook }: AssistantP
                 onClick={restart}
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
-                <ArrowCounterClockwiseIcon weight="fill" className="size-3.5" />
+                <ArrowCounterClockwiseIcon weight="bold" className="size-3.5" />
                 {a.restart}
               </button>
             )}

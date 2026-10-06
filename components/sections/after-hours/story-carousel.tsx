@@ -304,7 +304,7 @@ export function StoryCarousel({
 
       <div className="mx-auto mt-6 flex w-full max-w-sm items-center justify-between gap-4">
         <CarouselButton label={controls.previous} disabled={atStart} onClick={() => goTo(current - 1)}>
-          <CaretLeftIcon weight="fill" className="size-4" aria-hidden="true" />
+          <CaretLeftIcon weight="bold" className="size-4" aria-hidden="true" />
         </CarouselButton>
 
         <div className="flex min-w-0 flex-1 flex-col items-center gap-2">
@@ -330,7 +330,7 @@ export function StoryCarousel({
         </div>
 
         <CarouselButton label={controls.next} disabled={atEnd} onClick={() => goTo(current + 1)}>
-          <CaretRightIcon weight="fill" className="size-4" aria-hidden="true" />
+          <CaretRightIcon weight="bold" className="size-4" aria-hidden="true" />
         </CarouselButton>
       </div>
 

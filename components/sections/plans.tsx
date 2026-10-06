@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRightIcon, CheckIcon, MinusIcon, PlugIcon, ArrowCounterClockwiseIcon, SparkleIcon, type Icon as PhosphorIcon } from "@phosphor-icons/react"
+import { ArrowRightIcon, CheckIcon, MinusIcon, PlugIcon, ClockCounterClockwiseIcon, SparkleIcon, type Icon as PhosphorIcon } from "@phosphor-icons/react"
 import type { PlanCard as PlanCardData, PlanFeatureRow, SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -9,7 +9,7 @@ import { useInteraction } from "@/components/providers/interaction-context"
 
 type PlansSection = SiteContent["plans"]
 
-const ADD_ON_ICONS: PhosphorIcon[] = [SparkleIcon, ArrowCounterClockwiseIcon, PlugIcon]
+const ADD_ON_ICONS: PhosphorIcon[] = [SparkleIcon, ClockCounterClockwiseIcon, PlugIcon]
 
 export function Plans({ content }: { content: SiteContent }) {
   const { openAppointment } = useInteraction()
@@ -63,7 +63,7 @@ export function Plans({ content }: { content: SiteContent }) {
           <a href="#personalized-demo" className="inline-flex">
             <ActionButton variant="primary" size="lg">
               {section.primaryCta}
-              <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
+              <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
             </ActionButton>
           </a>
           <ActionButton variant="outline" size="lg" onClick={() => openAppointment({ source: "plans" })}>
@@ -101,7 +101,7 @@ function PlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection
         {plan.points.map((point) => (
           <li key={point} className="flex items-start gap-3">
             <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-              <CheckIcon weight="fill" className="size-3" aria-hidden="true" />
+              <CheckIcon weight="bold" className="size-3" aria-hidden="true" />
             </span>
             <span className="leading-relaxed">{point}</span>
           </li>
@@ -168,16 +168,16 @@ function FeatureGroup({
             <span className="text-pretty py-3 pr-1 text-foreground">{feature.label}</span>
             <span className="flex items-center justify-center py-3">
               {feature.essentials ? (
-                <CheckIcon weight="fill" className="size-4 text-brand" aria-label={section.includedEssentialsAria} />
+                <CheckIcon weight="bold" className="size-4 text-brand" aria-label={section.includedEssentialsAria} />
               ) : (
-                <MinusIcon weight="fill" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedEssentialsAria} />
+                <MinusIcon weight="bold" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedEssentialsAria} />
               )}
             </span>
             <span className="flex items-center justify-center py-3">
               {feature.pro ? (
-                <CheckIcon weight="fill" className={`size-4 ${checkColor}`} aria-label={section.includedProAria} />
+                <CheckIcon weight="bold" className={`size-4 ${checkColor}`} aria-label={section.includedProAria} />
               ) : (
-                <MinusIcon weight="fill" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedProAria} />
+                <MinusIcon weight="bold" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedProAria} />
               )}
             </span>
           </div>

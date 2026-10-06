@@ -22,7 +22,7 @@ export function LegalPage({ content, page }: { content: SiteContent; page: Legal
             href={pathFor("home", content.locale)}
             className="label-mono inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
           >
-            <ArrowLeftIcon weight="fill" className="size-4" />
+            <ArrowLeftIcon weight="bold" className="size-4" />
             {page.backHome}
           </Link>
 

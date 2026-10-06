@@ -37,7 +37,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
                     onClick={() => setOpen(expanded ? -1 : index)}
                   >
                     <span className="text-sm font-medium text-foreground sm:text-base">{item.q}</span>
-                    <CaretDownIcon weight="fill"
+                    <CaretDownIcon weight="bold"
                       className={
                         "size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none " +
                         (expanded ? "rotate-180 text-brand" : "text-muted-foreground")
@@ -75,7 +75,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
             <a href="#personalized-demo" className="inline-flex">
               <ActionButton variant="primary" size="lg">
                 {section.primaryCta}
-                <ArrowRightIcon weight="fill" className="size-4" aria-hidden="true" />
+                <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
               </ActionButton>
             </a>
             <ActionButton variant="outline" size="lg" onClick={() => openAppointment({ source: "faq-final-cta" })}>

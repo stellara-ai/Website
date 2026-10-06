@@ -53,7 +53,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
               className={"flex items-center gap-1 self-end text-[11px] text-muted-foreground " + enter(active)}
               style={delay(900)}
             >
-              <ChecksIcon weight="fill" className="size-3.5 text-approve" />
+              <ChecksIcon weight="bold" className="size-3.5 text-approve" />
               {ui.delivered}
             </span>
           </div>
@@ -111,7 +111,7 @@ export function buildTreatmentScenes(story: TreatmentStoryContent, controls: Sto
               }
               style={delay(1200)}
             >
-              <ArrowRightIcon weight="fill" className="size-3.5 shrink-0 text-brand" />
+              <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
               <span className="truncate">{ui.alertNext}</span>
             </div>
           </Panel>
