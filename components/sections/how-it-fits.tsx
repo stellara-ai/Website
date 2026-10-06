@@ -96,7 +96,6 @@ export function HowItFits({ content }: { content: SiteContent }) {
                 key={step.stage}
                 step={step}
                 index={i}
-                isLast={i === scenario.steps.length - 1}
                 ownerLabel={section.ownerLabels[step.owner]}
                 nextLabel={section.nextLabel}
               />
@@ -115,20 +114,18 @@ export function HowItFits({ content }: { content: SiteContent }) {
 function StepCard({
   step,
   index,
-  isLast,
   ownerLabel,
   nextLabel,
 }: {
   step: WorkflowStep
   index: number
-  isLast: boolean
   ownerLabel: string
   nextLabel: string
 }) {
   const style = OWNER_STYLE[step.owner]
 
   return (
-    <li className="ah-reveal flex min-w-0 flex-col gap-3" style={delay(index * STEP_INTERVAL_MS)}>
+    <li className="group ah-reveal flex min-w-0 flex-col gap-3" style={delay(index * STEP_INTERVAL_MS)}>
       <div className="flex items-center gap-2">
         <span
           className="wf-pulse flex size-6 shrink-0 items-center justify-center rounded-full border border-brand/40 bg-background text-xs font-semibold tabular-nums text-brand"
@@ -137,13 +134,11 @@ function StepCard({
           {index + 1}
         </span>
         <span className="min-w-0 flex-1 text-sm font-semibold leading-snug text-foreground">{step.stage}</span>
-        {!isLast && (
-          <span
-            className="wf-line hidden h-px w-6 shrink-0 bg-border lg:block"
-            style={delay(index * STEP_INTERVAL_MS + 400)}
-            aria-hidden="true"
-          />
-        )}
+        <span
+          className="wf-line hidden h-px w-6 shrink-0 bg-border lg:block lg:group-last:hidden"
+          style={delay(index * STEP_INTERVAL_MS + 400)}
+          aria-hidden="true"
+        />
       </div>
 
       <div className={cn("flex flex-1 flex-col gap-3 rounded-2xl border bg-background/80 p-4", style.card)}>
