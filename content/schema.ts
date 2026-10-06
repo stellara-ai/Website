@@ -122,23 +122,33 @@ export interface MeasurableWorkMetric {
 
 export type AttentionTone = "auto" | "handoff" | "done"
 
-export interface MeasurableWorkAttention {
+/** One line of the morning brief: what moved forward, paired with what staff should do. */
+export interface BriefItem {
+  count: string
   label: string
-  meta: string
-  status: string
-  tone: AttentionTone
+  detail: string
+  action: string
+  /** "handoff" when staff need to act, "done" when nothing is required. */
+  tone: Extract<AttentionTone, "handoff" | "done">
 }
 
 export interface MeasurableWorkContent {
   eyebrow: string
   title: string
   description: string
-  reportLabel: string
-  dashboardLabel: string
-  periodLabel: string
-  metrics: MeasurableWorkMetric[]
-  attentionLabel: string
-  attention: MeasurableWorkAttention[]
+  illustrative: string
+  briefLabel: string
+  briefFirm: string
+  briefTime: string
+  movedLabel: string
+  actionLabel: string
+  handoffStatus: string
+  doneStatus: string
+  items: BriefItem[]
+  monthLabel: string
+  monthPeriod: string
+  monthMetrics: MeasurableWorkMetric[]
+  footnote: string
 }
 
 export interface StorySceneCopy {
@@ -276,17 +286,14 @@ export interface StoriesContent {
   website: WebsiteStoryContent
 }
 
-export interface PlanFeatureRow {
-  label: string
-  essentials: boolean
-  pro: boolean
-}
-
-export interface PlanCard {
+export interface PlanCoverage {
   name: string
+  /** What the plan covers, phrased as the firm's need. */
+  focus: string
   monthly: string
   implementation: string
-  summary: string
+  /** Label introducing `points`. */
+  pointsLabel: string
   points: string[]
 }
 
@@ -295,35 +302,29 @@ export interface PlansContent {
   title: string
   description: string
   badge: string
-  monthlyPriceLabel: string
   implementationLabel: string
-  featureHeader: string
-  essentialsLabel: string
-  proLabel: string
   perMonthLabel: string
-  coreGroupLabel: string
-  proGroupLabel: string
-  includedEssentialsAria: string
-  notIncludedEssentialsAria: string
-  includedProAria: string
-  notIncludedProAria: string
-  distinction: string
+  /** Shown in the Pro column in place of repeating the Essentials list. */
+  includesEssentials: string
   addOnsLabel: string
+  addOnsNote: string
   primaryCta: string
   secondaryCta: string
-  plans: PlanCard[]
+  essentials: PlanCoverage
+  pro: PlanCoverage
   addOns: string[]
-  features: PlanFeatureRow[]
 }
 
 export interface TrustFounderContent {
   eyebrow: string
   title: string
-  description: string
-  imagePlaceholder: string
-  paragraphOne: string
-  paragraphTwo: string
-  tagline: string
+  name: string
+  role: string
+  /** Public path to the founder photograph. Leave null until the photo is added. */
+  photo: string | null
+  photoAlt: string
+  photoPending: string
+  paragraphs: string[]
 }
 
 export interface FaqItem {
@@ -331,11 +332,16 @@ export interface FaqItem {
   a: string
 }
 
+export interface FaqGroup {
+  label: string
+  items: FaqItem[]
+}
+
 export interface FaqFinalCtaContent {
   eyebrow: string
   title: string
   description: string
-  faqs: FaqItem[]
+  groups: FaqGroup[]
   finalTitle: string
   finalDescription: string
   primaryCta: string

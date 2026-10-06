@@ -206,28 +206,58 @@ export const es: SiteContent = {
       "Su equipo interviene donde se necesita criterio humano. Stellara maneja el trabajo repetitivo alrededor de ellos.",
   },
   measurableWork: {
-    eyebrow: "Visibilidad",
-    title: "Vea qué se está haciendo.",
+    eyebrow: "A la mañana siguiente",
+    title: "Lo que avanzó. Lo que necesita su equipo.",
     description:
-      "Sepa qué se está gestionando, qué necesita atención y dónde podrían estarse perdiendo oportunidades.",
-    reportLabel: "Reporte de ejemplo",
-    dashboardLabel: "Panel ilustrativo",
-    periodLabel: "Últimos 30 días",
-    attentionLabel: "Para su equipo",
-    attention: [
-      { label: "Cita de terapia perdida", meta: "Maria S. · Seguimiento de tratamiento", status: "Requiere acción del personal", tone: "handoff" },
-      { label: "Consulta solicitada", meta: "Daniel O. · Sitio web", status: "Requiere acción del personal", tone: "handoff" },
-      { label: "Recordatorio de reseña enviado", meta: "James C. · Reseñas", status: "Gestionado automáticamente", tone: "auto" },
+      "Cada mañana su equipo ve lo que Stellara gestionó durante la noche y exactamente qué asuntos esperan a una persona.",
+    illustrative: "Ejemplo ilustrativo · firma y datos ficticios",
+    briefLabel: "Resumen matutino",
+    briefFirm: "Linden Law",
+    briefTime: "Martes · 7:30 a. m.",
+    movedLabel: "Avanzó",
+    actionLabel: "Su equipo",
+    handoffStatus: "Requiere acción del personal",
+    doneStatus: "No requiere acción",
+    items: [
+      {
+        count: "6",
+        label: "Consultas captadas durante la noche",
+        detail: "Datos recopilados y equipo de admisión notificado.",
+        action: "Devolver la llamada a las 2 personas que pidieron hablar después de las 9 a. m.",
+        tone: "handoff",
+      },
+      {
+        count: "3",
+        label: "Consultas programadas",
+        detail: "Confirmaciones enviadas. Los recordatorios están programados.",
+        action: "Ya están en el calendario de hoy.",
+        tone: "done",
+      },
+      {
+        count: "2",
+        label: "Respuestas de clientes que requieren seguimiento",
+        detail: "Maria S. mencionó que faltó a una cita de fisioterapia.",
+        action: "Ana llama a Maria para ayudarle a reprogramar.",
+        tone: "handoff",
+      },
+      {
+        count: "4",
+        label: "Solicitudes de reseña enviadas",
+        detail: "Enviadas a clientes cuyos casos se cerraron ayer.",
+        action: "Se envía un recordatorio si no hay respuesta.",
+        tone: "done",
+      },
     ],
-    metrics: [
+    monthLabel: "Durante el mes",
+    monthPeriod: "Últimos 30 días",
+    monthMetrics: [
       { label: "Consultas atendidas", value: "146" },
-      { label: "Tiempo de respuesta", value: "00:42" },
-      { label: "Consultas calificadas", value: "58" },
       { label: "Consultas programadas", value: "31" },
       { label: "Seguimientos completados", value: "82" },
-      { label: "Seguimientos de tratamiento", value: "37" },
-      { label: "Reseñas solicitadas", value: "49" },
+      { label: "Asuntos pendientes", value: "5" },
     ],
+    footnote:
+      "Estas cifras muestran la actividad de los flujos que su firma puede revisar. No son resultados de una firma real y no miden el valor de los casos ni los ingresos.",
   },
   stories: {
     controls: {
@@ -478,116 +508,107 @@ export const es: SiteContent = {
   },
   plans: {
     eyebrow: "Planes",
-    title: "Comience con los flujos de trabajo que más importan.",
-    description: "Dos puntos de partida claros con precios de fundadores. Elija primero la profundidad de flujos que necesita su firma.",
+    title: "¿Dónde necesita más apoyo su firma?",
+    description:
+      "Ambos planes mantienen en movimiento las nuevas consultas e incluyen reportes mensuales. Pro extiende la cobertura a su sitio web y al seguimiento posterior.",
     badge: "Precios de fundadores · primeras 5 firmas",
-    monthlyPriceLabel: "Precio mensual",
-    implementationLabel: "Implementación (pago único)",
-    featureHeader: "Característica",
-    essentialsLabel: "Essentials",
-    proLabel: "Pro",
+    implementationLabel: "implementación (pago único)",
     perMonthLabel: "/mes",
-    coreGroupLabel: "Incluido en ambos",
-    proGroupLabel: "Pro agrega",
-    includedEssentialsAria: "Incluido en Essentials",
-    notIncludedEssentialsAria: "No incluido en Essentials",
-    includedProAria: "Incluido en Pro",
-    notIncludedProAria: "No incluido en Pro",
-    distinction:
-      "La diferencia: Essentials captura consultas, agenda citas y solicita reseñas. Pro agrega admisión web y seguimiento continuo de prospectos y clientes potenciales.",
-    addOnsLabel: "Complementos opcionales (hasta 3)",
+    includesEssentials: "Todo lo incluido en Essentials",
+    addOnsLabel: "Complementos",
+    addOnsNote: "Se conversan con usted al definir el alcance de la implementación.",
     primaryCta: "Ver Stellara en acción",
     secondaryCta: "Hable con nosotros",
-    plans: [
-      {
-        name: "Essentials",
-        monthly: "$497",
-        implementation: "$500",
-        summary: "Captura consultas, agenda citas y solicita reseñas.",
-        points: [
-          "Atención de llamadas con IA / admisión fuera de horario",
-          "Recuperación de llamadas perdidas / respuesta por texto",
-          "Agendamiento de consultas y recordatorios",
-          "Solicitudes automáticas de reseñas",
-          "Reporte mensual de resultados",
-        ],
-      },
-      {
-        name: "Pro",
-        monthly: "$997",
-        implementation: "$1,000",
-        summary: "Agrega admisión web y seguimiento continuo de prospectos y clientes potenciales.",
-        points: [
-          "Todo lo incluido en Essentials",
-          "Agente de admisión web con IA",
-          "Seguimiento y reactivación de prospectos",
-          "Seguimiento de tratamiento",
-          "Visibilidad del pipeline de prospectos/clientes",
-        ],
-      },
-    ],
+    essentials: {
+      name: "Essentials",
+      focus: "Captar consultas, agendar citas y solicitar reseñas.",
+      monthly: "$497",
+      implementation: "$500",
+      pointsLabel: "Incluye",
+      points: [
+        "Atención de llamadas con IA / admisión fuera de horario",
+        "Recuperación de llamadas perdidas / respuesta por texto",
+        "Agendamiento de consultas y recordatorios",
+        "Solicitudes automáticas de reseñas",
+        "Reporte mensual de resultados",
+      ],
+    },
+    pro: {
+      name: "Pro",
+      focus: "Todo lo de Essentials, más admisión web y seguimiento continuo de prospectos y clientes.",
+      monthly: "$997",
+      implementation: "$1,000",
+      pointsLabel: "Pro agrega",
+      points: [
+        "Agente de admisión web con IA",
+        "Seguimiento y reactivación de prospectos",
+        "Seguimiento de tratamiento",
+        "Visibilidad del pipeline de prospectos/clientes",
+      ],
+    },
     addOns: [
       "Mejora inteligente del sitio web",
       "Reactivación de consultas no convertidas",
       "Integración personalizada de admisión y sistema de casos",
     ],
-    features: [
-      { label: "Atención de llamadas con IA / admisión fuera de horario", essentials: true, pro: true },
-      { label: "Recuperación de llamadas perdidas / respuesta por texto", essentials: true, pro: true },
-      { label: "Agendamiento de consultas y recordatorios", essentials: true, pro: true },
-      { label: "Solicitudes automáticas de reseñas", essentials: true, pro: true },
-      { label: "Reporte mensual de resultados", essentials: true, pro: true },
-      { label: "Agente de admisión web con IA", essentials: false, pro: true },
-      { label: "Seguimiento y reactivación de prospectos", essentials: false, pro: true },
-      { label: "Seguimiento de tratamiento", essentials: false, pro: true },
-      { label: "Visibilidad del pipeline de prospectos/clientes", essentials: false, pro: true },
-    ],
   },
   trustFounder: {
-    eyebrow: "Confianza",
-    title: "Construido de forma diferente, a propósito.",
-    description:
-      "Especializado, práctico y enfocado intencionalmente en los flujos que las firmas boutique de PIP necesitan mover cada día.",
-    imagePlaceholder: "Espacio para fotografía real del fundador",
-    paragraphOne:
-      "Stellara se construyó alrededor de una idea simple: las firmas no deberían necesitar equipos más grandes para ofrecer experiencias de cliente ágiles y consistentes.",
-    paragraphTwo:
-      "Combinamos software, automatización e IA alrededor de los flujos que su firma ya utiliza, y luego medimos si el trabajo realmente se está haciendo.",
-    tagline: "Boutique por diseño. Práctico por defecto.",
+    eyebrow: "El fundador",
+    title: "Conozca a quien construye sus flujos de trabajo.",
+    name: "Kerwin Londono",
+    role: "Fundador, Stellara AI LLC",
+    photo: null,
+    photoAlt: "Kerwin Londono, fundador de Stellara AI LLC",
+    photoPending: "Foto próximamente",
+    paragraphs: [
+      "Soy ingeniero de software y creé Stellara para ayudar a las firmas a mantener en movimiento el trabajo rutinario: desde la primera consulta hasta el seguimiento que necesita respuesta.",
+      "Empezamos por cómo trabaja su equipo hoy: qué debe ocurrir automáticamente, qué información necesita el personal y en qué momento debe intervenir una persona. Luego configuramos y probamos los flujos acordados y definimos cómo medir su actividad.",
+    ],
   },
   faqFinalCta: {
     eyebrow: "FAQ",
-    title: "Preguntas antes de probarlo",
+    title: "Antes de conectarlo a su firma.",
     description:
-      "Respuestas claras y prácticas. Los detalles finales de implementación se definen con su firma antes del lanzamiento.",
-    faqs: [
+      "Respuestas prácticas para dueños de firmas. Los detalles finales se acuerdan con su equipo antes de que algo entre en funcionamiento.",
+    groups: [
       {
-        q: "¿Stellara reemplaza a nuestro equipo de admisión?",
-        a: "No. Stellara está diseñado para gestionar pasos repetitivos de flujo y transferir a su equipo cuando se necesita criterio humano.",
+        label: "Transferencias y criterios",
+        items: [
+          {
+            q: "¿Qué pasa cuando alguien que llama necesita a una persona?",
+            a: "Su equipo recibe una notificación con los datos de la persona y lo que se conversó. A quién se notifica, y cuándo, sigue las reglas de transferencia que acordamos con usted durante la implementación.",
+          },
+          {
+            q: "¿Cómo usan nuestros criterios de admisión?",
+            a: "Ustedes los definen. Los revisamos con su equipo durante la configuración y los usamos para decidir qué datos se recopilan y qué consultas se señalan al personal. Los flujos se finalizan solo después de su aprobación.",
+          },
+        ],
       },
       {
-        q: "¿Qué pasa cuando una conversación necesita a una persona?",
-        a: "Las rutas de transferencia a humanos se configuran durante la implementación. Las reglas finales de escalamiento se definen con su equipo.",
+        label: "Sistemas e idioma",
+        items: [
+          {
+            q: "¿Puede funcionar con nuestros sistemas actuales?",
+            a: "Depende de los sistemas. Primero revisamos lo que usa su firma y luego definimos qué conexiones son viables. Las conexiones más profundas están disponibles con el complemento de Integración personalizada de admisión y sistema de casos.",
+          },
+          {
+            q: "¿Cómo se manejan el inglés y el español?",
+            a: "Los flujos en español pueden configurarse durante la implementación. Qué flujos funcionan en español se confirma en el alcance de su configuración.",
+          },
+        ],
       },
       {
-        q: "¿Podemos decidir qué consultas cumplen nuestros criterios de admisión?",
-        a: "Sí. Los criterios de admisión los define su firma y se revisan en la configuración antes de finalizar los flujos.",
-      },
-      {
-        q: "¿Stellara puede atender en español?",
-        a: "Los flujos en español pueden configurarse durante la implementación. La cobertura exacta de idiomas se confirma en el alcance de su proyecto.",
-      },
-      {
-        q: "¿Stellara puede trabajar con nuestros sistemas actuales?",
-        a: "El alcance de integración varía por firma. Primero se revisan sus sistemas y luego se definen rutas de integración viables.",
-      },
-      {
-        q: "¿Cuánto tarda la implementación?",
-        a: "El tiempo depende de los flujos seleccionados y la profundidad de integración. Se entrega un plan claro antes de iniciar.",
-      },
-      {
-        q: "¿Qué podemos medir?",
-        a: "Puede medir actividad operativa como consultas atendidas, seguimientos completados y resultados de programación. El reporte exacto se define con su equipo.",
+        label: "Implementación y reportes",
+        items: [
+          {
+            q: "¿Qué incluye la implementación?",
+            a: "Mapeamos cómo trabaja su equipo hoy, acordamos qué funciona automáticamente y en qué momento interviene el personal, y luego configuramos y probamos esos flujos y definimos cómo medir su actividad. Es un pago único: $500 para Essentials y $1,000 para Pro.",
+          },
+          {
+            q: "¿Qué podremos medir?",
+            a: "La actividad de los flujos, incluidas consultas atendidas, consultas programadas, seguimientos completados y asuntos que aún esperan a su equipo. Ambos planes incluyen reporte mensual de resultados, y Pro agrega visibilidad del pipeline de prospectos y clientes.",
+          },
+        ],
       },
     ],
     finalTitle: "Vea a Stellara trabajando para su firma.",

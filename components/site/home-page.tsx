@@ -25,8 +25,8 @@ export function HomePage({ content }: { content: SiteContent }) {
         <PersonalizedDemo content={content} />
         <HowItFits content={content} />
         <MeasurableWork content={content} />
-        <Plans content={content} />
         <TrustFounder content={content} />
+        <Plans content={content} />
         <FaqFinalCta content={content} />
       </main>
       <SiteFooter content={content} />
