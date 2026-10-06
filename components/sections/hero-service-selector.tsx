@@ -60,14 +60,22 @@ export function HeroServiceSelector({
               aria-selected={active}
               aria-controls={HERO_SERVICE_PANEL_ID}
               tabIndex={active ? 0 : -1}
+              data-service-theme={service.id}
               onClick={() => onSelect(service.id)}
               className={cn(
-                "whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out active:scale-[0.97] sm:px-5",
+                "inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.97] sm:px-5",
                 active
-                  ? "bg-foreground text-background shadow-soft"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                  ? "bg-brand text-brand-foreground shadow-soft"
+                  : "text-muted-foreground hover:bg-brand-tint hover:text-foreground",
               )}
             >
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "size-1.5 shrink-0 rounded-full transition-colors",
+                  active ? "bg-brand-foreground" : "bg-brand",
+                )}
+              />
               {service.label}
             </button>
           )

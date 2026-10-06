@@ -45,6 +45,10 @@
   --color-status-purple-tint: var(--status-purple-tint);
   --color-status-teal: var(--status-teal);
   --color-status-teal-tint: var(--status-teal-tint);
+  --color-svc-intake: var(--svc-intake);
+  --color-svc-intake-tint: var(--svc-intake-tint);
+  --color-svc-treatment: var(--svc-treatment);
+  --color-svc-treatment-tint: var(--svc-treatment-tint);
 
   /* Dark feature surface. */
   --color-ink: var(--ink);
@@ -80,7 +84,7 @@
   --card-foreground: #12172a;
   --popover: #ffffff;
   --popover-foreground: #12172a;
-  --primary: #a8792a;
+  --primary: #8a6322;
   --primary-foreground: #ffffff;
   --secondary: #eef0f5;
   --secondary-foreground: #12172a;
@@ -88,31 +92,35 @@
   --muted-foreground: #5c6172;
   --accent: #f6ecd6;
   --accent-foreground: #8a611e;
-  --destructive: #e2445c;
+  --destructive: #b9384b;
   --border: #e2e4ec;
   --input: #d3d6e0;
-  --ring: #a8792a;
+  --ring: #8a6322;
 
   /* Brand identity — the "Stellar" palette: a deep-space canvas with a starlight gold accent. */
-  --brand: #a8792a;
+  --brand: #8a6322;
   --brand-foreground: #ffffff;
-  --brand-strong: #8f651f;
+  --brand-strong: #74531c;
   --brand-strong-foreground: #ffffff;
   --brand-tint: #f6ecd6;
   --brand-tint-strong: #efe0c2;
-  --approve: #3b7a55;
+  --approve: #33694a;
   --approve-tint: #e2efe6;
 
-  --status-done: #12a150;
-  --status-work: #c98a1e;
-  --status-stuck: #e2445c;
-  --status-purple: #3e7bfa;
+  --status-done: #0e7c3e;
+  --status-work: #8d6115;
+  --status-stuck: #b9384b;
+  --status-purple: #3366cf;
   --status-done-tint: #e4f5ec;
   --status-work-tint: #f6ecd6;
   --status-stuck-tint: #fce4e8;
   --status-purple-tint: #e7efff;
-  --status-teal: #0d8f8a;
+  --status-teal: #0b7773;
   --status-teal-tint: #dcf3f1;
+  --svc-intake: #764dd9;
+  --svc-intake-tint: #efe9fc;
+  --svc-treatment: #be2d71;
+  --svc-treatment-tint: #fce6f0;
 
   --ink: #070b16;
   --ink-foreground: #eef1f7;
@@ -162,6 +170,10 @@
   --status-purple-tint: #16233f;
   --status-teal: #4fd1c5;
   --status-teal-tint: #0e2c2b;
+  --svc-intake: #b49cff;
+  --svc-intake-tint: #1d1733;
+  --svc-treatment: #ff7eb6;
+  --svc-treatment-tint: #2a1220;
 
   --ink: #070a14;
   --ink-foreground: #eef1f7;
@@ -210,6 +222,10 @@
     --status-purple-tint: #16233f;
     --status-teal: #4fd1c5;
     --status-teal-tint: #0e2c2b;
+    --svc-intake: #b49cff;
+    --svc-intake-tint: #1d1733;
+    --svc-treatment: #ff7eb6;
+    --svc-treatment-tint: #2a1220;
     --ink: #070a14;
     --ink-foreground: #eef1f7;
     --ink-muted: #9aa0b2;
@@ -534,6 +550,72 @@
 .dark .ah-tone-starlight {
   --ah-accent: oklch(0.78 0.075 165);
 }
+
+/* Each hero service re-points the brand tokens so its tab and carousel share one primary. Reviews keeps the default gold. */
+[data-service-theme="after-hours"] {
+  --brand: var(--svc-intake);
+  --brand-strong: #6539c9;
+  --brand-tint: var(--svc-intake-tint);
+  --brand-tint-strong: #e2d8f8;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+[data-service-theme="treatment-follow-up"] {
+  --brand: var(--svc-treatment);
+  --brand-strong: #b8256a;
+  --brand-tint: var(--svc-treatment-tint);
+  --brand-tint-strong: #f8d2e3;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+[data-service-theme="website-intake"] {
+  --brand: var(--status-purple);
+  --brand-strong: #2856b5;
+  --brand-tint: var(--status-purple-tint);
+  --brand-tint-strong: #d6e3ff;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+.dark [data-service-theme="after-hours"] {
+  --brand: var(--svc-intake);
+  --brand-strong: #c9b8ff;
+  --brand-tint: var(--svc-intake-tint);
+  --brand-tint-strong: #251d40;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+.dark [data-service-theme="treatment-follow-up"] {
+  --brand: var(--svc-treatment);
+  --brand-strong: #ffa3cb;
+  --brand-tint: var(--svc-treatment-tint);
+  --brand-tint-strong: #341629;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+.dark [data-service-theme="website-intake"] {
+  --brand: var(--status-purple);
+  --brand-strong: #a3bcff;
+  --brand-tint: var(--status-purple-tint);
+  --brand-tint-strong: #1c2c4f;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+[data-service-theme] {
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --ring: var(--brand);
+  --accent: var(--brand-tint);
+  --accent-foreground: var(--brand-strong);
+  /* Insets and hairlines pick up a faded wash of the service primary. */
+  --muted: color-mix(in oklab, var(--brand) 8%, var(--card));
+  --secondary: color-mix(in oklab, var(--brand) 8%, var(--card));
+  --border: color-mix(in oklab, var(--brand) 16%, var(--card));
+}
+.dark [data-service-theme] {
+  --muted: color-mix(in oklab, var(--brand) 11%, var(--card));
+  --secondary: color-mix(in oklab, var(--brand) 11%, var(--card));
+  --border: color-mix(in oklab, var(--brand) 20%, var(--card));
+}
 .ah-card {
   background: var(--card);
   box-shadow: 0 0 0 0 transparent;
@@ -704,6 +786,147 @@
 }
 .ah-halo {
   animation: ah-halo 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Story illustrations: one-shot motions that settle into a readable final state. */
+@keyframes st-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes st-focus {
+  from {
+    opacity: 0.2;
+    filter: blur(6px);
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+@keyframes st-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes st-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes st-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes st-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes st-word {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes st-slide {
+  from {
+    opacity: 0;
+    transform: translate(var(--st-dx, 0px), var(--st-dy, 16px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes st-cursor {
+  0% {
+    opacity: 0;
+    transform: translate(var(--st-dx, -44px), var(--st-dy, 34px));
+  }
+  25% {
+    opacity: 1;
+  }
+  78% {
+    transform: translate(0, 0) scale(1);
+  }
+  88% {
+    transform: translate(0, 0) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes st-press {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+}
+.st-draw {
+  stroke-dasharray: 1;
+  animation: st-draw 1s cubic-bezier(0.65, 0, 0.35, 1) var(--ah-delay, 0ms) both;
+}
+.st-focus {
+  animation: st-focus 1s cubic-bezier(0.22, 1, 0.36, 1) var(--ah-delay, 0ms) both;
+}
+.st-grow {
+  transform-origin: left center;
+  animation: st-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--ah-delay, 0ms) both;
+}
+.st-grow-slow {
+  transform-origin: left center;
+  animation: st-grow 1.8s cubic-bezier(0.45, 0, 0.55, 1) var(--ah-delay, 0ms) both;
+}
+.st-out {
+  animation: st-out 0.45s ease-in var(--ah-delay, 0ms) both;
+}
+.st-in {
+  animation: st-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--ah-delay, 0ms) both;
+}
+.st-type {
+  animation: st-type 0.9s steps(22, end) var(--ah-delay, 0ms) both;
+}
+.st-word {
+  animation: st-word 0.35s ease-out var(--ah-delay, 0ms) both;
+}
+.st-slide {
+  animation: st-slide 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--ah-delay, 0ms) both;
+}
+.st-cursor {
+  animation: st-cursor 1.2s cubic-bezier(0.22, 1, 0.36, 1) var(--ah-delay, 0ms) both;
+}
+.st-press {
+  animation: st-press 0.3s ease-in-out var(--ah-delay, 0ms) both;
 }
 
 .ah-panel {
@@ -1028,6 +1251,22 @@
   .ah-reveal {
     opacity: 1;
     animation: none !important;
+  }
+  .st-draw,
+  .st-focus,
+  .st-grow,
+  .st-grow-slow,
+  .st-in,
+  .st-type,
+  .st-word,
+  .st-slide,
+  .st-cursor,
+  .st-press {
+    animation: none !important;
+  }
+  .st-out {
+    animation: none !important;
+    opacity: 0;
   }
 }
 

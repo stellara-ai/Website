@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Stellara symbol — the three-orbit glyph. Painted with `currentColor` so it
- * inherits the brand token: gold (#a8792a) in light mode, its dark-field
+ * inherits the brand token: gold (#8a6322) in light mode, its dark-field
  * counterpart (#e8c88a) in dark mode, no theme-swap flash required.
  */
 export function StellaraSymbol({ className }: { className?: string }) {

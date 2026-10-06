@@ -171,51 +171,68 @@ export interface TreatmentStoryContent {
   ariaLabel: string
   scenes: StorySceneCopy[]
   ui: {
-    queueTitle: string
-    checkinType: string
-    statusScheduled: string
-    queue: { name: string; when: string }[]
-    smsFrom: string
-    outgoing: string
-    delivered: string
+    clientName: string
+    clientTag: string
+    staffTag: string
+    weekLabel: string
+    /** Three consecutive weekdays; the first holds the missed appointment. */
+    days: string[]
+    dates: string[]
+    appointment: string
+    appointmentTime: string
+    missed: string
+    checkinLabel: string
+    checkinTime: string
+    autoSent: string
+    firm: string
+    question: string
     reply: string
     replyTime: string
-    flag: string
     alertTitle: string
-    alertClient: string
-    alertDetails: string[]
-    alertNext: string
-    assignee: string
-    takeoverTitle: string
-    takeoverLines: string[]
-    takeoverNote: string
+    alertContext: string[]
+    nextActionLabel: string
+    nextAction: string
+    statusLabel: string
+    statusDone: string
   }
 }
 
 export interface ReviewsStoryContent {
   ariaLabel: string
+  /** Shown under the controls in place of the shared fictional-data note. */
+  illustrative: string
   scenes: StorySceneCopy[]
   ui: {
-    ruleTitle: string
-    ruleWhen: string
-    ruleTrigger: string
-    ruleThen: string
-    ruleAction: string
-    ruleNote: string
-    milestoneEvent: string
-    smsFrom: string
+    clientTag: string
+    prospectTag: string
+    staffTag: string
+    firmTag: string
+    differentPerson: string
+    matterName: string
+    matterType: string
+    /** Firm-defined milestones; the last one is completed in the scene. */
+    milestones: string[]
+    ruleMatched: string
+    firm: string
+    lockTime: string
+    now: string
     request: string
-    delivered: string
     linkTitle: string
-    linkBody: string
-    linkCta: string
-    linkContact: string
-    reminderTitle: string
-    reminderWhen: string
-    reminder: string
-    reminderRules: string[]
-    activityTitle: string
-    activity: { name: string; status: string; tone: AttentionTone }[]
+    linkLabel: string
+    reviewerInitials: string
+    reviewerName: string
+    reviewText: string
+    reviewLabel: string
+    post: string
+    posted: string
+    searchQuery: string
+    listingMeta: string
+    reviewsLink: string
+    tabs: string[]
+    consultCta: string
+    notificationTitle: string
+    notificationSource: string
+    requested: string
   }
 }
 
@@ -224,23 +241,31 @@ export interface WebsiteStoryContent {
   scenes: StorySceneCopy[]
   ui: {
     url: string
+    siteName: string
     siteHeadline: string
-    siteBody: string
     siteCta: string
-    visitor: string
-    chatPrompt: string
-    chatTitle: string
+    visitorTag: string
+    staffTag: string
+    launcher: string
+    assistantTitle: string
     question: string
-    answer: string
-    infoNote: string
-    detailsTitle: string
-    details: LabeledValue[]
-    consultTitle: string
+    assistantReply: string
+    detailsPrompt: string
+    formTitle: string
+    fields: LabeledValue[]
+    callbackTitle: string
+    callbackDay: string
     slots: string[]
-    consultSent: string
+    selectedSlot: number
+    requested: string
+    requestedNote: string
+    inboxTitle: string
+    inbox: string[]
     summaryTitle: string
-    summaryLines: string[]
-    summaryNext: string
+    newLabel: string
+    summary: LabeledValue[]
+    nextActionLabel: string
+    nextAction: string
   }
 }
 

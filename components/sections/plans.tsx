@@ -146,8 +146,8 @@ function FeatureGroup({
   accent: "brand" | "teal"
 }) {
   if (rows.length === 0) return null
-  const checkColor = accent === "teal" ? "text-status-teal" : "text-brand"
-  const dotColor = accent === "teal" ? "bg-status-teal" : "bg-brand"
+  const checkColor = accent === "teal" ? "text-status-purple" : "text-brand"
+  const dotColor = accent === "teal" ? "bg-status-purple" : "bg-brand"
 
   return (
     <div>

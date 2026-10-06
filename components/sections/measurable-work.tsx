@@ -7,12 +7,13 @@ import { SectionHeading } from "@/components/sections/section-parts"
 import { Chip } from "@/components/sections/stories/story-ui"
 import { cn } from "@/lib/utils"
 
-type Accent = "purple" | "done" | "teal" | "work"
+type Accent = "website" | "done" | "intake" | "treatment" | "work"
 
 const ACCENT: Record<Accent, { bar: string; text: string; tint: string }> = {
-  purple: { bar: "bg-status-purple", text: "text-status-purple", tint: "bg-status-purple-tint" },
+  website: { bar: "bg-status-purple", text: "text-status-purple", tint: "bg-status-purple-tint" },
   done: { bar: "bg-status-done", text: "text-status-done", tint: "bg-status-done-tint" },
-  teal: { bar: "bg-status-teal", text: "text-status-teal", tint: "bg-status-teal-tint" },
+  intake: { bar: "bg-svc-intake", text: "text-svc-intake", tint: "bg-svc-intake-tint" },
+  treatment: { bar: "bg-svc-treatment", text: "text-svc-treatment", tint: "bg-svc-treatment-tint" },
   work: { bar: "bg-status-work", text: "text-status-work", tint: "bg-status-work-tint" },
 }
 
@@ -111,15 +112,15 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
 
   const [handled, response, qualified, booked, followUps, treatment, reviews] = section.metrics
   const funnel: { metric: MeasurableWorkMetric; accent: Accent }[] = [
-    { metric: handled, accent: "purple" },
-    { metric: qualified, accent: "teal" },
+    { metric: handled, accent: "website" },
+    { metric: qualified, accent: "intake" },
     { metric: booked, accent: "work" },
   ]
   const funnelMax = parseMetric(handled.value).target || 1
   const tiles: { metric: MeasurableWorkMetric; accent: Accent; icon: PhosphorIcon }[] = [
     { metric: response, accent: "done", icon: TimerIcon },
-    { metric: followUps, accent: "purple", icon: CalendarCheckIcon },
-    { metric: treatment, accent: "teal", icon: HeartbeatIcon },
+    { metric: followUps, accent: "intake", icon: CalendarCheckIcon },
+    { metric: treatment, accent: "treatment", icon: HeartbeatIcon },
     { metric: reviews, accent: "work", icon: StarIcon },
   ]
   const handoffCount = section.attention.filter((item) => item.tone === "handoff").length
