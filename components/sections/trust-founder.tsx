@@ -6,7 +6,7 @@ export function TrustFounder({ content }: { content: SiteContent }) {
   const section = content.trustFounder
 
   return (
-    <section id="trust" className="scroll-mt-20 border-t border-border">
+    <section id="trust" className="scroll-mt-20">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading
           eyebrow={section.eyebrow}
@@ -14,10 +14,10 @@ export function TrustFounder({ content }: { content: SiteContent }) {
           description={section.description}
         />
 
-        <Reveal className="mt-10 grid gap-6 rounded-3xl border border-border bg-card/45 p-6 shadow-soft md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <Reveal className="mt-10 grid gap-6 rounded-2xl bg-surface-alt p-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
           <div className="flex items-center justify-center">
-            <div className="aspect-[4/5] w-full max-w-[18rem] rounded-2xl border border-dashed border-border bg-background/70 p-4">
-              <div className="flex h-full items-center justify-center rounded-xl border border-border bg-card/70 text-center">
+            <div className="aspect-[4/5] w-full max-w-[18rem] rounded-2xl border border-dashed border-border bg-background p-4">
+              <div className="flex h-full items-center justify-center rounded-xl bg-surface-alt text-center">
                 <p className="max-w-[12rem] text-xs leading-relaxed text-muted-foreground">
                   {section.imagePlaceholder}
                 </p>

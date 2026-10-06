@@ -58,7 +58,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70"
+          ? "border-b border-border bg-background"
           : "border-b border-transparent bg-transparent",
       )}
     >
