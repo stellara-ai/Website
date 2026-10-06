@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, type FormEvent } from "react"
-import { ArrowRight, CheckCircle2, Link2, Smartphone } from "lucide-react"
+import { ArrowRightIcon, CheckCircleIcon, LinkIcon, DeviceMobileIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -24,7 +24,7 @@ const INITIAL_STATE: DemoFormState = {
   email: "",
 }
 
-const STEP_ICONS = [Link2, Smartphone, CheckCircle2] as const
+const STEP_ICONS = [LinkIcon, DeviceMobileIcon, CheckCircleIcon] as const
 
 export function PersonalizedDemo({ content }: { content: SiteContent }) {
   const { openAppointment } = useInteraction()
@@ -102,7 +102,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
                 <ActionButton type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
                   {section.cta}
-                  <ArrowRight className="size-4" aria-hidden="true" />
+                  <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
                 </ActionButton>
                 <ActionButton
                   type="button"
@@ -125,7 +125,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
 
           <div className="grid gap-3">
             {section.steps.map((step, index) => {
-              const Icon = STEP_ICONS[index] ?? CheckCircle2
+              const Icon = STEP_ICONS[index] ?? CheckCircleIcon
               return (
                 <Reveal
                   key={step.index}
@@ -138,7 +138,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <Icon className="size-4 text-brand" aria-hidden="true" />
+                        <Icon weight="fill" className="size-4 text-brand" aria-hidden="true" />
                         <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
                       </div>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>

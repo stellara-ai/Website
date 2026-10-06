@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr"
 import type { LegalPageContent, SiteContent } from "@/content/schema"
 import { InteractionProvider } from "@/components/providers/interaction-provider"
 import { SiteHeader } from "@/components/layout/site-header"
@@ -22,7 +22,7 @@ export function LegalPage({ content, page }: { content: SiteContent; page: Legal
             href={pathFor("home", content.locale)}
             className="label-mono inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeftIcon weight="bold" className="size-4" />
             {page.backHome}
           </Link>
 

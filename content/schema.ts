@@ -82,14 +82,36 @@ export interface PersonalizedDemoContent {
   steps: PersonalizedDemoStep[]
 }
 
+/** Who owns a workflow step: Stellara, a handoff that needs staff, or the firm's team. */
+export type WorkflowOwner = "auto" | "handoff" | "staff"
+
+export interface WorkflowStep {
+  stage: string
+  owner: WorkflowOwner
+  title: string
+  meta: string
+  lines: string[]
+  next?: string
+}
+
+export interface WorkflowScenario {
+  id: string
+  label: string
+  steps: WorkflowStep[]
+}
+
 export interface HowItFitsContent {
   eyebrow: string
   title: string
   description: string
-  incoming: string[]
-  core: string[]
-  output: string[]
-  brandLabel: string
+  takeaway: string
+  illustrative: string
+  scenarioLabel: string
+  replay: string
+  replayLabel: string
+  ownerLabels: Record<WorkflowOwner, string>
+  nextLabel: string
+  scenarios: WorkflowScenario[]
   footnote: string
 }
 
@@ -98,13 +120,135 @@ export interface MeasurableWorkMetric {
   value: string
 }
 
+export type AttentionTone = "auto" | "handoff" | "done"
+
+export interface MeasurableWorkAttention {
+  label: string
+  meta: string
+  status: string
+  tone: AttentionTone
+}
+
 export interface MeasurableWorkContent {
   eyebrow: string
   title: string
   description: string
   reportLabel: string
   dashboardLabel: string
+  periodLabel: string
   metrics: MeasurableWorkMetric[]
+  attentionLabel: string
+  attention: MeasurableWorkAttention[]
+}
+
+export interface StorySceneCopy {
+  time: string
+  step: string
+  title: string
+  headline: string
+  headlineAccent?: string
+  body: string
+  summary: string
+}
+
+export interface StoryControlsContent {
+  previous: string
+  next: string
+  /** Template with {current} and {total}. */
+  progress: string
+  illustrative: string
+  handledAutomatically: string
+  staffActionNeeded: string
+  intakeAriaLabel: string
+}
+
+export interface LabeledValue {
+  label: string
+  value: string
+}
+
+export interface TreatmentStoryContent {
+  ariaLabel: string
+  scenes: StorySceneCopy[]
+  ui: {
+    queueTitle: string
+    checkinType: string
+    statusScheduled: string
+    queue: { name: string; when: string }[]
+    smsFrom: string
+    outgoing: string
+    delivered: string
+    reply: string
+    replyTime: string
+    flag: string
+    alertTitle: string
+    alertClient: string
+    alertDetails: string[]
+    alertNext: string
+    assignee: string
+    takeoverTitle: string
+    takeoverLines: string[]
+    takeoverNote: string
+  }
+}
+
+export interface ReviewsStoryContent {
+  ariaLabel: string
+  scenes: StorySceneCopy[]
+  ui: {
+    ruleTitle: string
+    ruleWhen: string
+    ruleTrigger: string
+    ruleThen: string
+    ruleAction: string
+    ruleNote: string
+    milestoneEvent: string
+    smsFrom: string
+    request: string
+    delivered: string
+    linkTitle: string
+    linkBody: string
+    linkCta: string
+    linkContact: string
+    reminderTitle: string
+    reminderWhen: string
+    reminder: string
+    reminderRules: string[]
+    activityTitle: string
+    activity: { name: string; status: string; tone: AttentionTone }[]
+  }
+}
+
+export interface WebsiteStoryContent {
+  ariaLabel: string
+  scenes: StorySceneCopy[]
+  ui: {
+    url: string
+    siteHeadline: string
+    siteBody: string
+    siteCta: string
+    visitor: string
+    chatPrompt: string
+    chatTitle: string
+    question: string
+    answer: string
+    infoNote: string
+    detailsTitle: string
+    details: LabeledValue[]
+    consultTitle: string
+    slots: string[]
+    consultSent: string
+    summaryTitle: string
+    summaryLines: string[]
+    summaryNext: string
+  }
+}
+
+export interface StoriesContent {
+  controls: StoryControlsContent
+  treatment: TreatmentStoryContent
+  reviews: ReviewsStoryContent
+  website: WebsiteStoryContent
 }
 
 export interface PlanFeatureRow {
@@ -115,7 +259,6 @@ export interface PlanFeatureRow {
 
 export interface PlanCard {
   name: string
-  highlighted?: boolean
   monthly: string
   implementation: string
   summary: string
@@ -132,6 +275,9 @@ export interface PlansContent {
   featureHeader: string
   essentialsLabel: string
   proLabel: string
+  perMonthLabel: string
+  coreGroupLabel: string
+  proGroupLabel: string
   includedEssentialsAria: string
   notIncludedEssentialsAria: string
   includedProAria: string
@@ -295,6 +441,7 @@ export interface SiteContent {
   personalizedDemo: PersonalizedDemoContent
   howItFits: HowItFitsContent
   measurableWork: MeasurableWorkContent
+  stories: StoriesContent
   plans: PlansContent
   trustFounder: TrustFounderContent
   faqFinalCta: FaqFinalCtaContent

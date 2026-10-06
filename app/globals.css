@@ -43,6 +43,8 @@
   --color-status-work-tint: var(--status-work-tint);
   --color-status-stuck-tint: var(--status-stuck-tint);
   --color-status-purple-tint: var(--status-purple-tint);
+  --color-status-teal: var(--status-teal);
+  --color-status-teal-tint: var(--status-teal-tint);
 
   /* Dark feature surface. */
   --color-ink: var(--ink);
@@ -109,6 +111,8 @@
   --status-work-tint: #f6ecd6;
   --status-stuck-tint: #fce4e8;
   --status-purple-tint: #e7efff;
+  --status-teal: #0d8f8a;
+  --status-teal-tint: #dcf3f1;
 
   --ink: #070b16;
   --ink-foreground: #eef1f7;
@@ -156,6 +160,8 @@
   --status-work-tint: #2b2514;
   --status-stuck-tint: #3d1f27;
   --status-purple-tint: #16233f;
+  --status-teal: #4fd1c5;
+  --status-teal-tint: #0e2c2b;
 
   --ink: #070a14;
   --ink-foreground: #eef1f7;
@@ -202,6 +208,8 @@
     --status-work-tint: #2b2514;
     --status-stuck-tint: #3d1f27;
     --status-purple-tint: #16233f;
+    --status-teal: #4fd1c5;
+    --status-teal-tint: #0e2c2b;
     --ink: #070a14;
     --ink-foreground: #eef1f7;
     --ink-muted: #9aa0b2;
@@ -495,6 +503,24 @@
 }
 .ah-tone-starlight {
   --ah-accent: oklch(0.54 0.085 165);
+}
+.ah-tone-ocean {
+  --ah-accent: oklch(0.52 0.08 230);
+}
+.ah-tone-meadow {
+  --ah-accent: oklch(0.54 0.08 140);
+}
+.ah-tone-sky {
+  --ah-accent: oklch(0.54 0.08 205);
+}
+.dark .ah-tone-ocean {
+  --ah-accent: oklch(0.76 0.07 230);
+}
+.dark .ah-tone-meadow {
+  --ah-accent: oklch(0.78 0.075 140);
+}
+.dark .ah-tone-sky {
+  --ah-accent: oklch(0.78 0.07 205);
 }
 .dark .ah-tone-dusk {
   --ah-accent: oklch(0.76 0.075 268);
@@ -929,7 +955,37 @@
   }
 }
 
+.wf-pulse {
+  animation: wf-pulse 1.4s cubic-bezier(0.22, 1, 0.36, 1) 2 both;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes wf-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand) 40%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+.wf-line {
+  transform-origin: left center;
+  animation: wf-line 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--ah-delay, 0ms);
+}
+@keyframes wf-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .wf-pulse,
+  .wf-line {
+    animation: none !important;
+  }
   .ah-scan {
     animation: none !important;
     transform: translateY(5.25rem);
@@ -1002,5 +1058,19 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+.mw-sweep {
+  transform-origin: left;
+  animation: mw-sweep linear forwards;
+}
+
+@keyframes mw-sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

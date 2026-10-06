@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
-import { CalendarCheck, Check, Database, Globe, MessageSquare, Phone } from "lucide-react"
+import { CalendarCheckIcon, CheckIcon, DatabaseIcon, GlobeIcon, ChatIcon, PhoneIcon } from "@phosphor-icons/react/dist/ssr"
 import { StellaraSymbol } from "@/components/brand/stellara-logo"
 
 export type Scene = {
@@ -59,10 +59,10 @@ function OfficeClosed({ active }: { active: boolean }) {
 }
 
 const INQUIRIES = [
-  { icon: Phone, channel: "Call", time: "7:42 PM", note: "Rear-end collision last week", at: 300 },
-  { icon: Globe, channel: "Web form", time: "9:15 PM", note: "PIP claim for physical therapy", at: 1100 },
-  { icon: MessageSquare, channel: "Text", time: "10:58 PM", note: "Question about PIP coverage", at: 1900 },
-  { icon: Phone, channel: "Call", time: "6:47 AM", note: "Spanish-speaking caller", at: 2700 },
+  { icon: PhoneIcon, channel: "Call", time: "7:42 PM", note: "Rear-end collision last week", at: 300 },
+  { icon: GlobeIcon, channel: "Web form", time: "9:15 PM", note: "PIP claim for physical therapy", at: 1100 },
+  { icon: ChatIcon, channel: "Text", time: "10:58 PM", note: "Question about PIP coverage", at: 1900 },
+  { icon: PhoneIcon, channel: "Call", time: "6:47 AM", note: "Spanish-speaking caller", at: 2700 },
 ] as const
 
 function InquiriesArrive({ active }: { active: boolean }) {
@@ -88,7 +88,7 @@ function InquiriesArrive({ active }: { active: boolean }) {
               style={delay(item.at)}
             >
               <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-scene/10 text-scene">
-                <Icon className="size-3.5" />
+                <Icon weight="fill" className="size-3.5" />
               </span>
               <span className="flex min-w-0 flex-1 flex-col">
                 <span className="text-xs font-semibold text-foreground">{item.channel}</span>
@@ -168,7 +168,7 @@ function StellaraScreens({ active }: { active: boolean }) {
                       className={"relative flex size-4 items-center justify-center rounded-full bg-approve text-background " + enter(active)}
                       style={delay(row.at + 600)}
                     >
-                      <Check className="size-2.5" strokeWidth={3} />
+                      <CheckIcon weight="bold" className="size-3" />
                     </span>
                   </span>
                 </li>
@@ -184,7 +184,7 @@ function StellaraScreens({ active }: { active: boolean }) {
           style={delay(3800)}
         >
           <span className="flex size-4 items-center justify-center rounded-full bg-approve text-background">
-            <Check className="size-3" strokeWidth={3} />
+            <CheckIcon weight="bold" className="size-3" />
           </span>
           Meets your PIP intake criteria
         </span>
@@ -256,11 +256,11 @@ function MorningBrief({ active }: { active: boolean }) {
             style={delay(1500)}
           >
             <span className="flex items-center gap-1.5">
-              <CalendarCheck className="size-3.5 text-scene" />
+              <CalendarCheckIcon weight="fill" className="size-3.5 text-scene" />
               On your calendar
             </span>
             <span className="flex items-center gap-1.5">
-              <Database className="size-3.5 text-scene" />
+              <DatabaseIcon weight="fill" className="size-3.5 text-scene" />
               Logged in CRM
             </span>
           </div>

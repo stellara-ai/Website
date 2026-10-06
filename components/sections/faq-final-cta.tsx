@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRightIcon, CaretDownIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -25,21 +25,40 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
         <div className="mt-10 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card/45 shadow-soft">
           {section.faqs.map((item, index) => {
             const expanded = open === index
+            const panelId = `faq-panel-${index}`
             return (
-              <div key={item.q}>
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left sm:px-5"
-                  aria-expanded={expanded}
-                  onClick={() => setOpen(expanded ? -1 : index)}
+              <div key={item.q} className={expanded ? "bg-background/40" : undefined}>
+                <h3>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-background/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand sm:px-5"
+                    aria-expanded={expanded}
+                    aria-controls={panelId}
+                    onClick={() => setOpen(expanded ? -1 : index)}
+                  >
+                    <span className="text-sm font-medium text-foreground sm:text-base">{item.q}</span>
+                    <CaretDownIcon weight="bold"
+                      className={
+                        "size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none " +
+                        (expanded ? "rotate-180 text-brand" : "text-muted-foreground")
+                      }
+                      aria-hidden="true"
+                    />
+                  </button>
+                </h3>
+                <div
+                  id={panelId}
+                  role="region"
+                  inert={!expanded}
+                  className={
+                    "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none " +
+                    (expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+                  }
                 >
-                  <span className="text-sm font-medium text-foreground sm:text-base">{item.q}</span>
-                  <ChevronDown
-                    className={"size-4 shrink-0 text-muted-foreground transition-transform " + (expanded ? "rotate-180" : "")}
-                    aria-hidden="true"
-                  />
-                </button>
-                {expanded && <p className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground sm:px-5">{item.a}</p>}
+                  <div className="overflow-hidden">
+                    <p className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground sm:px-5">{item.a}</p>
+                  </div>
+                </div>
               </div>
             )
           })}
@@ -56,7 +75,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
             <a href="#personalized-demo" className="inline-flex">
               <ActionButton variant="primary" size="lg">
                 {section.primaryCta}
-                <ArrowRight className="size-4" aria-hidden="true" />
+                <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
               </ActionButton>
             </a>
             <ActionButton variant="outline" size="lg" onClick={() => openAppointment({ source: "faq-final-cta" })}>
