@@ -19,11 +19,11 @@ function ServiceDemo({ service, content }: { service: HeroServiceId; content: Si
   const { stories } = content
   const { controls } = stories
   const scenes = useMemo(() => {
-    if (service === "treatment-follow-up") return buildTreatmentScenes(stories.treatment, controls)
+    if (service === "treatment-follow-up") return buildTreatmentScenes(stories.treatment)
     if (service === "reviews") return buildReviewsScenes(stories.reviews)
-    if (service === "website-intake") return buildWebsiteScenes(stories.website, controls)
+    if (service === "website-intake") return buildWebsiteScenes(stories.website)
     return null
-  }, [service, stories, controls])
+  }, [service, stories])
 
   if (!scenes) {
     return <AfterHoursCarousel layout="hero" controls={controls} ariaLabel={controls.intakeAriaLabel} />
@@ -36,7 +36,10 @@ function ServiceDemo({ service, content }: { service: HeroServiceId; content: Si
         ? stories.reviews.ariaLabel
         : stories.website.ariaLabel
 
-  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={controls} layout="hero" />
+  const storyControls =
+    service === "reviews" ? { ...controls, illustrative: stories.reviews.illustrative } : controls
+
+  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={storyControls} layout="hero" />
 }
 
 export function Hero({ content }: { content: SiteContent }) {

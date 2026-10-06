@@ -1,156 +1,243 @@
-import { ArrowRightIcon, CalendarDotsIcon, ChecksIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
-import type { StoryControlsContent, TreatmentStoryContent } from "@/content/schema"
+import { ArrowRightIcon, CheckIcon, ClockIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
+import type { TreatmentStoryContent } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
-import { Bubble, CheckDot, Chip, Initials, Panel, StageFrame, StageHeader, buildScenes, delay, enter } from "./story-ui"
+import { cn } from "@/lib/utils"
+import { Bubble, Chip, buildScenes, delay, enter } from "./story-ui"
+import { Figure, Phone, ROLE_BUBBLE, RoleTag, Stage, Workstation, leave, motionVars, play } from "./illustration"
 
-export function buildTreatmentScenes(story: TreatmentStoryContent, controls: StoryControlsContent): Scene[] {
-  const ui = story.ui
+type Ui = TreatmentStoryContent["ui"]
+type SceneProps = { ui: Ui; active: boolean }
 
-  return buildScenes(story.scenes, [
-    {
-      id: "treatment-scheduled",
-      tone: "ah-tone-ocean",
-      durationMs: 5200,
-      visual: (active) => (
-        <StageFrame>
-          <StageHeader title={ui.queueTitle} aside={<CalendarDotsIcon weight="fill" className="size-3.5" />} />
-          <div className="flex flex-col gap-2">
-            {ui.queue.map((row, i) => (
-              <Panel
-                key={row.name}
-                className={
-                  "flex items-center gap-2.5 p-2.5 " +
-                  enter(active) +
-                  (i === 0 ? " border-scene/50 ring-1 ring-scene/25" : " opacity-80")
-                }
-                style={delay(200 + i * 220)}
-              >
-                <Initials name={row.name} />
-                <div className="flex min-w-0 flex-1 flex-col">
-                  <span className="truncate text-xs font-semibold">{row.name}</span>
-                  <span className="truncate text-[11px] text-muted-foreground">{row.when}</span>
+function Floor() {
+  return <span className="absolute inset-x-3 bottom-3 h-px bg-foreground/10" />
+}
+
+function LifeInterrupts({ ui, active }: SceneProps) {
+  return (
+    <Stage>
+      <RoleTag role="client" className={"self-start " + enter(active)} style={delay(100)}>
+        {ui.clientTag} · {ui.clientName}
+      </RoleTag>
+      <div className="flex min-h-0 flex-1 items-end gap-3 pb-1">
+        <Figure role="client" className={"h-24 sm:h-32 " + enter(active)} style={delay(200)} />
+        <div
+          className={
+            "mb-3 flex min-w-0 flex-1 flex-col gap-1.5 self-center rounded-xl border border-border bg-card p-2 shadow-sm " +
+            enter(active)
+          }
+          style={delay(320)}
+        >
+          <span className="truncate text-[11px] font-semibold">{ui.weekLabel}</span>
+          <div className="grid grid-cols-3 gap-1">
+            {ui.days.map((day, i) => (
+              <div key={day} className="flex min-w-0 flex-col gap-0.5">
+                <span className="truncate text-center text-[10px] uppercase tracking-wide text-muted-foreground">{day}</span>
+                <span className="text-center text-xs font-semibold tabular-nums">{ui.dates[i]}</span>
+                <div className="h-16 rounded-md bg-muted/80 p-0.5 sm:h-24">
+                  {i === 0 && (
+                    <div className="relative flex flex-col gap-0.5 rounded bg-status-teal-tint p-1">
+                      <span className="break-words text-[10px] font-semibold leading-tight">{ui.appointment}</span>
+                      <span className="text-[10px] tabular-nums text-muted-foreground">{ui.appointmentTime}</span>
+                      <span
+                        className={"absolute inset-x-0.5 top-1/2 h-[1.5px] rounded-full bg-status-stuck " + play(active, "st-grow")}
+                        style={delay(1000)}
+                      />
+                    </div>
+                  )}
                 </div>
-                {i === 0 && <Chip tone="auto">{ui.statusScheduled}</Chip>}
-              </Panel>
+              </div>
             ))}
           </div>
-          <p className="mt-auto truncate text-[11px] text-muted-foreground">{ui.checkinType}</p>
-        </StageFrame>
-      ),
-    },
-    {
-      id: "treatment-delivered",
-      tone: "ah-tone-dusk",
-      durationMs: 5000,
-      visual: (active) => (
-        <StageFrame className="justify-center">
-          <StageHeader title={ui.smsFrom} />
-          <div className="flex flex-col gap-2">
-            <Bubble side="out" className={enter(active)} style={delay(250)}>
-              {ui.outgoing}
-            </Bubble>
-            <span
-              className={"flex items-center gap-1 self-end text-[11px] text-muted-foreground " + enter(active)}
-              style={delay(900)}
+          <span
+            className={
+              "self-start rounded-full bg-status-stuck-tint px-2 py-0.5 text-[10px] font-semibold text-status-stuck " +
+              enter(active)
+            }
+            style={delay(1400)}
+          >
+            {ui.missed} · {ui.days[0]}
+          </span>
+        </div>
+      </div>
+      <Floor />
+    </Stage>
+  )
+}
+
+function CheckinSent({ ui, active }: SceneProps) {
+  return (
+    <Stage className="items-center gap-1.5">
+      <div
+        className={
+          "flex max-w-full items-center gap-2 rounded-full border border-border bg-card py-1 pl-1 pr-3 shadow-sm " +
+          enter(active)
+        }
+        style={delay(100)}
+      >
+        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
+          <ClockIcon weight="bold" className="size-3.5" />
+        </span>
+        <span className="flex min-w-0 flex-col leading-tight">
+          <span className="truncate text-[11px] font-semibold">{ui.checkinLabel}</span>
+          <span className="truncate text-[10px] tabular-nums text-muted-foreground">{ui.checkinTime}</span>
+        </span>
+      </div>
+      <svg viewBox="0 0 2 20" className="h-5 w-0.5 shrink-0 overflow-visible text-brand">
+        <path
+          d="M1 0v20"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          pathLength={1}
+          className={play(active, "st-draw")}
+          style={delay(450)}
+        />
+      </svg>
+      <Phone className={"min-h-0 w-[min(100%,11.5rem)] flex-1 " + play(active, "st-slide")} style={delay(650)}>
+        <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
+        <Bubble side="in" className={enter(active)} style={delay(1150)}>
+          {ui.question}
+        </Bubble>
+      </Phone>
+      <span
+        className={"flex items-center gap-1 text-[11px] font-medium text-muted-foreground " + enter(active)}
+        style={delay(1550)}
+      >
+        <CheckIcon weight="bold" className="size-3 text-approve" />
+        {ui.autoSent}
+      </span>
+    </Stage>
+  )
+}
+
+function ClientReplies({ ui, active }: SceneProps) {
+  return (
+    <Stage className="flex-row items-end justify-center gap-3 pb-4">
+      <Figure role="client" pose="phone" className={"h-24 sm:h-32 " + enter(active)} style={delay(100)} />
+      <Phone className="h-full max-h-64 w-[min(64%,11.5rem)] -rotate-2">
+        <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
+        <Bubble side="in" className="line-clamp-3 opacity-50">
+          {ui.question}
+        </Bubble>
+        <Bubble side="out" className={cn(ROLE_BUBBLE.client, play(active, "st-focus"))} style={delay(450)}>
+          {ui.reply}
+          <span className="mt-0.5 block text-[10px] tabular-nums text-muted-foreground">{ui.replyTime}</span>
+        </Bubble>
+      </Phone>
+      <Floor />
+    </Stage>
+  )
+}
+
+function TeamAlerted({ ui, active }: SceneProps) {
+  return (
+    <Stage>
+      <div
+        className={"flex flex-col gap-1.5 rounded-xl border border-border bg-card p-2.5 shadow-md " + play(active, "st-slide")}
+        style={motionVars({ delay: 150, dx: "-20px", dy: "0px" })}
+      >
+        <div className="flex items-center justify-between gap-2">
+          <span className="truncate text-xs font-semibold">{ui.clientName}</span>
+          <Chip tone="handoff">{ui.alertTitle}</Chip>
+        </div>
+        <p
+          className={cn("rounded-lg px-2 py-1.5 text-[11px] leading-snug", ROLE_BUBBLE.client, enter(active))}
+          style={delay(500)}
+        >
+          {"\u201C"}
+          {ui.reply}
+          {"\u201D"}
+        </p>
+        <ul className="flex flex-col gap-1">
+          {ui.alertContext.map((line, i) => (
+            <li
+              key={line}
+              className={cn("items-center gap-2 text-[11px] text-muted-foreground", i > 0 ? "hidden sm:flex" : "flex", enter(active))}
+              style={delay(800 + i * 200)}
             >
-              <ChecksIcon weight="bold" className="size-3.5 text-approve" />
-              {ui.delivered}
-            </span>
-          </div>
-        </StageFrame>
-      ),
-    },
-    {
-      id: "treatment-reply",
-      tone: "ah-tone-call",
-      durationMs: 5400,
-      visual: (active) => (
-        <StageFrame className="justify-center">
-          <div className="flex flex-col gap-2">
-            <Bubble side="out" className="line-clamp-2 opacity-60">
-              {ui.outgoing}
-            </Bubble>
-            <Bubble side="in" className={enter(active)} style={delay(300)}>
-              {ui.reply}
-              <span className="mt-1 block text-[10px] text-muted-foreground">{ui.replyTime}</span>
-            </Bubble>
-            <Chip tone="handoff" className={"self-start " + enter(active)} style={delay(1100)}>
-              {ui.flag}
-            </Chip>
-          </div>
-        </StageFrame>
-      ),
-    },
-    {
-      id: "treatment-alert",
-      tone: "ah-tone-magic",
-      durationMs: 5600,
-      visual: (active) => (
-        <StageFrame className="justify-center">
-          <Panel className={"flex flex-col gap-2.5 p-3 " + enter(active)} style={delay(150)}>
-            <div className="flex items-center justify-between gap-2">
-              <span className="truncate text-xs font-semibold">{ui.alertTitle}</span>
-              <Chip tone="handoff">{controls.staffActionNeeded}</Chip>
-            </div>
-            <span className="truncate text-[11px] text-muted-foreground">{ui.alertClient}</span>
-            <ul className="flex flex-col gap-1.5">
-              {ui.alertDetails.map((line, i) => (
-                <li
-                  key={line}
-                  className={"flex items-start gap-2 text-xs leading-snug " + enter(active)}
-                  style={delay(450 + i * 200)}
-                >
-                  <span className="mt-1.5 size-1 shrink-0 rounded-full bg-scene" />
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <div
-              className={
-                "flex items-center gap-2 rounded-lg bg-brand-tint px-2.5 py-2 text-xs font-medium " + enter(active)
-              }
-              style={delay(1200)}
-            >
-              <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
-              <span className="truncate">{ui.alertNext}</span>
-            </div>
-          </Panel>
-        </StageFrame>
-      ),
-    },
-    {
-      id: "treatment-takeover",
-      tone: "ah-tone-starlight",
-      durationMs: 5600,
-      visual: (active) => (
-        <StageFrame className="justify-center">
-          <Panel className={"flex flex-col gap-3 p-3 " + enter(active)} style={delay(150)}>
-            <div className="flex items-center gap-2.5">
-              <Initials name={ui.assignee} />
-              <div className="flex min-w-0 flex-col">
-                <span className="truncate text-xs font-semibold">{ui.takeoverTitle}</span>
-                <span className="truncate text-[11px] text-muted-foreground">{ui.assignee}</span>
-              </div>
-              <PhoneCallIcon weight="fill" className="ml-auto size-4 shrink-0 text-scene" />
-            </div>
-            <ul className="flex flex-col gap-2">
-              {ui.takeoverLines.map((line, i) => (
-                <li
-                  key={line}
-                  className={"flex items-center gap-2 text-xs " + enter(active)}
-                  style={delay(500 + i * 350)}
-                >
-                  <CheckDot />
-                  <span className="truncate">{line}</span>
-                </li>
-              ))}
-            </ul>
-          </Panel>
-          <p className={"text-center text-xs font-medium text-scene " + enter(active)} style={delay(1400)}>
-            {ui.takeoverNote}
-          </p>
-        </StageFrame>
-      ),
-    },
+              <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
+              <span className="truncate">{line}</span>
+            </li>
+          ))}
+        </ul>
+        <div className={"flex flex-col rounded-lg bg-brand-tint px-2.5 py-1.5 " + enter(active)} style={delay(1300)}>
+          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{ui.nextActionLabel}</span>
+          <span className="flex items-center gap-1.5 text-xs font-semibold">
+            <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
+            <span className="truncate">{ui.nextAction}</span>
+          </span>
+        </div>
+      </div>
+      <div className="mt-auto flex items-end gap-2">
+        <Workstation role="staff" className="h-12 sm:h-20" />
+        <RoleTag role="staff" className="mb-1">
+          {ui.staffTag}
+        </RoleTag>
+      </div>
+    </Stage>
+  )
+}
+
+function StaffFollowsUp({ ui, active }: SceneProps) {
+  return (
+    <Stage className="gap-3">
+      <div className="relative flex min-h-0 flex-1 items-end justify-between gap-2">
+        <svg
+          viewBox="0 0 100 40"
+          preserveAspectRatio="none"
+          className="absolute left-[22%] top-[22%] h-[34%] w-[56%] overflow-visible text-brand"
+        >
+          <path
+            d="M2 38C25 0 75 0 98 38"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            pathLength={1}
+            className={play(active, "st-draw")}
+            style={delay(500)}
+          />
+        </svg>
+        <span
+          className={
+            "absolute left-1/2 top-[12%] flex size-8 -translate-x-1/2 items-center justify-center rounded-full border border-brand/40 bg-card text-brand shadow-sm " +
+            enter(active)
+          }
+          style={delay(1000)}
+        >
+          <PhoneCallIcon weight="fill" className="size-4" />
+        </span>
+        <div className="flex flex-col items-start gap-1">
+          <RoleTag role="staff">{ui.staffTag}</RoleTag>
+          <Workstation role="staff" pose="call" className={"h-20 sm:h-28 " + enter(active)} style={delay(150)} />
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          <RoleTag role="client">{ui.clientTag}</RoleTag>
+          <Figure role="client" pose="phone" className={"h-20 sm:h-28 " + enter(active)} style={delay(300)} />
+        </div>
+      </div>
+      <div className="flex items-center justify-between gap-2 rounded-xl border border-border bg-card px-2.5 py-2 shadow-sm">
+        <span className="shrink-0 text-[11px] text-muted-foreground">{ui.statusLabel}</span>
+        <span className="grid min-w-0 justify-items-end">
+          <span className={"col-start-1 row-start-1 min-w-0 " + leave(active)} style={delay(1500)}>
+            <Chip tone="handoff">{ui.nextAction}</Chip>
+          </span>
+          <span className={"col-start-1 row-start-1 min-w-0 " + play(active, "st-in")} style={delay(1800)}>
+            <Chip tone="auto">{ui.statusDone}</Chip>
+          </span>
+        </span>
+      </div>
+    </Stage>
+  )
+}
+
+export function buildTreatmentScenes(story: TreatmentStoryContent): Scene[] {
+  const ui = story.ui
+  return buildScenes(story.scenes, [
+    { id: "treatment-missed", tone: "ah-tone-sky", durationMs: 5200, visual: (a) => <LifeInterrupts ui={ui} active={a} /> },
+    { id: "treatment-checkin", tone: "ah-tone-sky", durationMs: 5000, visual: (a) => <CheckinSent ui={ui} active={a} /> },
+    { id: "treatment-reply", tone: "ah-tone-sky", durationMs: 5000, visual: (a) => <ClientReplies ui={ui} active={a} /> },
+    { id: "treatment-alert", tone: "ah-tone-call", durationMs: 5600, visual: (a) => <TeamAlerted ui={ui} active={a} /> },
+    { id: "treatment-followup", tone: "ah-tone-call", durationMs: 5600, visual: (a) => <StaffFollowsUp ui={ui} active={a} /> },
   ])
 }
