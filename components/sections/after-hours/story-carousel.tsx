@@ -337,13 +337,19 @@ export function StoryCarousel({
                 }
               />
               <article
+                data-active={isCurrent || undefined}
                 className={
                   "ah-card relative isolate flex h-full flex-col gap-4 overflow-hidden rounded-[1.75rem] p-3.5 text-left text-foreground [clip-path:inset(0_round_1.75rem)] transition-shadow duration-700 sm:p-4 " +
                   s.tone
                 }
               >
                 <header className="flex items-center justify-between gap-2 px-1.5 pt-1">
-                  <span className="flex min-w-0 items-center gap-2 text-xs font-medium text-muted-foreground">
+                  <span
+                    className={cn(
+                      "flex min-w-0 items-center gap-2 text-xs font-medium transition-colors duration-700",
+                      isCurrent ? "text-foreground" : "text-muted-foreground",
+                    )}
+                  >
                     <span className="size-1.5 shrink-0 rounded-full bg-scene" aria-hidden="true" />
                     <span className="truncate">{s.step}</span>
                   </span>
@@ -362,7 +368,14 @@ export function StoryCarousel({
                   >
                     {s.headline}
                   </h3>
-                  <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                  <p
+                    className={cn(
+                      "text-pretty text-sm leading-relaxed transition-colors duration-700",
+                      isCurrent ? "text-foreground/85" : "text-muted-foreground",
+                    )}
+                  >
+                    {s.body}
+                  </p>
                 </div>
               </article>
             </div>
