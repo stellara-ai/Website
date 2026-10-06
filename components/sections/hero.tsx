@@ -62,11 +62,11 @@ export function Hero({ content }: { content: SiteContent }) {
               {hero.headline}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-pretty text-[clamp(1rem,.8664rem+0.2155vw,1.125rem)] leading-relaxed text-muted-foreground">
-              {hero.supporting}
-            </p>
-
-            <div className="mt-10 flex w-full flex-col items-center gap-4">
+  <p className="mt-6 max-w-[44ch] text-pretty text-[clamp(1rem,.8664rem+0.2155vw,1.125rem)] font-normal leading-relaxed text-foreground">
+ {hero.supporting}
+  </p>
+  
+  <div className="mt-8 flex w-full flex-col items-center gap-4">
               <p className="text-sm font-medium text-foreground">{hero.selectorQuestion}</p>
               <HeroServiceSelector
                 services={hero.services}
