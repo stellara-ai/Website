@@ -276,6 +276,10 @@ export interface PlansContent {
   featureHeader: string
   essentialsLabel: string
   proLabel: string
+  recommendedLabel: string
+  perMonthLabel: string
+  coreGroupLabel: string
+  proGroupLabel: string
   includedEssentialsAria: string
   notIncludedEssentialsAria: string
   includedProAria: string
