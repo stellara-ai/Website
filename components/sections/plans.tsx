@@ -30,7 +30,7 @@ export function Plans({ content }: { content: SiteContent }) {
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
           {section.plans.map((plan, index) => (
             <Reveal key={plan.name} delay={index * 120} className="flex">
-              <PlanCard plan={plan} section={section} />
+              <PlanCard plan={plan} section={section} featured={index === section.plans.length - 1} />
             </Reveal>
           ))}
         </div>
@@ -91,9 +91,23 @@ function PriceBlock({ plan, section }: { plan: PlanCardData; section: PlansSecti
   )
 }
 
-function PlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
+function PlanCard({ plan, section, featured }: { plan: PlanCardData; section: PlansSection; featured: boolean }) {
   return (
-    <article className="flex w-full flex-col rounded-2xl border border-border bg-card/65 p-6 shadow-soft transition-colors hover:border-brand/30 md:p-8">
+    <article
+      className={
+        "relative flex w-full flex-col overflow-hidden rounded-2xl border bg-card p-6 pt-8 transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 md:p-8 md:pt-10 " +
+        (featured ? "border-brand/45 shadow-float" : "border-border shadow-soft hover:border-brand/30")
+      }
+    >
+      <span
+        aria-hidden="true"
+        className={
+          "absolute inset-x-0 top-0 h-1.5 " +
+          (featured
+            ? "bg-[linear-gradient(90deg,var(--cta),var(--svc-treatment),var(--status-purple))]"
+            : "bg-[linear-gradient(90deg,var(--cta),var(--svc-intake))]")
+        }
+      />
       <h3 className="text-xl font-semibold tracking-tight text-foreground">{plan.name}</h3>
       <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">{plan.summary}</p>
       <PriceBlock plan={plan} section={section} />

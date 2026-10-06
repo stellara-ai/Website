@@ -33,6 +33,9 @@
   --color-brand-tint-strong: var(--brand-tint-strong);
   --color-approve: var(--approve);
   --color-approve-tint: var(--approve-tint);
+  --color-cta: var(--cta);
+  --color-cta-strong: var(--cta-strong);
+  --color-cta-foreground: var(--cta-foreground);
 
   /* Status colors — the signature colored labels. */
   --color-status-done: var(--status-done);
@@ -106,6 +109,10 @@
   --brand-tint-strong: #efe0c2;
   --approve: #33694a;
   --approve-tint: #e2efe6;
+  /* Vivid starlight gold for the primary CTA; ink text keeps it well above AA. */
+  --cta: #eab03f;
+  --cta-strong: #f4c25e;
+  --cta-foreground: #12172a;
 
   --status-done: #0e7c3e;
   --status-work: #8d6115;
@@ -159,6 +166,9 @@
   --brand-tint-strong: #2b2514;
   --approve: #8cc7a1;
   --approve-tint: #14251b;
+  --cta: #f2bf55;
+  --cta-strong: #f8d27e;
+  --cta-foreground: #0a0e1a;
 
   --status-done: #2bb673;
   --status-work: #e8c88a;
@@ -507,48 +517,49 @@
   --ah-accent: var(--brand);
   --ah-b: var(--background);
 }
-/* Muted, low-chroma accents per card so each scene has its own hue next to the brand gold. */
+/* Saturated accents per card so each scene has its own hue next to the brand gold.
+   Lightness is held at 0.52 (light) / 0.78 (dark) so accent text and icons keep AA contrast. */
 .ah-tone-dusk {
-  --ah-accent: oklch(0.52 0.09 268);
+  --ah-accent: oklch(0.52 0.17 268);
 }
 .ah-tone-call {
-  --ah-accent: oklch(0.58 0.11 30);
+  --ah-accent: oklch(0.52 0.17 32);
 }
 .ah-tone-magic {
-  --ah-accent: oklch(0.52 0.09 300);
+  --ah-accent: oklch(0.52 0.19 305);
 }
 .ah-tone-starlight {
-  --ah-accent: oklch(0.54 0.085 165);
+  --ah-accent: oklch(0.52 0.12 165);
 }
 .ah-tone-ocean {
-  --ah-accent: oklch(0.52 0.08 230);
+  --ah-accent: oklch(0.52 0.15 238);
 }
 .ah-tone-meadow {
-  --ah-accent: oklch(0.54 0.08 140);
+  --ah-accent: oklch(0.52 0.14 145);
 }
 .ah-tone-sky {
-  --ah-accent: oklch(0.54 0.08 205);
+  --ah-accent: oklch(0.52 0.13 215);
 }
 .dark .ah-tone-ocean {
-  --ah-accent: oklch(0.76 0.07 230);
+  --ah-accent: oklch(0.78 0.13 238);
 }
 .dark .ah-tone-meadow {
-  --ah-accent: oklch(0.78 0.075 140);
+  --ah-accent: oklch(0.8 0.15 145);
 }
 .dark .ah-tone-sky {
-  --ah-accent: oklch(0.78 0.07 205);
+  --ah-accent: oklch(0.8 0.12 215);
 }
 .dark .ah-tone-dusk {
-  --ah-accent: oklch(0.76 0.075 268);
+  --ah-accent: oklch(0.78 0.13 268);
 }
 .dark .ah-tone-call {
-  --ah-accent: oklch(0.76 0.09 30);
+  --ah-accent: oklch(0.78 0.14 32);
 }
 .dark .ah-tone-magic {
-  --ah-accent: oklch(0.76 0.075 300);
+  --ah-accent: oklch(0.78 0.15 305);
 }
 .dark .ah-tone-starlight {
-  --ah-accent: oklch(0.78 0.075 165);
+  --ah-accent: oklch(0.8 0.12 165);
 }
 
 /* Each hero service re-points the brand tokens so its tab and carousel share one primary. Reviews keeps the default gold. */
@@ -616,6 +627,54 @@
   --secondary: color-mix(in oklab, var(--brand) 11%, var(--card));
   --border: color-mix(in oklab, var(--brand) 20%, var(--card));
 }
+/* Section bands: alternate hue washes give the page rhythm; text stays on theme tokens. */
+.band-tone {
+  background:
+    radial-gradient(55% 70% at 0% 0%, color-mix(in oklab, var(--band-hue, var(--brand)) 20%, transparent), transparent 72%),
+    radial-gradient(45% 60% at 100% 100%, color-mix(in oklab, var(--band-hue, var(--brand)) 12%, transparent), transparent 72%),
+    color-mix(in oklab, var(--band-hue, var(--brand)) 6%, var(--background));
+}
+.band-gold {
+  --band-hue: var(--cta);
+}
+.band-blue {
+  --band-hue: var(--status-purple);
+}
+.dark .band-tone {
+  background:
+    radial-gradient(55% 70% at 0% 0%, color-mix(in oklab, var(--band-hue, var(--brand)) 14%, transparent), transparent 72%),
+    radial-gradient(45% 60% at 100% 100%, color-mix(in oklab, var(--band-hue, var(--brand)) 9%, transparent), transparent 72%),
+    color-mix(in oklab, var(--band-hue, var(--brand)) 4%, var(--background));
+}
+/* Deep-space surface; pair with the .dark class so every token inside flips to the dark palette. */
+.band-space {
+  background:
+    radial-gradient(60% 70% at 12% 0%, color-mix(in oklab, var(--svc-intake) 26%, transparent), transparent 70%),
+    radial-gradient(50% 65% at 92% 100%, color-mix(in oklab, var(--cta) 20%, transparent), transparent 70%),
+    radial-gradient(40% 50% at 70% 10%, color-mix(in oklab, var(--svc-treatment) 12%, transparent), transparent 70%),
+    var(--ink);
+  color: var(--foreground);
+}
+.shadow-cta {
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 45%, transparent) inset,
+    0 10px 24px -10px color-mix(in oklab, var(--cta) 85%, transparent),
+    0 2px 6px -2px rgba(18, 23, 42, 0.18);
+}
+.shadow-cta:hover {
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 55%, transparent) inset,
+    0 16px 30px -10px color-mix(in oklab, var(--cta) 95%, transparent),
+    0 3px 8px -2px rgba(18, 23, 42, 0.2);
+}
+/* Soft service-colored glow behind the hero carousel; follows the selected service. */
+.hero-aura {
+  background:
+    radial-gradient(45% 50% at 50% 42%, color-mix(in oklab, var(--brand) 22%, transparent), transparent 75%),
+    radial-gradient(30% 35% at 18% 70%, color-mix(in oklab, var(--cta) 16%, transparent), transparent 75%),
+    radial-gradient(30% 35% at 82% 70%, color-mix(in oklab, var(--brand) 14%, transparent), transparent 75%);
+  transition: opacity 0.6s ease;
+}
 .ah-card {
   background: var(--card);
   box-shadow: 0 0 0 0 transparent;
@@ -640,9 +699,10 @@
 }
 :root:not(.dark) .ah-stage {
   background:
-    radial-gradient(110% 75% at 50% 0%, color-mix(in srgb, var(--ah-accent) 20%, transparent), transparent 72%),
-    color-mix(in srgb, var(--ink) 7%, var(--muted));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ah-accent) 18%, var(--border));
+    radial-gradient(110% 75% at 50% 0%, color-mix(in srgb, var(--ah-accent) 26%, transparent), transparent 72%),
+    radial-gradient(80% 60% at 100% 100%, color-mix(in srgb, var(--brand) 14%, transparent), transparent 70%),
+    color-mix(in oklab, var(--brand) 9%, color-mix(in srgb, var(--ink) 4%, var(--muted)));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ah-accent) 24%, var(--border));
 }
 .ah-horizon {
   background: linear-gradient(to right, transparent, color-mix(in srgb, var(--brand) 60%, transparent), transparent);

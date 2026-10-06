@@ -137,7 +137,7 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
   })
 
   return (
-    <section id="measurement" className="scroll-mt-20 border-t border-border">
+    <section id="measurement" className="band-tone band-blue scroll-mt-20 border-t border-border">
       <div className="container-editorial grid gap-12 py-20 md:py-24 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 

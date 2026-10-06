@@ -140,8 +140,9 @@ export function Hero({ content }: { content: SiteContent }) {
               aria-labelledby={heroServiceTabId(selectedService)}
               data-service={selectedService}
               data-service-theme={selectedService}
-              className="relative w-full min-w-0"
+              className="relative isolate w-full min-w-0"
             >
+              <div aria-hidden="true" className="hero-aura pointer-events-none absolute -inset-x-40 -bottom-10 -top-24 -z-10" />
               <ServiceDemo
                 service={selectedService}
                 content={content}

@@ -7,7 +7,7 @@ export const actionVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-brand text-brand-foreground hover:brightness-110 shadow-[0_6px_16px_-4px_rgba(97,97,255,0.5)]",
+          "bg-cta text-cta-foreground shadow-cta hover:-translate-y-0.5 hover:bg-cta-strong active:translate-y-0 active:brightness-95 focus-visible:ring-foreground motion-reduce:hover:translate-y-0",
         ink: "bg-foreground text-background hover:opacity-90",
         outline:
           "border-2 border-foreground/15 bg-transparent text-foreground hover:border-brand hover:text-brand",

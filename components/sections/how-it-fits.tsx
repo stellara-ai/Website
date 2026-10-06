@@ -36,7 +36,7 @@ export function HowItFits({ content }: { content: SiteContent }) {
   const scenario = section.scenarios.find((s) => s.id === scenarioId) ?? section.scenarios[0]
 
   return (
-    <section id="fit" className="scroll-mt-20 border-t border-border">
+    <section id="fit" data-service-theme="after-hours" className="band-tone scroll-mt-20 border-t border-border">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 

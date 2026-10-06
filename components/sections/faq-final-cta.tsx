@@ -64,7 +64,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
           })}
         </div>
 
-        <Reveal className="mt-14 rounded-3xl border border-border bg-card/55 p-7 text-center shadow-soft sm:p-10">
+        <Reveal className="dark band-space mt-14 overflow-hidden rounded-3xl border border-border p-7 text-center shadow-float sm:p-12">
           <h2 className="text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl">
             {section.finalTitle}
           </h2>

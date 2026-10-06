@@ -6,7 +6,7 @@ export function TrustFounder({ content }: { content: SiteContent }) {
   const section = content.trustFounder
 
   return (
-    <section id="trust" className="scroll-mt-20 border-t border-border">
+    <section id="trust" className="dark band-space scroll-mt-20 border-t border-border">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading
           eyebrow={section.eyebrow}

@@ -43,7 +43,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
   }
 
   return (
-    <section id="personalized-demo" className="scroll-mt-20 border-t border-border">
+    <section id="personalized-demo" className="band-tone band-gold scroll-mt-20 border-t border-border">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading
           eyebrow={section.eyebrow}
