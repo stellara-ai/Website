@@ -39,12 +39,12 @@ export function HeroServiceSelector({
   }
 
   return (
-    <div className="-mx-5 flex max-w-[100vw] justify-start overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:justify-center sm:px-0 [&::-webkit-scrollbar]:hidden">
+    <div className="-mx-5 -my-6 flex max-w-[100vw] justify-start overflow-x-auto px-5 py-6 [scrollbar-width:none] sm:-mx-6 sm:justify-center sm:px-6 [&::-webkit-scrollbar]:hidden">
       <div
         role="tablist"
         aria-label={label}
         onKeyDown={handleKeyDown}
-        className="mx-auto inline-flex shrink-0 items-center gap-1 rounded-full border border-border bg-card/70 p-1 shadow-soft backdrop-blur"
+        className="mx-auto inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-card p-2 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(0,0,0,0.45)] dark:ring-1 dark:ring-border"
       >
         {services.map((service) => {
           const active = service.id === selected
