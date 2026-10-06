@@ -590,6 +590,15 @@
   --ring: var(--brand);
   --accent: var(--brand-tint);
   --accent-foreground: var(--brand-strong);
+  /* Insets and hairlines pick up a faded wash of the service primary. */
+  --muted: color-mix(in oklab, var(--brand) 8%, var(--card));
+  --secondary: color-mix(in oklab, var(--brand) 8%, var(--card));
+  --border: color-mix(in oklab, var(--brand) 16%, var(--card));
+}
+.dark [data-service-theme] {
+  --muted: color-mix(in oklab, var(--brand) 11%, var(--card));
+  --secondary: color-mix(in oklab, var(--brand) 11%, var(--card));
+  --border: color-mix(in oklab, var(--brand) 20%, var(--card));
 }
 .ah-card {
   background: var(--card);
