@@ -32,8 +32,10 @@ export function Plans({ content }: { content: SiteContent }) {
               key={plan.name}
               delay={index * 100}
               className={
-                "rounded-2xl border bg-card/65 p-6 shadow-soft " +
-                (plan.highlighted ? "border-brand/40" : "border-border")
+                "rounded-2xl border p-6 shadow-soft transition-colors " +
+                (plan.highlighted
+                  ? "border-brand/50 bg-card ring-1 ring-brand/20"
+                  : "border-border bg-card/65 hover:border-brand/30")
               }
             >
               <h3 className="text-xl font-semibold tracking-tight text-foreground">{plan.name}</h3>
@@ -48,7 +50,7 @@ export function Plans({ content }: { content: SiteContent }) {
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{plan.summary}</p>
-              <ul className="mt-5 space-y-2.5 text-sm text-foreground">
+              <ul className="mt-5 flex flex-col gap-2.5 text-sm text-foreground">
                 {plan.points.map((point) => (
                   <li key={point} className="flex items-start gap-2.5">
                     <Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />
@@ -61,7 +63,7 @@ export function Plans({ content }: { content: SiteContent }) {
         </div>
 
         <Reveal className="mt-5 overflow-hidden rounded-2xl border border-border bg-card/45 shadow-soft">
-          <div className="grid grid-cols-[minmax(14rem,1fr)_7rem_7rem] border-b border-border bg-background/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground sm:grid-cols-[minmax(18rem,1fr)_8rem_8rem] sm:px-5">
+          <div className="grid grid-cols-[minmax(0,1fr)_5rem_5rem] gap-x-2 border-b border-border bg-background/80 px-4 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground sm:grid-cols-[minmax(18rem,1fr)_8rem_8rem] sm:px-5">
             <span>{section.featureHeader}</span>
             <span className="text-center">{section.essentialsLabel}</span>
             <span className="text-center">{section.proLabel}</span>
@@ -70,9 +72,9 @@ export function Plans({ content }: { content: SiteContent }) {
             {section.features.map((feature) => (
               <div
                 key={feature.label}
-                className="grid grid-cols-[minmax(14rem,1fr)_7rem_7rem] items-center px-4 py-3 text-sm sm:grid-cols-[minmax(18rem,1fr)_8rem_8rem] sm:px-5"
+                className="grid grid-cols-[minmax(0,1fr)_5rem_5rem] items-center gap-x-2 px-4 py-3 text-sm transition-colors hover:bg-background/60 sm:grid-cols-[minmax(18rem,1fr)_8rem_8rem] sm:px-5"
               >
-                <span className="pr-3 text-foreground">{feature.label}</span>
+                <span className="text-pretty pr-1 text-foreground">{feature.label}</span>
                 <span className="flex justify-center">
                   {feature.essentials ? (
                     <Check className="size-4 text-brand" aria-label={section.includedEssentialsAria} />

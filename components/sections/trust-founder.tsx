@@ -28,7 +28,10 @@ export function TrustFounder({ content }: { content: SiteContent }) {
           <div>
             <p className="text-lg leading-relaxed text-foreground">{section.paragraphOne}</p>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{section.paragraphTwo}</p>
-            <p className="mt-5 text-sm font-medium text-foreground">{section.tagline}</p>
+            <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-tint px-3.5 py-1.5 text-sm font-medium text-brand">
+              <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              {section.tagline}
+            </p>
           </div>
         </Reveal>
       </div>
