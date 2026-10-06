@@ -534,6 +534,63 @@
 .dark .ah-tone-starlight {
   --ah-accent: oklch(0.78 0.075 165);
 }
+
+/* Each hero service re-points the brand tokens so its tab and carousel share one primary. Reviews keeps the default gold. */
+[data-service-theme="after-hours"] {
+  --brand: #7a4fe0;
+  --brand-strong: #6539c9;
+  --brand-tint: #efe9fc;
+  --brand-tint-strong: #e2d8f8;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+[data-service-theme="treatment-follow-up"] {
+  --brand: #d6337f;
+  --brand-strong: #b8256a;
+  --brand-tint: #fce6f0;
+  --brand-tint-strong: #f8d2e3;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+[data-service-theme="website-intake"] {
+  --brand: #138a52;
+  --brand-strong: #0f7244;
+  --brand-tint: #e2f4ea;
+  --brand-tint-strong: #cdebda;
+  --brand-foreground: #ffffff;
+  --brand-strong-foreground: #ffffff;
+}
+.dark [data-service-theme="after-hours"] {
+  --brand: #b49cff;
+  --brand-strong: #c9b8ff;
+  --brand-tint: #1d1733;
+  --brand-tint-strong: #251d40;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+.dark [data-service-theme="treatment-follow-up"] {
+  --brand: #ff7eb6;
+  --brand-strong: #ffa3cb;
+  --brand-tint: #2a1220;
+  --brand-tint-strong: #341629;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+.dark [data-service-theme="website-intake"] {
+  --brand: #5fd59a;
+  --brand-strong: #86e2b3;
+  --brand-tint: #10241a;
+  --brand-tint-strong: #142d20;
+  --brand-foreground: #0a0e1a;
+  --brand-strong-foreground: #0a0e1a;
+}
+[data-service-theme] {
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --ring: var(--brand);
+  --accent: var(--brand-tint);
+  --accent-foreground: var(--brand-strong);
+}
 .ah-card {
   background: var(--card);
   box-shadow: 0 0 0 0 transparent;

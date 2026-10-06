@@ -87,6 +87,7 @@ export function Hero({ content }: { content: SiteContent }) {
               role="tabpanel"
               aria-labelledby={heroServiceTabId(selectedService)}
               data-service={selectedService}
+              data-service-theme={selectedService}
               className="relative w-full min-w-0"
             >
               <ServiceDemo service={selectedService} content={content} />
