@@ -259,7 +259,6 @@ export interface PlanFeatureRow {
 
 export interface PlanCard {
   name: string
-  highlighted?: boolean
   monthly: string
   implementation: string
   summary: string
@@ -276,7 +275,6 @@ export interface PlansContent {
   featureHeader: string
   essentialsLabel: string
   proLabel: string
-  recommendedLabel: string
   perMonthLabel: string
   coreGroupLabel: string
   proGroupLabel: string

@@ -466,7 +466,6 @@ export const es: SiteContent = {
     featureHeader: "Característica",
     essentialsLabel: "Essentials",
     proLabel: "Pro",
-    recommendedLabel: "Recomendado",
     perMonthLabel: "/mes",
     coreGroupLabel: "Incluido en ambos",
     proGroupLabel: "Pro agrega",
@@ -495,7 +494,6 @@ export const es: SiteContent = {
       },
       {
         name: "Pro",
-        highlighted: true,
         monthly: "$997",
         implementation: "$1,000",
         summary: "Agrega admisión web y seguimiento continuo de prospectos y clientes potenciales.",

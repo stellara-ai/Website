@@ -466,7 +466,6 @@ export const en: SiteContent = {
     featureHeader: "Feature",
     essentialsLabel: "Essentials",
     proLabel: "Pro",
-    recommendedLabel: "Recommended",
     perMonthLabel: "/mo",
     coreGroupLabel: "Included in both",
     proGroupLabel: "Pro adds",
@@ -495,7 +494,6 @@ export const en: SiteContent = {
       },
       {
         name: "Pro",
-        highlighted: true,
         monthly: "$997",
         implementation: "$1,000",
         summary: "Adds website intake and ongoing follow-up with prospects and clients.",

@@ -30,11 +30,7 @@ export function Plans({ content }: { content: SiteContent }) {
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
           {section.plans.map((plan, index) => (
             <Reveal key={plan.name} delay={index * 120} className="flex">
-              {plan.highlighted ? (
-                <ProPlanCard plan={plan} section={section} />
-              ) : (
-                <StandardPlanCard plan={plan} section={section} />
-              )}
+              <PlanCard plan={plan} section={section} />
             </Reveal>
           ))}
         </div>
@@ -79,19 +75,12 @@ export function Plans({ content }: { content: SiteContent }) {
   )
 }
 
-function PriceBlock({ plan, section, emphasis }: { plan: PlanCardData; section: PlansSection; emphasis: boolean }) {
+function PriceBlock({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
   return (
     <div className="mt-5 flex flex-col gap-3">
       <p className="sr-only">{section.monthlyPriceLabel}</p>
       <p className="flex items-baseline gap-1">
-        <span
-          className={
-            "font-semibold tracking-tight " +
-            (emphasis ? "text-5xl text-foreground md:text-6xl" : "text-4xl text-foreground md:text-5xl")
-          }
-        >
-          {plan.monthly}
-        </span>
+        <span className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">{plan.monthly}</span>
         <span className="text-base font-medium text-muted-foreground">{section.perMonthLabel}</span>
       </p>
       <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs text-muted-foreground">
@@ -102,12 +91,12 @@ function PriceBlock({ plan, section, emphasis }: { plan: PlanCardData; section: 
   )
 }
 
-function StandardPlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
+function PlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
   return (
     <article className="flex w-full flex-col rounded-2xl border border-border bg-card/65 p-6 shadow-soft transition-colors hover:border-brand/30 md:p-8">
       <h3 className="text-xl font-semibold tracking-tight text-foreground">{plan.name}</h3>
       <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">{plan.summary}</p>
-      <PriceBlock plan={plan} section={section} emphasis={false} />
+      <PriceBlock plan={plan} section={section} />
       <ul className="mt-6 flex flex-col gap-3 border-t border-border pt-6 text-sm text-foreground">
         {plan.points.map((point) => (
           <li key={point} className="flex items-start gap-3">
@@ -119,50 +108,6 @@ function StandardPlanCard({ plan, section }: { plan: PlanCardData; section: Plan
         ))}
       </ul>
     </article>
-  )
-}
-
-function ProPlanCard({ plan, section }: { plan: PlanCardData; section: PlansSection }) {
-  const [inherited, ...exclusive] = plan.points
-
-  return (
-    <div className="plan-pro-frame w-full rounded-2xl p-px shadow-soft">
-      <article className="plan-pro-glow relative flex h-full flex-col overflow-hidden rounded-[calc(1rem-1px)] p-6 md:p-8">
-        <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-brand px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-brand-foreground">
-          <SparkleIcon weight="fill" className="size-3" aria-hidden="true" />
-          {section.recommendedLabel}
-          <span
-            className="plan-sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-brand-foreground/30"
-            aria-hidden="true"
-          />
-        </span>
-
-        <h3 className="pr-32 text-xl font-semibold tracking-tight text-foreground">{plan.name}</h3>
-        <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">{plan.summary}</p>
-        <PriceBlock plan={plan} section={section} emphasis />
-
-        <div className="mt-6 flex flex-col gap-3 border-t border-brand/25 pt-6 text-sm text-foreground">
-          {inherited ? (
-            <p className="flex items-center gap-3 font-medium">
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-                <CheckIcon weight="fill" className="size-3" aria-hidden="true" />
-              </span>
-              {inherited}
-            </p>
-          ) : null}
-          <ul className="flex flex-col gap-3">
-            {exclusive.map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-status-teal-tint text-status-teal">
-                  <SparkleIcon weight="fill" className="size-3" aria-hidden="true" />
-                </span>
-                <span className="leading-relaxed">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </article>
-    </div>
   )
 }
 
@@ -179,7 +124,7 @@ function ComparisonTable({ section }: { section: PlansSection }) {
       >
         <span className="py-3">{section.featureHeader}</span>
         <span className="py-3 text-center">{section.essentialsLabel}</span>
-        <span className="plan-pro-col flex items-center justify-center gap-1 rounded-t-lg py-3 text-brand">
+        <span className="py-3 text-center">
           {section.proLabel}
         </span>
       </div>
@@ -212,7 +157,7 @@ function FeatureGroup({
           {label}
         </span>
         <span aria-hidden="true" />
-        <span className="plan-pro-col" aria-hidden="true" />
+        <span aria-hidden="true" />
       </div>
       <div className="divide-y divide-border">
         {rows.map((feature) => (
@@ -228,7 +173,7 @@ function FeatureGroup({
                 <MinusIcon weight="fill" className="size-4 text-muted-foreground/60" aria-label={section.notIncludedEssentialsAria} />
               )}
             </span>
-            <span className="plan-pro-col flex items-center justify-center py-3">
+            <span className="flex items-center justify-center py-3">
               {feature.pro ? (
                 <CheckIcon weight="fill" className={`size-4 ${checkColor}`} aria-label={section.includedProAria} />
               ) : (
