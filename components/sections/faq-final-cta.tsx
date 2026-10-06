@@ -8,7 +8,7 @@ import { Reveal } from "@/components/util/reveal"
 import { SectionHeading } from "@/components/sections/section-parts"
 import { useInteraction } from "@/components/providers/interaction-context"
 
-type Faq = SiteContent["faqFinalCta"]["faqs"][number]
+type FaqGroup = SiteContent["faqFinalCta"]["groups"][number]
 
 export function FaqFinalCta({ content }: { content: SiteContent }) {
   const { openAppointment } = useInteraction()
@@ -16,10 +16,10 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
 
   return (
     <section id="faq" className="scroll-mt-20 bg-surface-alt">
-      <div className="container-editorial py-20 md:py-24">
+      <div className="container-editorial border-t border-border py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
-        <FaqExplorer faqs={section.faqs} />
+        <FaqExplorer groups={section.groups} />
 
         <Reveal className="mt-14 rounded-2xl bg-card p-7 text-center sm:p-10">
           <h2 className="text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl">
@@ -45,14 +45,26 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
   )
 }
 
-function FaqExplorer({ faqs }: { faqs: Faq[] }) {
+function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
   const [active, setActive] = useState(0)
+  const faqs = groups.flatMap((group) => group.items)
   const current = faqs[active]
+  let offset = 0
 
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-10">
-      <ul className="flex flex-col gap-2.5">
-        {faqs.map((item, index) => {
+      <div className="flex flex-col gap-7">
+        {groups.map((group) => {
+          const start = offset
+          offset += group.items.length
+          return (
+            <div key={group.label}>
+              <h3 className="mb-3 px-1 text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+                {group.label}
+              </h3>
+              <ul className="flex flex-col gap-2.5">
+                {group.items.map((item, itemIndex) => {
+          const index = start + itemIndex
           const selected = index === active
           const mobilePanelId = `faq-answer-${index}`
           return (
@@ -105,8 +117,12 @@ function FaqExplorer({ faqs }: { faqs: Faq[] }) {
               </div>
             </li>
           )
+                })}
+              </ul>
+            </div>
+          )
         })}
-      </ul>
+      </div>
 
       <div
         id="faq-answer-panel"

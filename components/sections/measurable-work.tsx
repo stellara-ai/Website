@@ -1,288 +1,145 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import { CalendarCheckIcon, HeartbeatIcon, StarIcon, TimerIcon, type Icon as PhosphorIcon } from "@phosphor-icons/react"
-import type { MeasurableWorkMetric, SiteContent } from "@/content/schema"
+import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react/dist/ssr"
+import type { BriefItem, SiteContent } from "@/content/schema"
 import { SectionHeading } from "@/components/sections/section-parts"
-import { Chip } from "@/components/sections/stories/story-ui"
+import { Reveal } from "@/components/util/reveal"
 import { cn } from "@/lib/utils"
 
-type Accent = "website" | "done" | "intake" | "treatment" | "work"
-
-const ACCENT: Record<Accent, { bar: string; text: string; tint: string }> = {
-  website: { bar: "bg-status-purple", text: "text-status-purple", tint: "bg-status-purple-tint" },
-  done: { bar: "bg-status-done", text: "text-status-done", tint: "bg-status-done-tint" },
-  intake: { bar: "bg-svc-intake", text: "text-svc-intake", tint: "bg-svc-intake-tint" },
-  treatment: { bar: "bg-svc-treatment", text: "text-svc-treatment", tint: "bg-svc-treatment-tint" },
-  work: { bar: "bg-status-work", text: "text-status-work", tint: "bg-status-work-tint" },
-}
-
-const TREND = [34, 48, 41, 58, 52, 66, 61, 77, 70, 86, 80, 94, 88, 100]
-const ROTATE_MS = 2800
-
-function useDashboardMotion() {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [inView, setInView] = useState(false)
-  const [reduced, setReduced] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReduced(media.matches)
-    const node = ref.current
-    if (!node) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.25 },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
-
-  return { ref, inView, reduced }
-}
-
-function parseMetric(value: string) {
-  const time = value.match(/^(\d+):(\d+)$/)
-  if (time) return { target: Number(time[1]) * 60 + Number(time[2]), isTime: true }
-  return { target: Number(value.replace(/[^\d.]/g, "")) || 0, isTime: false }
-}
-
-function formatMetric(amount: number, isTime: boolean) {
-  if (!isTime) return Math.round(amount).toLocaleString("en-US")
-  const total = Math.round(amount)
-  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`
-}
-
-function CountUp({ value, run, instant }: { value: string; run: boolean; instant: boolean }) {
-  const { target, isTime } = parseMetric(value)
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    if (!run) return
-    if (instant) {
-      setProgress(1)
-      return
-    }
-    let frame = 0
-    const start = performance.now()
-    const tick = (now: number) => {
-      const t = Math.min((now - start) / 1400, 1)
-      setProgress(1 - Math.pow(1 - t, 3))
-      if (t < 1) frame = requestAnimationFrame(tick)
-    }
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
-  }, [run, instant])
-
-  return (
-    <>
-      <span aria-hidden="true" className="tabular-nums">
-        {formatMetric(target * progress, isTime)}
-      </span>
-      <span className="sr-only">{value}</span>
-    </>
-  )
-}
-
-function Card({
-  className,
-  style,
-  children,
-}: {
-  className?: string
-  style?: React.CSSProperties
-  children: React.ReactNode
-}) {
-  return (
-    <div className={cn("rounded-xl bg-card p-4 sm:p-5", className)} style={style}>
-      {children}
-    </div>
-  )
-}
+type Section = SiteContent["measurableWork"]
 
 export function MeasurableWork({ content }: { content: SiteContent }) {
   const section = content.measurableWork
-  const { ref, inView, reduced } = useDashboardMotion()
-  const [active, setActive] = useState(0)
-
-  const [handled, response, qualified, booked, followUps, treatment, reviews] = section.metrics
-  const funnel: { metric: MeasurableWorkMetric; accent: Accent }[] = [
-    { metric: handled, accent: "website" },
-    { metric: qualified, accent: "intake" },
-    { metric: booked, accent: "work" },
-  ]
-  const funnelMax = parseMetric(handled.value).target || 1
-  const tiles: { metric: MeasurableWorkMetric; accent: Accent; icon: PhosphorIcon }[] = [
-    { metric: response, accent: "done", icon: TimerIcon },
-    { metric: followUps, accent: "intake", icon: CalendarCheckIcon },
-    { metric: treatment, accent: "treatment", icon: HeartbeatIcon },
-    { metric: reviews, accent: "work", icon: StarIcon },
-  ]
-  const handoffCount = section.attention.filter((item) => item.tone === "handoff").length
-  const rotating = inView && !reduced
-
-  useEffect(() => {
-    if (!rotating) return
-    const id = window.setInterval(() => setActive((i) => (i + 1) % section.attention.length), ROTATE_MS)
-    return () => window.clearInterval(id)
-  }, [rotating, section.attention.length])
-
-  const grow = (delay: number) => ({
-    transitionDelay: reduced ? "0ms" : `${delay}ms`,
-  })
+  const unresolvedIndex = section.monthMetrics.length - 1
 
   return (
     <section id="measurement" className="scroll-mt-20">
-      <div className="container-editorial grid gap-12 py-20 md:py-24 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
+      <div className="container-editorial py-20 md:py-24">
         <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
 
-        <div
-          ref={ref}
-          className={cn(
-            "relative transition-all duration-700 ease-out motion-reduce:transition-none",
-            inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-          )}
-        >
-          <div className="relative flex flex-col gap-3 rounded-2xl bg-surface-alt p-4 sm:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
-              <p className="flex items-center gap-2.5 text-sm font-semibold text-foreground">
-                <span className="relative flex size-2.5" aria-hidden="true">
-                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-status-done opacity-60 motion-reduce:animate-none" />
-                  <span className="relative inline-flex size-2.5 rounded-full bg-status-done" />
-                </span>
-                {section.reportLabel}
+        <Reveal className="mt-10">
+          <article aria-labelledby="brief-heading" className="overflow-hidden rounded-2xl bg-surface-alt">
+          <header className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-5">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h3 id="brief-heading" className="text-lg font-semibold tracking-tight text-foreground">
+                {section.briefLabel}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {section.briefFirm} <span aria-hidden="true">·</span> {section.briefTime}
               </p>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground">
-                  {section.periodLabel}
-                </span>
-                <span className="rounded-full border border-border px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
-                  {section.dashboardLabel}
-                </span>
-              </div>
             </div>
+            <p className="w-fit rounded-full border border-border px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+              {section.illustrative}
+            </p>
+          </header>
 
-            <div className="grid gap-3 md:grid-cols-5">
-              <Card className="flex flex-col gap-4 md:col-span-3">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.08em] text-muted-foreground">{handled.label}</p>
-                  <p className="mt-1.5 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                    <CountUp value={handled.value} run={inView} instant={reduced} />
-                  </p>
-                </div>
-                <div className="flex h-24 items-end gap-1.5" aria-hidden="true">
-                  {TREND.map((height, index) => (
-                    <span
-                      key={index}
-                      className={cn(
-                        "flex-1 origin-bottom rounded-t-md transition-transform duration-700 ease-out motion-reduce:transition-none",
-                        index === TREND.length - 1 ? "bg-status-purple" : "bg-status-purple/30",
-                        inView ? "scale-y-100" : "scale-y-0",
-                      )}
-                      style={{ height: `${height}%`, ...grow(200 + index * 45) }}
-                    />
-                  ))}
-                </div>
-              </Card>
-
-              <Card className="flex flex-col justify-center gap-4 md:col-span-2">
-                {funnel.map(({ metric, accent }, index) => {
-                  const share = Math.round((parseMetric(metric.value).target / funnelMax) * 100)
-                  return (
-                    <div key={metric.label} className="flex flex-col gap-1.5">
-                      <div className="flex items-baseline justify-between gap-2 text-sm">
-                        <span className="truncate text-muted-foreground">{metric.label}</span>
-                        <span className="font-semibold text-foreground">
-                          <CountUp value={metric.value} run={inView} instant={reduced} />
-                        </span>
-                      </div>
-                      <div className="h-2 overflow-hidden rounded-full bg-muted" aria-hidden="true">
-                        <div
-                          className={cn(
-                            "h-full rounded-full transition-[width] duration-1000 ease-out motion-reduce:transition-none",
-                            ACCENT[accent].bar,
-                          )}
-                          style={{ width: inView ? `${share}%` : "0%", ...grow(300 + index * 150) }}
-                        />
-                      </div>
-                    </div>
-                  )
-                })}
-              </Card>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {tiles.map(({ metric, accent, icon: Icon }, index) => (
-                <Card
-                  key={metric.label}
-                  className={cn(
-                    "flex flex-col gap-3 transition-all duration-500 ease-out motion-reduce:transition-none",
-                    inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
-                  )}
-                  style={grow(450 + index * 90)}
-                >
-                  <span
-                    className={cn("flex size-8 items-center justify-center rounded-lg", ACCENT[accent].tint, ACCENT[accent].text)}
-                    aria-hidden="true"
-                  >
-                    <Icon weight="fill" className="size-4" />
-                  </span>
-                  <div>
-                    <p className="text-2xl font-semibold tracking-tight text-foreground">
-                      <CountUp value={metric.value} run={inView} instant={reduced} />
-                    </p>
-                    <p className="mt-1 text-xs leading-snug text-muted-foreground">{metric.label}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="flex flex-col gap-3">
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-foreground">{section.attentionLabel}</p>
-                <span className="flex size-6 items-center justify-center rounded-full bg-status-work text-xs font-semibold text-background">
-                  {handoffCount}
-                </span>
-              </div>
-              <ul className="flex flex-col gap-2">
-                {section.attention.map((item, index) => {
-                  const isActive = rotating && index === active
-                  return (
-                    <li
-                      key={item.label}
-                      className={cn(
-                        "relative flex flex-col gap-2 overflow-hidden rounded-xl border p-3 transition-colors duration-300 sm:flex-row sm:items-center sm:justify-between",
-                        isActive ? "border-brand/40 bg-brand-tint" : "border-border bg-card",
-                      )}
-                    >
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-foreground">{item.label}</p>
-                        <p className="truncate text-xs text-muted-foreground">{item.meta}</p>
-                      </div>
-                      <Chip tone={item.tone} className="self-start sm:self-auto">
-                        {item.status}
-                      </Chip>
-                      {isActive && (
-                        <span
-                          key={`sweep-${active}`}
-                          className="mw-sweep absolute inset-x-0 bottom-0 h-0.5 bg-brand"
-                          style={{ animationDuration: `${ROTATE_MS}ms` }}
-                          aria-hidden="true"
-                        />
-                      )}
-                    </li>
-                  )
-                })}
-              </ul>
-            </Card>
+          <div
+            className="hidden grid-cols-[5rem_minmax(0,1fr)_minmax(0,1fr)] gap-x-8 border-b border-border px-8 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground md:grid"
+            aria-hidden="true"
+          >
+            <span />
+            <span>{section.movedLabel}</span>
+            <span>{section.actionLabel}</span>
           </div>
-        </div>
+
+          <ol className="divide-y divide-border">
+            {section.items.map((item, index) => (
+              <BriefRow key={item.label} item={item} section={section} delay={index * 90} />
+            ))}
+          </ol>
+          </article>
+        </Reveal>
+
+        <Reveal delay={120} className="mt-10">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-foreground pb-3">
+            <h3 className="text-lg font-semibold tracking-tight text-foreground">{section.monthLabel}</h3>
+            <p className="text-sm text-muted-foreground">
+              {section.monthPeriod} <span aria-hidden="true">·</span> {section.illustrative}
+            </p>
+          </div>
+          <dl className="grid grid-cols-2 md:grid-cols-4">
+            {section.monthMetrics.map((metric, index) => (
+              <div
+                key={metric.label}
+                className={cn(
+                  "flex flex-col-reverse gap-1 border-b border-border py-5 pr-4 md:border-b-0 md:py-6",
+                  index % 2 === 1 && "border-l pl-4 md:pl-6",
+                  index > 0 && "md:border-l md:pl-6",
+                )}
+              >
+                <dt className="text-sm leading-snug text-muted-foreground">{metric.label}</dt>
+                <dd
+                  className={cn(
+                    "text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl",
+                    index === unresolvedIndex ? "text-status-work" : "text-foreground",
+                  )}
+                >
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-4 max-w-3xl text-pretty text-sm leading-relaxed text-muted-foreground">{section.footnote}</p>
+        </Reveal>
       </div>
     </section>
+  )
+}
+
+function BriefRow({ item, section, delay }: { item: BriefItem; section: Section; delay: number }) {
+  const needsStaff = item.tone === "handoff"
+
+  return (
+    <Reveal
+      as="li"
+      delay={delay}
+      className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-4 gap-y-4 px-5 py-6 sm:px-8 md:grid-cols-[5rem_minmax(0,1fr)_minmax(0,1fr)] md:items-start md:gap-x-8"
+    >
+      <p className="text-4xl font-semibold leading-none tabular-nums tracking-tight text-foreground md:text-5xl">
+        {item.count}
+      </p>
+
+      <div className="min-w-0">
+        <p className="text-base font-semibold text-foreground">{item.label}</p>
+        <p className="mt-1 text-pretty text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+      </div>
+
+      <div
+        className={cn(
+          "col-start-2 flex items-start gap-3 rounded-xl px-4 py-3 md:col-start-3",
+          needsStaff ? "bg-card" : "bg-transparent px-0 md:px-4",
+        )}
+      >
+        <span
+          className={cn(
+            "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full",
+            needsStaff ? "bg-status-work text-background" : "bg-status-done-tint text-status-done",
+          )}
+          aria-hidden="true"
+        >
+          {needsStaff ? (
+            <ArrowRightIcon weight="bold" className="size-3" />
+          ) : (
+            <CheckIcon weight="bold" className="size-3" />
+          )}
+        </span>
+        <div className="min-w-0">
+          <p
+            className={cn(
+              "text-xs font-semibold uppercase tracking-[0.08em]",
+              needsStaff ? "text-status-work" : "text-status-done",
+            )}
+          >
+            {needsStaff ? section.handoffStatus : section.doneStatus}
+          </p>
+          <p
+            className={cn(
+              "mt-1 text-pretty text-sm leading-relaxed",
+              needsStaff ? "font-medium text-foreground" : "text-muted-foreground",
+            )}
+          >
+            {item.action}
+          </p>
+        </div>
+      </div>
+    </Reveal>
   )
 }
