@@ -1,10 +1,13 @@
 "use client"
 
-import { useState, type ComponentType } from "react"
+import { useMemo, useState } from "react"
 import type { HeroServiceId, SiteContent } from "@/content/schema"
 import { StellaraField } from "@/components/util/stellara-field"
 import { AfterHoursCarousel } from "@/components/sections/after-hours/after-hours-carousel"
-import type { CarouselLayout } from "@/components/sections/after-hours/carousel-layout"
+import { StoryCarousel } from "@/components/sections/after-hours/story-carousel"
+import { buildTreatmentScenes } from "@/components/sections/stories/treatment-scenes"
+import { buildReviewsScenes } from "@/components/sections/stories/reviews-scenes"
+import { buildWebsiteScenes } from "@/components/sections/stories/website-scenes"
 import {
   HERO_SERVICE_PANEL_ID,
   HeroServiceSelector,
@@ -12,20 +15,33 @@ import {
 } from "@/components/sections/hero-service-selector"
 import { track } from "@/lib/analytics"
 
-// Each service maps to its own demonstration. They all share the existing
-// carousel for now; swap in a per-service component here without touching the hero.
-const serviceDemos: Record<HeroServiceId, ComponentType<{ layout?: CarouselLayout }>> = {
-  "after-hours": AfterHoursCarousel,
-  reviews: AfterHoursCarousel,
-  "website-intake": AfterHoursCarousel,
-  "treatment-follow-up": AfterHoursCarousel,
+function ServiceDemo({ service, content }: { service: HeroServiceId; content: SiteContent }) {
+  const { stories } = content
+  const { controls } = stories
+  const scenes = useMemo(() => {
+    if (service === "treatment-follow-up") return buildTreatmentScenes(stories.treatment, controls)
+    if (service === "reviews") return buildReviewsScenes(stories.reviews)
+    if (service === "website-intake") return buildWebsiteScenes(stories.website, controls)
+    return null
+  }, [service, stories, controls])
+
+  if (!scenes) {
+    return <AfterHoursCarousel layout="hero" controls={controls} ariaLabel={controls.intakeAriaLabel} />
+  }
+
+  const ariaLabel =
+    service === "treatment-follow-up"
+      ? stories.treatment.ariaLabel
+      : service === "reviews"
+        ? stories.reviews.ariaLabel
+        : stories.website.ariaLabel
+
+  return <StoryCarousel key={service} scenes={scenes} ariaLabel={ariaLabel} controls={controls} layout="hero" />
 }
 
 export function Hero({ content }: { content: SiteContent }) {
   const { hero } = content
   const [selectedService, setSelectedService] = useState<HeroServiceId>("after-hours")
-
-  const Demo = serviceDemos[selectedService]
 
   return (
     <section className="relative overflow-hidden bg-background">
@@ -33,7 +49,13 @@ export function Hero({ content }: { content: SiteContent }) {
       <div className="container-editorial relative">
         <div className="flex flex-col items-center gap-10 pb-14 pt-6 text-center md:gap-12 md:pb-20 md:pt-10">
           <div className="hero-load flex min-w-0 max-w-4xl flex-col items-center">
-            <h1 className="whitespace-nowrap text-[3.5rem] font-normal leading-[1.18] tracking-monday text-foreground">
+            <h1
+              className="whitespace-nowrap font-normal leading-[1.18] tracking-monday text-foreground"
+              style={{
+                // Scales with the line length so the headline stays on one line in every locale.
+                fontSize: `min(3.5rem, calc(min(100vw - 2.5rem, 56rem) / ${(hero.headline.length * 0.49).toFixed(2)}))`,
+              }}
+            >
               {hero.headline}
             </h1>
 
@@ -64,7 +86,7 @@ export function Hero({ content }: { content: SiteContent }) {
               data-service={selectedService}
               className="relative w-full min-w-0"
             >
-              <Demo layout="hero" />
+              <ServiceDemo service={selectedService} content={content} />
             </div>
           </div>
         </div>
