@@ -247,10 +247,12 @@ export function StoryCarousel({
           const d = loop ? wrapOffset(raw, n) : raw
           const isActive = i === current && !dragging
           const isCurrent = i === current
-          // A card that only appears adjacent because of looping (e.g. the final
-          // outcome peeking beside the opening scene) would spoil the story order.
+          // A card adjacent only because of looping (e.g. the final outcome beside
+          // the opening scene) stays visible so both sides are always filled, but is
+          // pushed further into the distance so it doesn't read as the next step.
           const wrapped = loop && Math.abs(d - raw) > 0.5
-          const hidden = wrapped || Math.abs(d) > 1.4
+          const hidden = Math.abs(d) > 1.4
+          const style = cardStyle(d, dragging, reduced)
           return (
             <div
               key={s.id}
@@ -258,9 +260,15 @@ export function StoryCarousel({
               aria-roledescription="slide"
               aria-label={`${i + 1} / ${n}: ${s.title}`}
               aria-hidden={!isCurrent}
-              onClick={isCurrent || hidden ? undefined : () => goTo(i)}
-              className={layoutClasses.card + " " + (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")}
-              style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
+              onClick={isCurrent || hidden || wrapped ? undefined : () => goTo(i)}
+              className={
+                layoutClasses.card + " " + (hidden || wrapped ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")
+              }
+              style={
+                wrapped
+                  ? { ...style, opacity: Number(style.opacity) * 0.5, filter: "saturate(0.3)" }
+                  : style
+              }
             >
               {/* Shadow lives outside the article because its clip-path would clip box-shadow. */}
               <div
