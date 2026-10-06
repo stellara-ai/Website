@@ -7,9 +7,12 @@ import type { SiteContent } from "@/content/schema"
 import { pathFor } from "@/lib/routes"
 import { useInteraction } from "@/components/providers/interaction-context"
 import { StellaraLogo } from "@/components/brand/stellara-logo"
-import { LanguageSwitcher } from "./language-switcher"
 import { ActionButton } from "@/components/ui/action"
 import { cn } from "@/lib/utils"
+
+function scrollToId(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+}
 
 export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: boolean }) {
   const { openAppointment } = useInteraction()
@@ -85,12 +88,24 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <LanguageSwitcher content={content} />
+          <ActionButton
+            variant="outline"
+            size="sm"
+            onClick={() => openAppointment({ source: "header-talk" })}
+          >
+            {content.faqFinalCta.secondaryCta}
+          </ActionButton>
           <ActionButton
             variant="primary"
             size="sm"
             className="gap-1.5"
-            onClick={() => openAppointment({ source: "header" })}
+            onClick={() => {
+              if (isHome) {
+                scrollToId("personalized-demo")
+                return
+              }
+              openAppointment({ source: "header" })
+            }}
           >
             {content.navCta}
             <ArrowRight className="size-4" aria-hidden="true" />
@@ -121,15 +136,16 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
                 {item.label}
               </Link>
             ))}
-            <div className="mt-3 flex items-center gap-3">
-              <LanguageSwitcher content={content} />
-            </div>
             <ActionButton
               variant="primary"
               size="lg"
               className="mt-3 w-full"
               onClick={() => {
                 setMenuOpen(false)
+                if (isHome) {
+                  scrollToId("personalized-demo")
+                  return
+                }
                 openAppointment({ source: "mobile-menu" })
               }}
             >

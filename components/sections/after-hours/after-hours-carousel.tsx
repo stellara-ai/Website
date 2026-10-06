@@ -10,11 +10,19 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react"
+import { cn } from "@/lib/utils"
+import { AFTER_HOURS_LAYOUT_CLASSES, type CarouselLayout } from "./carousel-layout"
 import { SCENES } from "./scenes"
 
 const RESUME_AFTER_MS = 6000
 const SPACING = 54
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
+
+type AfterHoursCarouselProps = {
+  layout?: CarouselLayout
+  className?: string
+  ariaLabel?: string
+}
 
 function wrapOffset(d: number, n: number) {
   return ((((d + n / 2) % n) + n) % n) - n / 2
@@ -48,7 +56,12 @@ function usePrefersReducedMotion() {
   return reduced
 }
 
-export function AfterHoursCarousel() {
+export function AfterHoursCarousel({
+  layout = "hero",
+  className,
+  ariaLabel = "After hours: how Stellara Agent handles a call when your office is closed",
+}: AfterHoursCarouselProps) {
+  const layoutClasses = AFTER_HOURS_LAYOUT_CLASSES[layout]
   const n = SCENES.length
   const [current, setCurrent] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
@@ -165,8 +178,8 @@ export function AfterHoursCarousel() {
       ref={rootRef}
       role="region"
       aria-roledescription="carousel"
-      aria-label="After hours: how Stellara Agent handles a call when your office is closed"
-      className="w-full"
+      aria-label={ariaLabel}
+      className={cn("w-full", className)}
     >
       <div
         ref={stageRef}
@@ -193,7 +206,7 @@ export function AfterHoursCarousel() {
           (dragging ? "cursor-grabbing" : "cursor-grab")
         }
       >
-        <div data-sizer aria-hidden="true" className="invisible mx-auto aspect-[4/5] w-[80%] sm:w-[62%]" />
+        <div data-sizer aria-hidden="true" className={layoutClasses.sizer} />
 
         {SCENES.map((s, i) => {
           const d = wrapOffset(i - position, n)
@@ -211,10 +224,7 @@ export function AfterHoursCarousel() {
               aria-label={`${i + 1} of ${n}: ${s.title}`}
               aria-hidden={!isCurrent}
               onClick={isCurrent ? undefined : () => goTo(i)}
-              className={
-                "absolute left-1/2 top-0 aspect-[4/5] w-[70%] will-change-transform [transform-style:preserve-3d] sm:w-[62%] " +
-                (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")
-              }
+              className={layoutClasses.card + " " + (hidden ? "pointer-events-none" : isCurrent ? "" : "cursor-pointer")}
               style={wrapped ? { ...cardStyle(d, dragging, reduced), opacity: 0 } : cardStyle(d, dragging, reduced)}
             >
               {/* Shadow lives outside the article because its clip-path would clip box-shadow. */}
@@ -239,7 +249,7 @@ export function AfterHoursCarousel() {
                   <span className="font-mono text-xs font-medium tabular-nums text-foreground">{s.time}</span>
                 </header>
 
-                <div className="ah-stage relative isolate flex-1 overflow-hidden rounded-[1.25rem] [clip-path:inset(0_round_1.25rem)]">
+                <div className={layoutClasses.stage}>
                   {s.visual(isActive)}
                 </div>
 

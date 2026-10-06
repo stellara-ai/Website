@@ -6,6 +6,7 @@ import { pathFor } from "@/lib/routes"
 import { useInteraction } from "@/components/providers/interaction-context"
 import { StellaraLogo } from "@/components/brand/stellara-logo"
 import { ThemeToggle } from "./theme-toggle"
+import { LanguageSwitcher } from "./language-switcher"
 
 export function SiteFooter({ content }: { content: SiteContent }) {
   const { openAppointment } = useInteraction()
@@ -64,6 +65,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
             {content.footer.crafted}
           </p>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher content={content} />
             <p>
               © {year} Stellara AI LLC. {content.footer.rights}
             </p>

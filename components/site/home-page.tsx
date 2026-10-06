@@ -3,14 +3,12 @@ import { InteractionProvider } from "@/components/providers/interaction-provider
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { Hero } from "@/components/sections/hero"
-import { Friction } from "@/components/sections/friction"
-import { Work } from "@/components/sections/work"
-import { Explorer } from "@/components/sections/explorer"
-import { Process } from "@/components/sections/process"
-import { Software } from "@/components/sections/software"
-import { Industries } from "@/components/sections/industries"
-import { Principles } from "@/components/sections/principles"
-import { FinalCta } from "@/components/sections/final-cta"
+import { PersonalizedDemo } from "@/components/sections/personalized-demo"
+import { HowItFits } from "@/components/sections/how-it-fits"
+import { MeasurableWork } from "@/components/sections/measurable-work"
+import { Plans } from "@/components/sections/plans"
+import { TrustFounder } from "@/components/sections/trust-founder"
+import { FaqFinalCta } from "@/components/sections/faq-final-cta"
 
 export function HomePage({ content }: { content: SiteContent }) {
   return (
@@ -24,14 +22,12 @@ export function HomePage({ content }: { content: SiteContent }) {
       <SiteHeader content={content} isHome />
       <main id="main">
         <Hero content={content} />
-        <Friction content={content} />
-        <Work content={content} />
-        <Explorer content={content} />
-        <Process content={content} />
-        <Software content={content} />
-        <Industries content={content} />
-        <Principles content={content} />
-        <FinalCta content={content} />
+        <PersonalizedDemo content={content} />
+        <HowItFits content={content} />
+        <MeasurableWork content={content} />
+        <Plans content={content} />
+        <TrustFounder content={content} />
+        <FaqFinalCta content={content} />
       </main>
       <SiteFooter content={content} />
     </InteractionProvider>

@@ -35,14 +35,14 @@ export function StellaraLogo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-1", className)}>
-      <StellaraSymbol className="h-6" />
+      <StellaraSymbol className="h-[1.78rem]" />
       {showWordmark && (
         <span
           id={labelledById}
           className="font-display text-[1.8rem] font-medium tracking-[-0.02em] leading-none text-foreground"
         >
           stellara
-          <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.one</span>
+          <span className="text-[0.6em] font-normal tracking-normal text-brand align-baseline">.law</span>
         </span>
       )}
     </span>
