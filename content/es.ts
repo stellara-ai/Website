@@ -315,7 +315,7 @@ export const es: SiteContent = {
           time: "Jue 10:00 AM",
           step: "Seguimiento",
           title: "Mensaje programado enviado",
-          headline: "El seguimiento se hace igual.",
+          headline: "Stellara hace el seguimiento.",
           body: "Sale un mensaje programado. Nadie de su equipo tiene que escribirlo.",
           summary: "A la hora programada, Jane recibe un mensaje que le pregunta si pudo asistir a su cita.",
         },

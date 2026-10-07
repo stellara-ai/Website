@@ -315,7 +315,7 @@ export const en: SiteContent = {
           time: "Thu 10:00 AM",
           step: "Check-in",
           title: "Scheduled check-in sent",
-          headline: "The check-in still happens.",
+          headline: "Stellara checks in.",
           body: "A scheduled message goes out. No one on your team has to write it.",
           summary: "At the scheduled time, Jane receives a text asking whether she was able to attend her appointment.",
         },
