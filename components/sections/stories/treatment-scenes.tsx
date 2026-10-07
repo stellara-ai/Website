@@ -147,9 +147,11 @@ function TeamAlerted({ ui, active }: SceneProps) {
         }
         style={motionVars({ delay: 350, dx: "16px", dy: "-6px" })}
       >
-        <span className="absolute -left-1 top-3 size-2 rounded-full bg-status-stuck ring-2 ring-card" aria-hidden="true" />
         <div className="flex min-w-0 items-center justify-between gap-2">
-          <span className="truncate text-xs font-semibold">{ui.clientName}</span>
+          <span className="flex min-w-0 items-center gap-1.5">
+            <span className="size-2 shrink-0 rounded-full bg-status-stuck" aria-hidden="true" />
+            <span className="truncate text-xs font-semibold">{ui.clientName}</span>
+          </span>
           <span className="hidden shrink-0 sm:inline-flex">
             <Chip tone="handoff">{ui.alertTitle}</Chip>
           </span>
