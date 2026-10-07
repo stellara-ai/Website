@@ -620,7 +620,7 @@ export const es: SiteContent = {
         items: [
           {
             q: "¿Puede funcionar con nuestros sistemas actuales?",
-            a: "Depende de los sistemas. Primero revisamos lo que usa su firma y luego definimos qué conexiones son viables. Las conexiones más profundas están disponibles con el complemento de Integración personalizada de admisión y sistema de casos.",
+            a: "Por lo general, la pregunta no es si podemos conectarnos, sino cómo. Empezamos revisando las herramientas que su firma ya usa y luego definimos la forma más sencilla de integrar Stellara con ellas. Las conexiones más profundas están disponibles con el complemento de Integración personalizada de admisión y sistema de casos.",
           },
           {
             q: "¿Cómo se manejan el inglés y el español?",

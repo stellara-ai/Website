@@ -619,7 +619,7 @@ export const en: SiteContent = {
         items: [
           {
             q: "Can this work with our current systems?",
-            a: "It depends on the systems. We review what your firm uses first, then map which connections are feasible. Deeper connections are available through the Custom Intake & Case-System Integration add-on.",
+            a: "Usually it's not a question of whether we can connect, but how. We start by reviewing the tools your firm already uses, then map the cleanest way to fit Stellara around them. Deeper connections are available through the Custom Intake & Case-System Integration add-on.",
           },
           {
             q: "How are English and Spanish handled?",
