@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRightIcon, CaretDownIcon, CaretRightIcon } from "@phosphor-icons/react"
+import { ArrowRightIcon, MinusIcon, PlusIcon } from "@phosphor-icons/react"
 import type { SiteContent } from "@/content/schema"
 import { ActionButton } from "@/components/ui/action"
 import { Reveal } from "@/components/util/reveal"
@@ -68,36 +68,32 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
           const selected = index === active
           const mobilePanelId = `faq-answer-${index}`
           return (
-            <li key={item.q}>
+            <li
+              key={item.q}
+              className={
+                "border transition-[background-color,border-color,border-radius] duration-300 motion-reduce:transition-none " +
+                (selected
+                  ? "rounded-2xl border-transparent bg-card"
+                  : "rounded-[1.75rem] border-foreground hover:bg-card/60")
+              }
+            >
               <button
                 type="button"
                 aria-expanded={selected}
                 aria-controls={`${mobilePanelId} faq-answer-panel`}
                 onClick={() => setActive(index)}
                 className={
-                  "group flex w-full items-center justify-between gap-4 rounded-full border px-5 py-3.5 text-left text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface-alt sm:text-base " +
-                  (selected
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-transparent bg-card text-foreground hover:border-foreground/30")
+                  "flex w-full items-center gap-3 rounded-[inherit] px-3.5 text-left text-base text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface-alt " +
+                  (selected ? "py-4 font-medium" : "py-2")
                 }
               >
+                <span
+                  className="flex size-5 shrink-0 items-center justify-center rounded-full border border-foreground/60"
+                  aria-hidden="true"
+                >
+                  {selected ? <MinusIcon weight="bold" className="size-2.5" /> : <PlusIcon weight="bold" className="size-2.5" />}
+                </span>
                 <span className="text-pretty">{item.q}</span>
-                <CaretDownIcon
-                  weight="bold"
-                  className={
-                    "size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none lg:hidden " +
-                    (selected ? "rotate-180" : "text-muted-foreground")
-                  }
-                  aria-hidden="true"
-                />
-                <CaretRightIcon
-                  weight="bold"
-                  className={
-                    "hidden size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none lg:block " +
-                    (selected ? "translate-x-0.5" : "text-muted-foreground group-hover:translate-x-0.5")
-                  }
-                  aria-hidden="true"
-                />
               </button>
 
               <div
@@ -110,9 +106,7 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
                 }
               >
                 <div className="overflow-hidden">
-                  <p className="mx-2 mt-2.5 rounded-2xl bg-card px-5 py-4 text-sm leading-relaxed text-muted-foreground">
-                    {item.a}
-                  </p>
+                  <p className="px-4 pb-5 pl-11.5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
                 </div>
               </div>
             </li>
