@@ -65,15 +65,15 @@ export function HeroServiceSelector({
               className={cn(
                 "inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.97] sm:px-5",
                 active
-                  ? "bg-brand text-brand-foreground shadow-soft"
-                  : "text-muted-foreground hover:bg-brand-tint hover:text-foreground",
+                  ? "bg-brand-tint text-foreground ring-1 ring-inset ring-brand/30"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               <span
                 aria-hidden="true"
                 className={cn(
                   "size-1.5 shrink-0 rounded-full transition-colors",
-                  active ? "bg-brand-foreground" : "bg-brand",
+                  active ? "bg-brand" : "bg-muted-foreground/40",
                 )}
               />
               {service.label}

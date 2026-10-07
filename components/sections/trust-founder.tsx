@@ -1,6 +1,5 @@
 import Image from "next/image"
 import type { SiteContent } from "@/content/schema"
-import { Eyebrow } from "@/components/sections/section-parts"
 import { Reveal } from "@/components/util/reveal"
 
 export function TrustFounder({ content }: { content: SiteContent }) {
@@ -41,10 +40,9 @@ export function TrustFounder({ content }: { content: SiteContent }) {
         </Reveal>
 
         <Reveal delay={120}>
-          <Eyebrow tone="ink">{section.eyebrow}</Eyebrow>
           <h2
             id="founder-heading"
-            className="mt-5 text-balance text-3xl font-semibold leading-[1.12] tracking-monday text-ink-foreground sm:text-4xl md:text-[2.9rem]"
+            className="text-balance text-3xl font-semibold leading-[1.12] tracking-monday text-ink-foreground sm:text-4xl md:text-[2.9rem]"
           >
             {section.title}
           </h2>

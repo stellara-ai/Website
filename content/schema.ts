@@ -149,6 +149,30 @@ export interface MeasurableWorkContent {
   monthPeriod: string
   monthMetrics: MeasurableWorkMetric[]
   footnote: string
+  dashboard: DashboardSimContent
+}
+
+export interface DashboardDatum {
+  label: string
+  value: number
+}
+
+export interface DashboardSimContent {
+  title: string
+  live: string
+  /** Sidebar labels, in order: dashboard, conversations, calendars, contacts, tasks, agents. */
+  nav: string[]
+  todayLabel: string
+  sourceTitle: string
+  sources: DashboardDatum[]
+  statusTitle: string
+  statusTotal: string
+  statuses: DashboardDatum[]
+  growthTitle: string
+  growthPeriod: string
+  growth: number[]
+  activityTitle: string
+  events: string[]
 }
 
 export interface StorySceneCopy {

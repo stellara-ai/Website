@@ -50,10 +50,10 @@ function MilestoneReached({ ui, active }: SceneProps) {
           style={delay(1300)}
         >
           <ArrowBendDownRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
-          <span className="truncate">{ui.ruleMatched}</span>
+          <span className="leading-tight">{ui.ruleMatched}</span>
         </div>
       </div>
-      <div className="mt-auto flex items-end justify-end gap-2">
+      <div className="mt-auto hidden items-end justify-end gap-2 sm:flex">
         <RoleTag role="staff" className="mb-1">
           {ui.staffTag}
         </RoleTag>
@@ -66,12 +66,12 @@ function MilestoneReached({ ui, active }: SceneProps) {
 function InvitationArrives({ ui, active }: SceneProps) {
   return (
     <Stage className="flex-row items-end justify-center gap-3 pb-4">
-      <div className="flex flex-col items-start justify-between gap-2 self-stretch">
+      <div className="hidden flex-col items-start justify-between gap-2 self-stretch sm:flex">
         <RoleTag role="client">{ui.clientTag}</RoleTag>
         <Figure role="client" pose="phone" className="h-24 sm:h-32" />
       </div>
-      <Phone className="h-full w-[min(60%,11.5rem)]">
-        <span className="mt-1 text-center font-display text-xl font-medium tabular-nums sm:text-2xl">{ui.lockTime}</span>
+      <Phone className="h-full w-[min(88%,12rem)] sm:w-[min(60%,11.5rem)]">
+        <span className="mt-1 hidden text-center font-display text-xl font-medium tabular-nums sm:block sm:text-2xl">{ui.lockTime}</span>
         <div
           className={"flex flex-col gap-1 rounded-xl border border-border bg-muted/80 p-2 shadow-sm " + play(active, "st-slide")}
           style={motionVars({ delay: 400, dy: "-14px" })}
@@ -90,7 +90,7 @@ function InvitationArrives({ ui, active }: SceneProps) {
             <LinkSimpleIcon weight="bold" className="size-3.5" />
           </span>
           <span className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-[11px] font-semibold">{ui.linkTitle}</span>
+            <span className="text-[11px] font-semibold">{ui.linkTitle}</span>
             <span className="truncate text-[10px] text-muted-foreground">{ui.linkLabel}</span>
           </span>
         </div>
@@ -135,7 +135,7 @@ function ClientShares({ ui, active }: SceneProps) {
             </span>
             <span
               className={
-                "col-start-1 row-start-1 flex items-center gap-1 rounded-full bg-approve-tint px-3 py-1 text-[11px] font-medium text-approve " +
+                "col-start-1 row-start-1 flex items-center gap-1 whitespace-nowrap rounded-full bg-approve-tint px-2 py-1 text-[11px] font-medium text-approve sm:px-3 " +
                 play(active, "st-in")
               }
               style={delay(postAt + 250)}
@@ -166,7 +166,7 @@ function SomeoneSearches({ ui, active }: SceneProps) {
         <RoleTag role="prospect" className={play(active, "st-slide")} style={motionVars({ delay: 0, dx: "16px", dy: "0px" })}>
           {ui.prospectTag}
         </RoleTag>
-        <span className="truncate text-[10px] text-muted-foreground">{ui.differentPerson}</span>
+        <span className="hidden truncate text-[10px] text-muted-foreground sm:inline">{ui.differentPerson}</span>
       </div>
       <div className={"flex min-h-0 flex-1 flex-col gap-1.5 rounded-xl border border-border bg-card p-2 shadow-md " + enter(active)} style={delay(200)}>
         <div className="flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-2 py-1">
@@ -208,6 +208,7 @@ function TheyRead({ ui, active }: SceneProps) {
             <span
               key={tab}
               className={cn(
+                i > 1 && "hidden sm:inline",
                 "-mb-px pb-1",
                 i === 1 ? "border-b-2 border-status-purple font-semibold text-foreground" : "text-muted-foreground",
               )}
@@ -245,7 +246,7 @@ function TheyRead({ ui, active }: SceneProps) {
 function TheyReachOut({ ui, active }: SceneProps) {
   return (
     <Stage className="justify-center gap-0">
-      <RoleTag role="prospect" className="mb-1.5 self-start">
+      <RoleTag role="prospect" className="mb-1.5 hidden self-start sm:inline-flex">
         {ui.prospectTag}
       </RoleTag>
       <div className={"flex flex-col gap-2 rounded-xl border border-border bg-card p-2.5 shadow-md " + enter(active)} style={delay(100)}>
@@ -261,7 +262,7 @@ function TheyReachOut({ ui, active }: SceneProps) {
           <Cursor className={"-bottom-3 right-2 " + play(active, "st-cursor")} style={delay(250)} />
         </span>
       </div>
-      <svg viewBox="0 0 2 28" className="mx-auto h-7 w-0.5 shrink-0 overflow-visible text-foreground/30">
+      <svg viewBox="0 0 2 28" className="mx-auto h-4 w-0.5 shrink-0 overflow-visible text-foreground/30 sm:h-7">
         <path
           d="M1 0v28"
           stroke="currentColor"
@@ -281,7 +282,7 @@ function TheyReachOut({ ui, active }: SceneProps) {
             <BellSimpleIcon weight="fill" className="size-3.5" />
           </span>
           <span className="flex min-w-0 flex-1 flex-col leading-tight">
-            <span className="truncate text-xs font-semibold">{ui.notificationTitle}</span>
+            <span className="text-xs font-semibold">{ui.notificationTitle}</span>
             <span className="truncate text-[10px] text-muted-foreground">{ui.notificationSource}</span>
           </span>
         </div>

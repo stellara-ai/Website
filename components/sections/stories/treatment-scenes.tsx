@@ -1,5 +1,6 @@
-import { ArrowRightIcon, CheckIcon, ClockIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
+import { ArrowRightIcon, CheckIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
 import type { TreatmentStoryContent } from "@/content/schema"
+import { StellaraSymbol } from "@/components/brand/stellara-logo"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { cn } from "@/lib/utils"
 import { Bubble, Chip, buildScenes, delay, enter } from "./story-ui"
@@ -74,8 +75,9 @@ function CheckinSent({ ui, active }: SceneProps) {
         }
         style={delay(100)}
       >
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-          <ClockIcon weight="bold" className="size-3.5" />
+        <span className="relative flex size-6 shrink-0 items-center justify-center">
+          <span className="ah-agent-halo absolute inset-0 rounded-full" />
+          <StellaraSymbol className={"ah-agent relative h-3.5 " + (active ? "ah-alive" : "")} />
         </span>
         <span className="flex min-w-0 flex-col leading-tight">
           <span className="truncate text-[11px] font-semibold">{ui.checkinLabel}</span>
@@ -96,7 +98,7 @@ function CheckinSent({ ui, active }: SceneProps) {
       <Phone className={"min-h-0 w-[min(100%,11.5rem)] flex-1 " + play(active, "st-slide")} style={delay(650)}>
         <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
         <Bubble side="in" className={enter(active)} style={delay(1150)}>
-          {ui.question}
+          <span className="line-clamp-2 sm:line-clamp-none">{ui.question}</span>
         </Bubble>
       </Phone>
       <span
@@ -116,8 +118,8 @@ function ClientReplies({ ui, active }: SceneProps) {
       <Figure role="client" pose="phone" className={"h-24 sm:h-32 " + enter(active)} style={delay(100)} />
       <Phone className="h-full max-h-64 w-[min(64%,11.5rem)] -rotate-2">
         <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
-        <Bubble side="in" className="line-clamp-3 opacity-50">
-          {ui.question}
+        <Bubble side="in" className="opacity-50">
+          <span className="line-clamp-2">{ui.question}</span>
         </Bubble>
         <Bubble side="out" className={cn(ROLE_BUBBLE.client, play(active, "st-focus"))} style={delay(450)}>
           {ui.reply}
@@ -131,49 +133,53 @@ function ClientReplies({ ui, active }: SceneProps) {
 
 function TeamAlerted({ ui, active }: SceneProps) {
   return (
-    <Stage>
+    <Stage className="flex-row items-end gap-2 pb-4 sm:gap-3">
+      <div className={"flex shrink-0 flex-col items-start gap-1 " + enter(active)} style={delay(100)}>
+        <RoleTag role="staff" className="hidden sm:inline-flex">
+          {ui.staffTag}
+        </RoleTag>
+        <Workstation role="staff" className="h-10 sm:h-16" />
+      </div>
       <div
-        className={"flex flex-col gap-1.5 rounded-xl border border-border bg-card p-2.5 shadow-md " + play(active, "st-slide")}
-        style={motionVars({ delay: 150, dx: "-20px", dy: "0px" })}
+        className={
+          "relative mb-2 flex min-w-0 flex-1 flex-col gap-1.5 self-center rounded-xl border border-border bg-card p-2 shadow-md sm:p-2.5 " +
+          play(active, "st-slide")
+        }
+        style={motionVars({ delay: 350, dx: "16px", dy: "-6px" })}
       >
-        <div className="flex items-center justify-between gap-2">
-          <span className="truncate text-xs font-semibold">{ui.clientName}</span>
-          <Chip tone="handoff">{ui.alertTitle}</Chip>
+        <div className="flex min-w-0 items-center justify-between gap-2">
+          <span className="flex min-w-0 items-center gap-1.5">
+            <span className="size-2 shrink-0 rounded-full bg-status-stuck" aria-hidden="true" />
+            <span className="truncate text-xs font-semibold">{ui.clientName}</span>
+          </span>
+          <span className="hidden shrink-0 sm:inline-flex">
+            <Chip tone="handoff">{ui.alertTitle}</Chip>
+          </span>
         </div>
         <p
-          className={cn("rounded-lg px-2 py-1.5 text-[11px] leading-snug", ROLE_BUBBLE.client, enter(active))}
-          style={delay(500)}
+          className={cn("line-clamp-3 rounded-lg sm:line-clamp-2 px-2 py-1 text-[11px] leading-snug", ROLE_BUBBLE.client, enter(active))}
+          style={delay(650)}
         >
           {"\u201C"}
           {ui.reply}
           {"\u201D"}
         </p>
-        <ul className="flex flex-col gap-1">
-          {ui.alertContext.map((line, i) => (
-            <li
-              key={line}
-              className={cn("items-center gap-2 text-[11px] text-muted-foreground", i > 0 ? "hidden sm:flex" : "flex", enter(active))}
-              style={delay(800 + i * 200)}
-            >
-              <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
-              <span className="truncate">{line}</span>
-            </li>
-          ))}
-        </ul>
-        <div className={"flex flex-col rounded-lg bg-brand-tint px-2.5 py-1.5 " + enter(active)} style={delay(1300)}>
-          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{ui.nextActionLabel}</span>
-          <span className="flex items-center gap-1.5 text-xs font-semibold">
-            <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
-            <span className="truncate">{ui.nextAction}</span>
-          </span>
-        </div>
+        <span
+          className={"hidden items-center gap-2 text-[11px] text-muted-foreground sm:flex " + enter(active)}
+          style={delay(900)}
+        >
+          <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
+          <span className="min-w-0 leading-tight">{ui.alertContext[0]}</span>
+        </span>
+        <span
+          className={"flex min-w-0 items-center gap-1.5 rounded-lg bg-brand-tint px-2 py-1 text-[11px] font-semibold " + enter(active)}
+          style={delay(1200)}
+        >
+          <ArrowRightIcon weight="bold" className="size-3 shrink-0 text-brand" />
+          <span className="min-w-0 leading-tight">{ui.nextAction}</span>
+        </span>
       </div>
-      <div className="mt-auto flex items-end gap-2">
-        <Workstation role="staff" className="h-12 sm:h-20" />
-        <RoleTag role="staff" className="mb-1">
-          {ui.staffTag}
-        </RoleTag>
-      </div>
+      <Floor />
     </Stage>
   )
 }

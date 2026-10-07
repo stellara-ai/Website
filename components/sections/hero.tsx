@@ -86,7 +86,7 @@ export function Hero({ content }: { content: SiteContent }) {
     <section className="relative overflow-hidden bg-background">
       <StellaraField />
       <div className="container-editorial relative">
-        <div className="flex flex-col items-center gap-10 pb-14 pt-6 text-center md:gap-12 md:pb-20 md:pt-10">
+        <div className="flex flex-col items-center gap-8 pb-14 pt-6 text-center md:gap-9 md:pb-20 md:pt-8">
           <div className="hero-load flex w-full min-w-0 max-w-4xl flex-col items-center">
             <h1
               className="text-balance text-[clamp(1.75rem,1.1rem+3.2vw,2.25rem)] font-normal leading-[1.18] tracking-monday text-foreground sm:whitespace-nowrap sm:text-[length:var(--hero-fit)]"
@@ -107,9 +107,9 @@ export function Hero({ content }: { content: SiteContent }) {
 
             <ActionButton
               variant="primary"
-              className="mt-6 h-auto min-h-11 max-w-full whitespace-normal py-2.5 text-center lg:hidden"
+              className="mt-6 h-auto min-h-11 max-w-full whitespace-normal py-2.5 text-center"
               onClick={() => {
-                track("hero_cta_selected", { source: "hero-mobile" })
+                track("hero_cta_selected", { source: "hero" })
                 document.getElementById("personalized-demo")?.scrollIntoView({ behavior: "smooth", block: "start" })
               }}
             >
@@ -117,7 +117,7 @@ export function Hero({ content }: { content: SiteContent }) {
               <ArrowRightIcon weight="bold" className="size-4" aria-hidden="true" />
             </ActionButton>
 
-            <div className="mt-8 flex w-full flex-col items-center gap-4">
+            <div className="mt-7 flex w-full flex-col items-center gap-3">
               <p className="text-sm font-medium text-foreground">{hero.selectorQuestion}</p>
               <HeroServiceSelector
                 services={hero.services}

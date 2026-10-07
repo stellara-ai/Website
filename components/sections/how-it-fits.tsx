@@ -38,7 +38,7 @@ export function HowItFits({ content }: { content: SiteContent }) {
   return (
     <section id="fit" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial py-20 md:py-24">
-        <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
+        <SectionHeading title={section.title} description={section.description} />
 
         <Reveal className="mt-12 flex flex-col gap-6 rounded-2xl bg-card p-4 sm:p-6 lg:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

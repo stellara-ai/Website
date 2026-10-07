@@ -46,7 +46,7 @@ export function PersonalizedDemo({ content }: { content: SiteContent }) {
     <section id="personalized-demo" className="scroll-mt-20">
       <div className="container-editorial py-20 md:py-24">
         <SectionHeading
-          eyebrow={section.eyebrow}
+
           title={section.title}
           description={section.description}
         />
