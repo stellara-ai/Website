@@ -160,7 +160,7 @@ export interface DashboardDatum {
 export interface DashboardSimContent {
   title: string
   live: string
-  /** Sidebar labels, in order: dashboard, assistant, conversations, calendars, contacts, tasks, agents, websites, settings. */
+  /** Sidebar labels, in order: dashboard, conversations, calendars, contacts, tasks, agents. */
   nav: string[]
   todayLabel: string
   sourceTitle: string

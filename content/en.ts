@@ -261,7 +261,7 @@ export const en: SiteContent = {
     dashboard: {
       title: "Dashboard",
       live: "Live",
-      nav: ["Dashboard", "Conversations", "Calendars", "Contacts", "Tasks", "Agents", "Settings"],
+      nav: ["Dashboard", "Conversations", "Calendars", "Contacts", "Tasks", "Agents"],
       todayLabel: "today",
       sourceTitle: "Contacts by source",
       sources: [
@@ -754,7 +754,7 @@ export const en: SiteContent = {
     next: "Continue",
     back: "Back",
     submit: "Request this time",
-    submitting: "Sending…",
+    submitting: "Sending��",
     confirmTitle: "Request received",
     confirmReason: "Reason",
     confirmTime: "Requested time",

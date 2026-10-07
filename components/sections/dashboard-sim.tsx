@@ -11,10 +11,7 @@ import {
   CheckIcon,
   CheckSquareIcon,
   FunnelIcon,
-  GearIcon,
-  GlobeIcon,
   RobotIcon,
-  SparkleIcon,
   SquaresFourIcon,
   WarningCircleIcon,
 } from "@phosphor-icons/react/dist/ssr"
@@ -41,7 +38,6 @@ const NAV_ICONS: IconType[] = [
   FunnelIcon,
   CheckSquareIcon,
   RobotIcon,
-  GearIcon,
 ]
 const KPI_ICONS: IconType[] = [ChatCircleTextIcon, CalendarCheckIcon, CheckCircleIcon, WarningCircleIcon]
 const KPI_TONES: Tone[] = ["purple", "done", "teal", "work"]
@@ -247,7 +243,6 @@ function Sidebar({ copy }: { copy: Section["dashboard"] }) {
               className={cn(
                 "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm",
                 active ? "bg-brand-tint font-semibold text-foreground" : "text-muted-foreground",
-                index === 6 && "mt-3",
               )}
             >
               <Icon className={cn("size-4 shrink-0", active && "text-brand")} weight={active ? "fill" : "regular"} />
