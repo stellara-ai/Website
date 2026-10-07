@@ -28,15 +28,6 @@ const CRITERIA = [
 
 const WINDOW_COUNT = 20
 
-function AgentMark({ active }: { active: boolean }) {
-  return (
-    <span className="relative inline-flex size-4 shrink-0 items-center justify-center">
-      <span className={"absolute inset-0 rounded-full bg-agent/25 " + (active ? "ah-agent-halo" : "opacity-0")} />
-      <StellaraSymbol className={"relative h-3 text-agent " + (active ? "ah-alive" : "")} />
-    </span>
-  )
-}
-
 function OfficeClosed({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
@@ -78,10 +69,7 @@ function InquiriesArrive({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-          <AgentMark active={active} />
-          After-hours inbox
-        </span>
+        <span className="text-xs font-semibold text-foreground">After-hours inbox</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className={"size-1.5 rounded-full bg-scene " + (active ? "ah-twinkle" : "")} />
           Receiving
@@ -119,10 +107,7 @@ function StellaraScreens({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-          <AgentMark active={active} />
-          Stellara
-        </span>
+        <span className="text-xs font-semibold text-foreground">Stellara</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className="flex h-3 items-center gap-0.5">
             {[0, 150, 300, 450].map((ms) => (
@@ -148,14 +133,14 @@ function StellaraScreens({ active }: { active: boolean }) {
               className={"absolute left-2 top-1 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
             >
               <span
-                className={"absolute inset-0 rounded-full border border-agent/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
+                className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
               />
               <span
-                className={"absolute inset-0 rounded-full border border-agent " + (active ? "ah-done" : "opacity-0")}
+                className={"absolute inset-0 rounded-full border border-brand " + (active ? "ah-done" : "opacity-0")}
                 style={delay(3400)}
               />
-              <span className="absolute inset-1 rounded-full bg-card shadow-sm ring-1 ring-agent/30" />
-              <StellaraSymbol className={"relative h-3.5 text-agent " + (active ? "ah-alive" : "")} />
+              <span className="absolute inset-1 rounded-full bg-brand-tint" />
+              <StellaraSymbol className={"relative h-3.5 text-brand " + (active ? "ah-alive" : "")} />
             </span>
             <ul className="flex flex-col">
               {CRITERIA.map((row) => (
@@ -246,10 +231,7 @@ function MorningBrief({ active }: { active: boolean }) {
           style={delay(250)}
         >
           <div className="flex items-center justify-between border-b border-border px-3 py-2">
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-              <AgentMark active={active} />
-              Overnight intake
-            </span>
+            <span className="text-xs font-semibold text-foreground">Overnight intake</span>
             <span className="text-xs tabular-nums text-muted-foreground">8:00 AM</span>
           </div>
           <ul className="flex flex-col gap-1.5 px-3 py-2.5">
