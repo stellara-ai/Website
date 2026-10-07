@@ -59,6 +59,8 @@
   --color-surface-alt: var(--surface-alt);
   /* Logo gold for dark fields — stays the light-gold variant in both themes. */
   --color-gilt: #e8c88a;
+  /* The Stellara agent's own gold — never re-pointed by service themes. */
+  --color-agent: var(--agent-gold);
   --color-scene-a: var(--ah-a);
   --color-scene-b: var(--ah-b);
   --color-scene-c: var(--ah-c);
@@ -101,6 +103,7 @@
 
   /* Brand identity — the "Stellar" palette: a deep-space canvas with a starlight gold accent. */
   --brand: #8a6322;
+  --agent-gold: #8a6322;
   --brand-foreground: #ffffff;
   --brand-strong: #74531c;
   --brand-strong-foreground: #ffffff;
@@ -155,6 +158,7 @@
   --ring: #e8c88a;
 
   --brand: #e8c88a;
+  --agent-gold: #e8c88a;
   --brand-foreground: #0a0e1a;
   --brand-strong: #f0d9a8;
   --brand-strong-foreground: #0a0e1a;
@@ -1112,7 +1116,21 @@
   }
   50% {
     transform: scale(1.06);
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 50%, transparent));
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--agent-gold) 50%, transparent));
+  }
+}
+.ah-agent-halo {
+  animation: ah-agent-halo 3s ease-in-out infinite;
+}
+@keyframes ah-agent-halo {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0;
   }
 }
 .ah-scan {
@@ -1258,7 +1276,8 @@
   .ah-twinkle,
   .ah-float,
   .ah-breathe,
-  .ah-alive {
+  .ah-alive,
+  .ah-agent-halo {
     animation: none !important;
   }
   .ah-pulse-ring {
