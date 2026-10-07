@@ -57,14 +57,12 @@ export function StatusLabel({
 }
 
 export function SectionHeading({
-  eyebrow,
   title,
   description,
   align = "left",
   tone = "default",
   className,
 }: {
-  eyebrow?: string
   title: React.ReactNode
   description?: string
   align?: "left" | "center"
@@ -73,14 +71,9 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn(align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl", className)}>
-      {eyebrow && (
-        <div className={cn(align === "center" && "flex justify-center")}>
-          <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
-        </div>
-      )}
       <h2
         className={cn(
-          "mt-5 text-balance text-3xl font-semibold leading-[1.12] tracking-monday sm:text-4xl md:text-[2.9rem]",
+          "text-balance text-3xl font-semibold leading-[1.12] tracking-monday sm:text-4xl md:text-[2.9rem]",
           tone === "ink" ? "text-ink-foreground" : "text-foreground",
         )}
       >

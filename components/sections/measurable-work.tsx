@@ -13,7 +13,7 @@ export function MeasurableWork({ content }: { content: SiteContent }) {
   return (
     <section id="measurement" className="scroll-mt-20">
       <div className="container-editorial py-20 md:py-24">
-        <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
+        <SectionHeading title={section.title} description={section.description} />
 
         <Reveal className="mt-10">
           <article aria-labelledby="brief-heading" className="overflow-hidden rounded-2xl bg-surface-alt">

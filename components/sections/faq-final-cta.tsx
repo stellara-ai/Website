@@ -17,7 +17,7 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
   return (
     <section id="faq" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial border-t border-border py-20 md:py-24">
-        <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
+        <SectionHeading title={section.title} description={section.description} />
 
         <FaqExplorer groups={section.groups} />
 

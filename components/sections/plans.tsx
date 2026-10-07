@@ -17,7 +17,7 @@ export function Plans({ content }: { content: SiteContent }) {
   return (
     <section id="plans" className="scroll-mt-20 bg-surface-alt">
       <div className="container-editorial py-20 md:py-24">
-        <SectionHeading eyebrow={section.eyebrow} title={section.title} description={section.description} />
+        <SectionHeading title={section.title} description={section.description} />
 
         <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand-tint px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-brand">
           <span className="size-1.5 rounded-full bg-brand" aria-hidden="true" />
