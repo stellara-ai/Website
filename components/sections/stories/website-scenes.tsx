@@ -1,4 +1,5 @@
 import { ArrowRightIcon, CalendarBlankIcon, ChatCircleTextIcon } from "@phosphor-icons/react/dist/ssr"
+import { StellaraSymbol } from "@/components/brand/stellara-logo"
 import type { WebsiteStoryContent } from "@/content/schema"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { cn } from "@/lib/utils"
@@ -95,7 +96,7 @@ function AsksQuestion({ ui, active }: SceneProps) {
           style={delay(650)}
         >
           <div className="hidden items-center gap-1.5 border-b border-border pb-1.5 sm:flex">
-            <span className="size-2 shrink-0 rounded-full bg-approve" />
+            <StellaraSymbol className="h-3.5 shrink-0" />
             <span className="truncate text-[11px] font-semibold">{ui.assistantTitle}</span>
           </div>
           <Bubble side="out" className={cn(ROLE_BUBBLE.prospect, enter(active))} style={delay(1100)}>
