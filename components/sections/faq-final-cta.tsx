@@ -47,8 +47,6 @@ export function FaqFinalCta({ content }: { content: SiteContent }) {
 
 function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
   const [active, setActive] = useState(0)
-  const faqs = groups.flatMap((group) => group.items)
-  const current = faqs[active]
   let offset = 0
 
   return (
@@ -66,7 +64,7 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
                 {group.items.map((item, itemIndex) => {
           const index = start + itemIndex
           const selected = index === active
-          const mobilePanelId = `faq-answer-${index}`
+          const answerId = `faq-answer-${index}`
           return (
             <li
               key={item.q}
@@ -80,7 +78,7 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
               <button
                 type="button"
                 aria-expanded={selected}
-                aria-controls={`${mobilePanelId} faq-answer-panel`}
+                aria-controls={answerId}
                 onClick={() => setActive(index)}
                 className={
                   "flex w-full items-center gap-3 rounded-[inherit] px-3.5 text-left text-base text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface-alt " +
@@ -97,16 +95,16 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
               </button>
 
               <div
-                id={mobilePanelId}
+                id={answerId}
                 role="region"
                 inert={!selected}
                 className={
-                  "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none lg:hidden " +
+                  "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none " +
                   (selected ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
                 }
               >
                 <div className="overflow-hidden">
-                  <p className="px-4 pb-5 pl-11.5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                  <p className="px-4 pb-5 pl-11.5 text-sm leading-relaxed text-muted-foreground lg:text-base">{item.a}</p>
                 </div>
               </div>
             </li>
@@ -118,19 +116,6 @@ function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
         })}
       </div>
 
-      <div
-        id="faq-answer-panel"
-        aria-live="polite"
-        className="sticky top-24 hidden min-h-80 flex-col rounded-2xl bg-card p-10 lg:flex"
-      >
-        <div key={active} className="animate-in fade-in slide-in-from-bottom-2 duration-300 motion-reduce:animate-none">
-          <span className="block h-1 w-10 rounded-full bg-brand" aria-hidden="true" />
-          <h3 className="mt-6 text-balance text-2xl font-semibold leading-tight tracking-tight text-foreground">
-            {current.q}
-          </h3>
-          <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground">{current.a}</p>
-        </div>
-      </div>
     </div>
   )
 }
