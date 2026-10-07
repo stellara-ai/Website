@@ -67,27 +67,28 @@ const INQUIRIES = [
 
 function InquiriesArrive({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col gap-2.5 p-3.5" aria-hidden="true">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-foreground">After-hours inbox</span>
-        <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+    <div className="ah-fit absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
+      <div className="flex items-center justify-between gap-2">
+        <span className="truncate text-xs font-semibold text-foreground">After-hours inbox</span>
+        <span className="ah-fit-wide flex shrink-0 items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <span className={"size-1.5 rounded-full bg-scene " + (active ? "ah-twinkle" : "")} />
           Receiving
         </span>
       </div>
-      <ul className="flex flex-1 flex-col justify-center gap-2">
-        {INQUIRIES.map((item) => {
+      <ul className="flex min-h-0 flex-1 flex-col justify-center gap-1.5">
+        {INQUIRIES.map((item, index) => {
           const Icon = item.icon
           return (
             <li
               key={item.time}
               className={
-                "flex items-center gap-2.5 rounded-xl border border-border bg-card px-3 py-2 shadow-sm " +
+                "flex items-center gap-2 rounded-xl border border-border bg-card px-2.5 py-1.5 shadow-sm " +
+                (index === 2 ? "ah-fit-row3 " : index === 3 ? "ah-fit-row4 " : "") +
                 enter(active)
               }
               style={delay(item.at)}
             >
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-scene/10 text-scene">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-scene/10 text-scene">
                 <Icon weight="fill" className="size-3.5" />
               </span>
               <span className="flex min-w-0 flex-1 flex-col">
@@ -105,7 +106,7 @@ function InquiriesArrive({ active }: { active: boolean }) {
 
 function StellaraScreens({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
+    <div className="ah-fit absolute inset-0 flex flex-col gap-2 p-3" aria-hidden="true">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-foreground">Stellara</span>
         <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
@@ -124,13 +125,13 @@ function StellaraScreens({ active }: { active: boolean }) {
 
       <div className="flex min-h-0 flex-1 flex-col justify-center gap-2">
         <div className="flex flex-col rounded-xl border border-border bg-card shadow-sm">
-          <div className="flex items-center justify-between border-b border-border px-3 py-1.5">
-            <span className="text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
-            <span className="text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
+          <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-1.5">
+            <span className="truncate text-xs font-semibold text-foreground">Inquiry 2 of 4</span>
+            <span className="ah-fit-wide shrink-0 text-xs text-muted-foreground">{"Web form \u00B7 9:15 PM"}</span>
           </div>
           <div className="relative py-1">
             <span
-              className={"absolute left-2 top-1 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
+              className={"ah-fit-scan absolute left-2 top-0.5 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
             >
               <span
                 className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
@@ -144,12 +145,12 @@ function StellaraScreens({ active }: { active: boolean }) {
             </span>
             <ul className="flex flex-col">
               {CRITERIA.map((row) => (
-                <li key={row.label} className="relative flex h-7 items-center gap-2 pl-11 pr-3 text-xs">
+                <li key={row.label} className="ah-fit-row relative flex h-6.5 items-center gap-2 pl-11 pr-3 text-xs">
                   <span
                     className={"absolute inset-y-0.5 left-1 right-1 rounded-lg bg-brand-tint " + (active ? "ah-inspect" : "opacity-0")}
                     style={delay(row.at)}
                   />
-                  <span className="relative flex-1 text-muted-foreground">{row.label}</span>
+                  <span className="relative min-w-0 flex-1 truncate text-muted-foreground">{row.label}</span>
                   <span
                     className={"relative font-medium tabular-nums text-foreground " + enter(active)}
                     style={delay(row.at + 600)}
@@ -178,7 +179,7 @@ function StellaraScreens({ active }: { active: boolean }) {
         </div>
         <span
           className={
-            "flex items-center gap-2 self-start rounded-full border border-approve/30 bg-approve-tint px-2.5 py-1 text-xs font-medium text-approve shadow-sm " +
+            "ah-fit-chip flex max-w-full items-center gap-2 self-start rounded-full border border-approve/30 bg-approve-tint px-2.5 py-1 text-xs font-medium text-approve shadow-sm " +
             enter(active)
           }
           style={delay(3800)}
@@ -201,14 +202,14 @@ const BRIEF = [
 
 function MorningBrief({ active }: { active: boolean }) {
   return (
-    <div className="absolute inset-0" aria-hidden="true">
+    <div className="ah-fit absolute inset-0" aria-hidden="true">
       {[
-        { size: "size-[26rem]", orbit: "28s" },
-        { size: "size-[17rem]", orbit: "20s" },
+        { size: "w-[140%]", orbit: "28s" },
+        { size: "w-[92%]", orbit: "20s" },
       ].map((ring) => (
         <div
           key={ring.size}
-          className={"absolute left-1/2 top-[82%] -translate-x-1/2 -translate-y-1/2 " + ring.size}
+          className={"absolute left-1/2 top-[82%] aspect-square -translate-x-1/2 -translate-y-1/2 " + ring.size}
         >
           <div
             className="ah-orbit absolute inset-0 rounded-full border border-border"
@@ -223,7 +224,7 @@ function MorningBrief({ active }: { active: boolean }) {
       </div>
       <span className="ah-horizon absolute inset-x-6 top-[82%] h-px" />
 
-      <div className="absolute inset-x-0 top-0 flex justify-center p-4">
+      <div className="absolute inset-x-0 top-0 flex justify-center p-3">
         <div
           className={
             "flex w-full max-w-64 flex-col rounded-xl border border-border bg-card shadow-sm " + enter(active)
@@ -244,13 +245,13 @@ function MorningBrief({ active }: { active: boolean }) {
                 <span className="w-4 text-right font-display text-sm font-medium tabular-nums text-brand">
                   {row.value}
                 </span>
-                <span className="text-foreground">{row.label}</span>
+                <span className="min-w-0 truncate text-foreground">{row.label}</span>
               </li>
             ))}
           </ul>
           <div
             className={
-              "flex items-center gap-3 border-t border-border px-3 py-2 text-xs text-muted-foreground " +
+              "ah-fit-chip flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border px-3 py-2 text-xs text-muted-foreground " +
               enter(active)
             }
             style={delay(1500)}
