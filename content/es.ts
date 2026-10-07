@@ -258,6 +258,37 @@ export const es: SiteContent = {
     ],
     footnote:
       "Estas cifras muestran la actividad de los flujos que su firma puede revisar. No son resultados de una firma real y no miden el valor de los casos ni los ingresos.",
+    dashboard: {
+      title: "Panel",
+      live: "En vivo",
+      nav: ["Panel", "Asistente IA", "Conversaciones", "Calendarios", "Contactos", "Tareas", "Agentes", "Sitios web", "Ajustes"],
+      todayLabel: "hoy",
+      sourceTitle: "Contactos por origen",
+      sources: [
+        { label: "Widget web", value: 58 },
+        { label: "Chat fuera de horario", value: 41 },
+        { label: "Teléfono", value: 29 },
+        { label: "Referido", value: 18 },
+      ],
+      statusTitle: "Contactos por estado",
+      statusTotal: "contactos",
+      statuses: [
+        { label: "Activos", value: 64 },
+        { label: "Nuevos", value: 46 },
+        { label: "Con cita", value: 31 },
+        { label: "Requieren personal", value: 5 },
+      ],
+      growthTitle: "Crecimiento de contactos",
+      growthPeriod: "Últimos 14 días",
+      growth: [4, 6, 5, 8, 7, 9, 12, 10, 11, 14, 13, 16, 15, 19],
+      activityTitle: "Actividad nocturna",
+      events: [
+        "Stellara captó una nueva consulta desde el widget web",
+        "Stellara programó una consulta para las 10:30 AM",
+        "Stellara envió un seguimiento de tratamiento",
+        "Stellara marcó una respuesta del cliente para Ana",
+      ],
+    },
   },
   stories: {
     controls: {

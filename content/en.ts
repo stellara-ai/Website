@@ -258,6 +258,37 @@ export const en: SiteContent = {
     ],
     footnote:
       "These counts show workflow activity your firm can review. They are not results from a real firm and don\u2019t measure case value or revenue.",
+    dashboard: {
+      title: "Dashboard",
+      live: "Live",
+      nav: ["Dashboard", "AI Assistant", "Conversations", "Calendars", "Contacts", "Tasks", "Agents", "Websites", "Settings"],
+      todayLabel: "today",
+      sourceTitle: "Contacts by source",
+      sources: [
+        { label: "Web widget", value: 58 },
+        { label: "After-hours chat", value: 41 },
+        { label: "Phone", value: 29 },
+        { label: "Referral", value: 18 },
+      ],
+      statusTitle: "Contacts by status",
+      statusTotal: "contacts",
+      statuses: [
+        { label: "Active", value: 64 },
+        { label: "New", value: 46 },
+        { label: "Booked", value: 31 },
+        { label: "Needs staff", value: 5 },
+      ],
+      growthTitle: "Contact growth",
+      growthPeriod: "Last 14 days",
+      growth: [4, 6, 5, 8, 7, 9, 12, 10, 11, 14, 13, 16, 15, 19],
+      activityTitle: "Overnight activity",
+      events: [
+        "Stellara captured a new inquiry from the web widget",
+        "Stellara booked a consultation for 10:30 AM",
+        "Stellara sent a treatment check-in",
+        "Stellara flagged a client reply for Ana",
+      ],
+    },
   },
   stories: {
     controls: {
