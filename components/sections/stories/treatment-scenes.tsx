@@ -138,7 +138,7 @@ function TeamAlerted({ ui, active }: SceneProps) {
         <RoleTag role="staff" className="hidden sm:inline-flex">
           {ui.staffTag}
         </RoleTag>
-        <Workstation role="staff" className="h-12 sm:h-24" />
+        <Workstation role="staff" className="h-10 sm:h-16" />
       </div>
       <div
         className={
@@ -167,14 +167,14 @@ function TeamAlerted({ ui, active }: SceneProps) {
           style={delay(900)}
         >
           <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
-          <span className="truncate">{ui.alertContext[0]}</span>
+          <span className="min-w-0 leading-tight">{ui.alertContext[0]}</span>
         </span>
         <span
           className={"flex min-w-0 items-center gap-1.5 rounded-lg bg-brand-tint px-2 py-1 text-[11px] font-semibold " + enter(active)}
           style={delay(1200)}
         >
           <ArrowRightIcon weight="bold" className="size-3 shrink-0 text-brand" />
-          <span className="min-w-0 leading-tight sm:truncate">{ui.nextAction}</span>
+          <span className="min-w-0 leading-tight">{ui.nextAction}</span>
         </span>
       </div>
       <Floor />
