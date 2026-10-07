@@ -8,10 +8,14 @@ import { Browser, Cursor, Monitor, ROLE_BUBBLE, RoleTag, Skeleton, Stage, Workst
 type Ui = WebsiteStoryContent["ui"]
 type SceneProps = { ui: Ui; active: boolean }
 
-function SitePage({ ui, dim }: { ui: Ui; dim?: boolean }) {
+const CTA_CURSOR_DELAY = 700
+// The cursor animation runs 1.2s and "clicks" at ~88% of it, so the press lands then.
+const CTA_PRESS_DELAY = CTA_CURSOR_DELAY + 1050
+
+function SitePage({ ui, dim, active, pointer }: { ui: Ui; dim?: boolean; active?: boolean; pointer?: boolean }) {
   return (
-    <div className={cn("flex h-full flex-col gap-1.5 p-2.5 transition-opacity", dim && "opacity-35")}>
-      <div className="flex items-center justify-between gap-2">
+    <div className={cn("flex h-full min-h-0 flex-col gap-1 p-2 transition-opacity min-[360px]:gap-1.5 min-[360px]:p-2.5", dim && "opacity-35")}>
+      <div className="flex shrink-0 items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-1.5 text-[11px] font-semibold">
           <span className="size-2.5 shrink-0 rounded-sm bg-brand" />
           <span className="truncate">{ui.siteName}</span>
@@ -21,13 +25,25 @@ function SitePage({ ui, dim }: { ui: Ui; dim?: boolean }) {
           <Skeleton className="w-5" />
         </span>
       </div>
-      <span className="mt-1.5 text-balance text-sm font-semibold leading-tight">{ui.siteHeadline}</span>
-      <Skeleton className="w-[85%]" />
-      <Skeleton className="w-[60%]" />
-      <span className="mt-1 self-start rounded-full bg-foreground px-2.5 py-1 text-[10px] font-medium text-background">
+      <span className="mt-1 shrink-0 truncate text-sm font-semibold leading-tight">{ui.siteHeadline}</span>
+      <span
+        className={cn(
+          "relative mt-0.5 shrink-0 self-start whitespace-nowrap rounded-full bg-foreground px-2.5 py-1 text-[10px] font-medium leading-tight text-background",
+          pointer && play(Boolean(active), "st-press"),
+        )}
+        style={pointer ? delay(CTA_PRESS_DELAY) : undefined}
+      >
         {ui.siteCta}
+        {pointer && (
+          <Cursor
+            className={"-bottom-3 right-1 " + play(Boolean(active), "st-cursor")}
+            style={motionVars({ delay: CTA_CURSOR_DELAY, dx: "60px", dy: "48px" })}
+          />
+        )}
       </span>
-      <div className="mt-auto grid grid-cols-3 gap-1.5">
+      <Skeleton className="mt-1 w-[85%] shrink-0" />
+      <Skeleton className="w-[60%] shrink-0" />
+      <div className="mt-auto grid min-h-0 shrink grid-cols-3 gap-1.5 overflow-hidden">
         <span className="h-8 rounded-md bg-muted" />
         <span className="h-8 rounded-md bg-muted" />
         <span className="h-8 rounded-md bg-muted" />
@@ -40,14 +56,10 @@ function VisitorArrives({ ui, active }: SceneProps) {
   return (
     <Stage>
       <Browser url={ui.url} className={"min-h-0 flex-1 " + play(active, "st-slide")} style={delay(100)}>
-        <SitePage ui={ui} />
-        <Cursor
-          className={"left-[42%] top-[30%] " + play(active, "st-cursor")}
-          style={motionVars({ delay: 700, dx: "70px", dy: "60px" })}
-        />
+        <SitePage ui={ui} active={active} pointer />
       </Browser>
       <div className="flex items-end gap-2">
-        <Workstation role="prospect" device="laptop" className={"h-14 sm:h-20 " + enter(active)} style={delay(300)} />
+        <Workstation role="prospect" device="laptop" className={"h-10 min-[360px]:h-14 sm:h-20 " + enter(active)} style={delay(300)} />
         <RoleTag role="prospect" className="mb-1">
           {ui.visitorTag}
         </RoleTag>
