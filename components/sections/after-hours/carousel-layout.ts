@@ -8,8 +8,8 @@ export type CarouselLayoutClasses = {
 
 export const AFTER_HOURS_LAYOUT_CLASSES: Record<CarouselLayout, CarouselLayoutClasses> = {
   hero: {
-    sizer: "invisible mx-auto aspect-[10/11] min-h-[26rem] w-[80%] sm:aspect-square sm:min-h-[25rem] sm:w-[62%]",
-    card: "absolute left-1/2 top-0 aspect-[10/11] min-h-[26rem] w-[70%] will-change-transform [transform-style:preserve-3d] sm:aspect-square sm:min-h-[25rem] sm:w-[62%]",
+    sizer: "invisible mx-auto aspect-[10/11] min-h-[26rem] w-[80%] max-[359px]:min-h-[29rem] max-[359px]:w-[88%] sm:aspect-square sm:min-h-[25rem] sm:w-[62%]",
+    card: "absolute left-1/2 top-0 aspect-[10/11] min-h-[26rem] w-[70%] will-change-transform [transform-style:preserve-3d] max-[359px]:min-h-[29rem] max-[359px]:w-[84%] sm:aspect-square sm:min-h-[25rem] sm:w-[62%]",
     stage: "ah-stage relative isolate flex-1 min-h-[11.5rem] overflow-hidden rounded-[1.25rem] [clip-path:inset(0_round_1.25rem)] sm:min-h-[11rem]",
   },
   inset: {

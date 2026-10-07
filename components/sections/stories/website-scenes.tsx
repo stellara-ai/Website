@@ -94,7 +94,7 @@ function AsksQuestion({ ui, active }: SceneProps) {
           }
           style={delay(650)}
         >
-          <div className="flex items-center gap-1.5 border-b border-border pb-1.5">
+          <div className="hidden items-center gap-1.5 border-b border-border pb-1.5 sm:flex">
             <span className="size-2 shrink-0 rounded-full bg-approve" />
             <span className="truncate text-[11px] font-semibold">{ui.assistantTitle}</span>
           </div>
@@ -123,8 +123,8 @@ function DetailsCollected({ ui, active }: SceneProps) {
         </div>
         {ui.fields.map((field, i) => (
           <div key={field.label} className="flex items-center gap-2 border-b border-border/60 px-2.5 py-1.5 last:border-0">
-            <span className="w-[40%] shrink-0 truncate text-[10px] text-muted-foreground">{field.label}</span>
-            <span className={"min-w-0 flex-1 truncate text-xs font-medium " + play(active, "st-type")} style={delay(700 + i * 420)}>
+            <span className="w-[34%] shrink-0 text-[10px] leading-tight text-muted-foreground">{field.label}</span>
+            <span className={"min-w-0 flex-1 whitespace-nowrap text-[11px] font-medium sm:text-xs " + play(active, "st-type")} style={delay(700 + i * 420)}>
               {field.value}
             </span>
             <span className={enter(active)} style={delay(1150 + i * 420)}>
@@ -221,7 +221,7 @@ function TeamGetsContext({ ui, active }: SceneProps) {
             {ui.summary.map((row, i) => (
               <div
                 key={row.label}
-                className={"flex flex-col rounded-md bg-muted/70 px-2 py-0.5 " + play(active, "st-slide")}
+                className={cn("flex-col rounded-md bg-muted/70 px-2 py-0.5", i > 1 ? "hidden sm:flex" : "flex", play(active, "st-slide"))}
                 style={motionVars({ delay: 450 + i * 250, dx: "-14px", dy: "0px" })}
               >
                 <span className="truncate text-[10px] text-muted-foreground">{row.label}</span>
@@ -233,12 +233,12 @@ function TeamGetsContext({ ui, active }: SceneProps) {
               style={delay(1400)}
             >
               <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
-              <span className="truncate text-[11px] font-semibold">{ui.nextAction}</span>
+              <span className="leading-tight text-[11px] font-semibold">{ui.nextAction}</span>
             </div>
           </div>
         </div>
       </Monitor>
-      <RoleTag role="staff" className="self-center">
+      <RoleTag role="staff" className="hidden self-center sm:inline-flex">
         {ui.staffTag}
       </RoleTag>
     </Stage>

@@ -98,7 +98,7 @@ function CheckinSent({ ui, active }: SceneProps) {
       <Phone className={"min-h-0 w-[min(100%,11.5rem)] flex-1 " + play(active, "st-slide")} style={delay(650)}>
         <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
         <Bubble side="in" className={enter(active)} style={delay(1150)}>
-          {ui.question}
+          <span className="line-clamp-2 sm:line-clamp-none">{ui.question}</span>
         </Bubble>
       </Phone>
       <span
@@ -118,8 +118,8 @@ function ClientReplies({ ui, active }: SceneProps) {
       <Figure role="client" pose="phone" className={"h-24 sm:h-32 " + enter(active)} style={delay(100)} />
       <Phone className="h-full max-h-64 w-[min(64%,11.5rem)] -rotate-2">
         <span className="truncate text-center text-[10px] font-semibold text-muted-foreground">{ui.firm}</span>
-        <Bubble side="in" className="line-clamp-3 opacity-50">
-          {ui.question}
+        <Bubble side="in" className="opacity-50">
+          <span className="line-clamp-2">{ui.question}</span>
         </Bubble>
         <Bubble side="out" className={cn(ROLE_BUBBLE.client, play(active, "st-focus"))} style={delay(450)}>
           {ui.reply}

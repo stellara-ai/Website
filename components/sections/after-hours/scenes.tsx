@@ -150,7 +150,7 @@ function StellaraScreens({ active }: { active: boolean }) {
                     className={"absolute inset-y-0.5 left-1 right-1 rounded-lg bg-brand-tint " + (active ? "ah-inspect" : "opacity-0")}
                     style={delay(row.at)}
                   />
-                  <span className="relative min-w-0 flex-1 truncate text-muted-foreground">{row.label}</span>
+                  <span className="relative min-w-0 flex-1 leading-tight text-muted-foreground">{row.label}</span>
                   <span
                     className={"relative font-medium tabular-nums text-foreground " + enter(active)}
                     style={delay(row.at + 600)}
