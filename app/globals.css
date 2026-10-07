@@ -101,6 +101,7 @@
 
   /* Brand identity — the "Stellar" palette: a deep-space canvas with a starlight gold accent. */
   --brand: #8a6322;
+  --stellara-gold: #8a6322;
   --brand-foreground: #ffffff;
   --brand-strong: #74531c;
   --brand-strong-foreground: #ffffff;
@@ -155,6 +156,7 @@
   --ring: #e8c88a;
 
   --brand: #e8c88a;
+  --stellara-gold: #e8c88a;
   --brand-foreground: #0a0e1a;
   --brand-strong: #f0d9a8;
   --brand-strong-foreground: #0a0e1a;
@@ -209,6 +211,7 @@
     --input: rgba(255, 255, 255, 0.16);
     --ring: #e8c88a;
     --brand: #e8c88a;
+    --stellara-gold: #e8c88a;
     --brand-foreground: #0a0e1a;
     --brand-strong: #f0d9a8;
     --brand-strong-foreground: #0a0e1a;
@@ -985,8 +988,29 @@
     opacity: 1;
   }
 }
+/* A warm gold sun whose outer glow cools toward the card's violet so it sits inside the dusk palette. */
 .ah-sun-set {
-  background: radial-gradient(circle, var(--brand) 0%, color-mix(in srgb, var(--brand) 40%, transparent) 38%, transparent 68%);
+  background: radial-gradient(
+    circle,
+    oklch(0.92 0.13 92) 0%,
+    oklch(0.84 0.15 75) 30%,
+    color-mix(in oklab, color-mix(in oklab, oklch(0.78 0.15 60) 55%, var(--brand)) 45%, transparent) 50%,
+    transparent 70%
+  );
+}
+
+/* The Stellara agent mark stays gold inside every service theme; its halo is gold washed into the card. */
+.ah-agent {
+  color: var(--stellara-gold);
+}
+.ah-agent-halo {
+  background: color-mix(in oklab, var(--stellara-gold) 18%, var(--card));
+}
+.ah-agent-ring {
+  border-color: color-mix(in oklab, var(--stellara-gold) 60%, transparent);
+}
+.ah-agent-ring-solid {
+  border-color: var(--stellara-gold);
 }
 .ah-setting {
   animation: ah-setting 2s cubic-bezier(0.55, 0, 0.45, 1) 0.15s forwards;
@@ -1138,7 +1162,7 @@
   }
   50% {
     transform: scale(1.06);
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 50%, transparent));
+    filter: drop-shadow(0 0 10px color-mix(in srgb, currentColor 50%, transparent));
   }
 }
 .ah-scan {

@@ -32,7 +32,7 @@ function OfficeClosed({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
       <span className={"ah-dusk absolute inset-0 " + (active ? "ah-dusk-fall" : "")} />
-      <span className={"ah-sun-set absolute left-[22%] top-10 size-16 rounded-full " + (active ? "ah-setting" : "")} />
+      <span className={"ah-sun-set absolute left-[3%] top-8 aspect-square w-[16%] max-w-16 rounded-full " + (active ? "ah-setting" : "")} />
       <span className={"ah-moon absolute right-7 top-6 size-8 rounded-full " + (active ? "ah-moonrise" : "")} />
       <div className={"ah-stars absolute inset-0 " + (active ? "ah-stars-in" : "")}>
         {["left-8 top-10", "left-1/3 top-6", "right-1/3 top-16", "left-1/4 top-20"].map((pos, i) => (
@@ -134,14 +134,14 @@ function StellaraScreens({ active }: { active: boolean }) {
               className={"ah-fit-scan absolute left-2 top-0.5 z-10 flex size-7 items-center justify-center " + (active ? "ah-scan" : "")}
             >
               <span
-                className={"absolute inset-0 rounded-full border border-brand/60 " + (active ? "ah-pulse-ring" : "opacity-0")}
+                className={"ah-agent-ring absolute inset-0 rounded-full border " + (active ? "ah-pulse-ring" : "opacity-0")}
               />
               <span
-                className={"absolute inset-0 rounded-full border border-brand " + (active ? "ah-done" : "opacity-0")}
+                className={"ah-agent-ring-solid absolute inset-0 rounded-full border " + (active ? "ah-done" : "opacity-0")}
                 style={delay(3400)}
               />
-              <span className="absolute inset-1 rounded-full bg-brand-tint" />
-              <StellaraSymbol className={"relative h-3.5 text-brand " + (active ? "ah-alive" : "")} />
+              <span className="ah-agent-halo absolute inset-1 rounded-full" />
+              <StellaraSymbol className={"ah-agent relative h-3.5 " + (active ? "ah-alive" : "")} />
             </span>
             <ul className="flex flex-col">
               {CRITERIA.map((row) => (
