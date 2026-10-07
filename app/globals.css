@@ -511,48 +511,30 @@
   --ah-accent: var(--brand);
   --ah-b: var(--background);
 }
-/* Saturated accents per card so each scene has its own vivid hue next to the brand color. */
+/*
+  Card accents derive from the active service's --brand (set by [data-service-theme]),
+  so every scene stays in the selected tab's color family. Small hue/chroma shifts keep
+  scenes distinguishable; "call" leans furthest to mark the hand-off to the team.
+*/
 .ah-tone-dusk {
-  --ah-accent: oklch(0.52 0.21 268);
-}
-.ah-tone-call {
-  --ah-accent: oklch(0.64 0.21 38);
+  --ah-accent: oklch(from var(--brand) l calc(c * 1.15) h);
 }
 .ah-tone-magic {
-  --ah-accent: oklch(0.56 0.24 302);
+  --ah-accent: oklch(from var(--brand) calc(l - 0.04) calc(c * 1.25) calc(h + 12));
 }
 .ah-tone-starlight {
-  --ah-accent: oklch(0.66 0.17 162);
+  --ah-accent: oklch(from var(--brand) calc(l + 0.04) calc(c * 1.1) calc(h - 14));
 }
+.ah-tone-sky,
 .ah-tone-ocean {
-  --ah-accent: oklch(0.5 0.115 230);
+  --ah-accent: oklch(from var(--brand) calc(l + 0.02) c calc(h - 22));
 }
 .ah-tone-meadow {
-  --ah-accent: oklch(0.52 0.115 140);
+  --ah-accent: oklch(from var(--brand) calc(l + 0.03) calc(c * 0.95) calc(h - 30));
 }
-.ah-tone-sky {
-  --ah-accent: oklch(0.52 0.11 205);
-}
-.dark .ah-tone-ocean {
-  --ah-accent: oklch(0.78 0.1 230);
-}
-.dark .ah-tone-meadow {
-  --ah-accent: oklch(0.8 0.105 140);
-}
-.dark .ah-tone-sky {
-  --ah-accent: oklch(0.8 0.1 205);
-}
-.dark .ah-tone-dusk {
-  --ah-accent: oklch(0.7 0.18 268);
-}
-.dark .ah-tone-call {
-  --ah-accent: oklch(0.74 0.18 40);
-}
-.dark .ah-tone-magic {
-  --ah-accent: oklch(0.7 0.21 302);
-}
-.dark .ah-tone-starlight {
-  --ah-accent: oklch(0.78 0.16 162);
+.ah-tone-call,
+.ah-tone-sunset {
+  --ah-accent: oklch(from var(--brand) calc(l + 0.03) calc(c * 1.2) calc(h + 28));
 }
 
 /* Each hero service re-points the brand tokens so its tab and carousel share one primary. Reviews keeps the default gold. */
