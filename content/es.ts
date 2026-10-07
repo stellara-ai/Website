@@ -261,7 +261,7 @@ export const es: SiteContent = {
     dashboard: {
       title: "Panel",
       live: "En vivo",
-      nav: ["Panel", "Asistente IA", "Conversaciones", "Calendarios", "Contactos", "Tareas", "Agentes", "Sitios web", "Ajustes"],
+      nav: ["Panel", "Conversaciones", "Calendarios", "Contactos", "Tareas", "Agentes", "Ajustes"],
       todayLabel: "hoy",
       sourceTitle: "Contactos por origen",
       sources: [

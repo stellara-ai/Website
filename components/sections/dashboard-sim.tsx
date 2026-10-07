@@ -36,13 +36,11 @@ const TONES: Record<Tone, { text: string; bg: string; tint: string; fill: string
 
 const NAV_ICONS: IconType[] = [
   SquaresFourIcon,
-  SparkleIcon,
   ChatsCircleIcon,
   CalendarBlankIcon,
   FunnelIcon,
   CheckSquareIcon,
   RobotIcon,
-  GlobeIcon,
   GearIcon,
 ]
 const KPI_ICONS: IconType[] = [ChatCircleTextIcon, CalendarCheckIcon, CheckCircleIcon, WarningCircleIcon]
