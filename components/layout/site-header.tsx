@@ -10,8 +10,17 @@ import { StellaraLogo } from "@/components/brand/stellara-logo"
 import { ActionButton } from "@/components/ui/action"
 import { cn } from "@/lib/utils"
 
+const HEADING_GAP = 24
+
+// Land the section's heading just below the sticky header, rather than the section's top edge.
 function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  const section = document.getElementById(id)
+  if (!section) return
+  const target = section.querySelector<HTMLElement>("h2") ?? section
+  const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0
+  const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - HEADING_GAP
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? "auto" : "smooth" })
 }
 
 export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: boolean }) {
@@ -21,6 +30,13 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
   const [active, setActive] = useState<string>("")
 
   const homePath = pathFor("home", content.locale)
+
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (!isHome || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
+    event.preventDefault()
+    scrollToId(id)
+    window.history.replaceState(null, "", `#${id}`)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -75,6 +91,7 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
               <Link
                 key={item.id}
                 href={`${homePath}${item.href}`}
+                onClick={(event) => handleNavClick(event, id)}
                 className={cn(
                   "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-[15px] font-normal transition-colors",
                   isActive ? "text-foreground" : "text-foreground/80 hover:text-foreground",
@@ -130,7 +147,10 @@ export function SiteHeader({ content, isHome }: { content: SiteContent; isHome: 
               <Link
                 key={item.id}
                 href={`${homePath}${item.href}`}
-                onClick={() => setMenuOpen(false)}
+                onClick={(event) => {
+                  setMenuOpen(false)
+                  handleNavClick(event, item.href.replace("#", ""))
+                }}
                 className="rounded-md px-3 py-3 text-base text-foreground hover:bg-muted"
               >
                 {item.label}
