@@ -133,49 +133,51 @@ function ClientReplies({ ui, active }: SceneProps) {
 
 function TeamAlerted({ ui, active }: SceneProps) {
   return (
-    <Stage>
+    <Stage className="flex-row items-end gap-2 pb-4 sm:gap-3">
+      <div className={"flex shrink-0 flex-col items-start gap-1 " + enter(active)} style={delay(100)}>
+        <RoleTag role="staff" className="hidden sm:inline-flex">
+          {ui.staffTag}
+        </RoleTag>
+        <Workstation role="staff" className="h-12 sm:h-24" />
+      </div>
       <div
-        className={"flex flex-col gap-1.5 rounded-xl border border-border bg-card p-2.5 shadow-md " + play(active, "st-slide")}
-        style={motionVars({ delay: 150, dx: "-20px", dy: "0px" })}
+        className={
+          "relative mb-2 flex min-w-0 flex-1 flex-col gap-1.5 self-center rounded-xl border border-border bg-card p-2 shadow-md sm:p-2.5 " +
+          play(active, "st-slide")
+        }
+        style={motionVars({ delay: 350, dx: "16px", dy: "-6px" })}
       >
-        <div className="flex items-center justify-between gap-2">
+        <span className="absolute -left-1 top-3 size-2 rounded-full bg-status-stuck ring-2 ring-card" aria-hidden="true" />
+        <div className="flex min-w-0 items-center justify-between gap-2">
           <span className="truncate text-xs font-semibold">{ui.clientName}</span>
-          <Chip tone="handoff">{ui.alertTitle}</Chip>
+          <span className="hidden shrink-0 sm:inline-flex">
+            <Chip tone="handoff">{ui.alertTitle}</Chip>
+          </span>
         </div>
         <p
-          className={cn("rounded-lg px-2 py-1.5 text-[11px] leading-snug", ROLE_BUBBLE.client, enter(active))}
-          style={delay(500)}
+          className={cn("line-clamp-3 rounded-lg sm:line-clamp-2 px-2 py-1 text-[11px] leading-snug", ROLE_BUBBLE.client, enter(active))}
+          style={delay(650)}
         >
           {"\u201C"}
           {ui.reply}
           {"\u201D"}
         </p>
-        <ul className="flex flex-col gap-1">
-          {ui.alertContext.map((line, i) => (
-            <li
-              key={line}
-              className={cn("items-center gap-2 text-[11px] text-muted-foreground", i > 0 ? "hidden sm:flex" : "flex", enter(active))}
-              style={delay(800 + i * 200)}
-            >
-              <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
-              <span className="truncate">{line}</span>
-            </li>
-          ))}
-        </ul>
-        <div className={"flex flex-col rounded-lg bg-brand-tint px-2.5 py-1.5 " + enter(active)} style={delay(1300)}>
-          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{ui.nextActionLabel}</span>
-          <span className="flex items-center gap-1.5 text-xs font-semibold">
-            <ArrowRightIcon weight="bold" className="size-3.5 shrink-0 text-brand" />
-            <span className="truncate">{ui.nextAction}</span>
-          </span>
-        </div>
+        <span
+          className={"hidden items-center gap-2 text-[11px] text-muted-foreground sm:flex " + enter(active)}
+          style={delay(900)}
+        >
+          <span className="size-1 shrink-0 rounded-full bg-foreground/40" />
+          <span className="truncate">{ui.alertContext[0]}</span>
+        </span>
+        <span
+          className={"flex min-w-0 items-center gap-1.5 rounded-lg bg-brand-tint px-2 py-1 text-[11px] font-semibold " + enter(active)}
+          style={delay(1200)}
+        >
+          <ArrowRightIcon weight="bold" className="size-3 shrink-0 text-brand" />
+          <span className="min-w-0 leading-tight sm:truncate">{ui.nextAction}</span>
+        </span>
       </div>
-      <div className="mt-auto flex items-end gap-2">
-        <Workstation role="staff" className="h-12 sm:h-20" />
-        <RoleTag role="staff" className="mb-1">
-          {ui.staffTag}
-        </RoleTag>
-      </div>
+      <Floor />
     </Stage>
   )
 }
