@@ -506,7 +506,7 @@ export const es: SiteContent = {
         visitorTag: "Visitante",
         staffTag: "Su equipo",
         launcher: "Hacer una pregunta",
-        assistantTitle: "Asistente de admisión",
+        assistantTitle: "Agente de admisión de Stellara",
         question: "¿Alguien me puede contactar por un accidente de auto?",
         assistantReply: "Sí. Unos datos breves ayudarán al equipo a darle seguimiento.",
         detailsPrompt: "Unos datos breves para el equipo:",
@@ -579,7 +579,7 @@ export const es: SiteContent = {
     },
     addOns: [
       "Mejora inteligente del sitio web",
-      "Reactivación de consultas no convertidas",
+      "Reactivaci��n de consultas no convertidas",
       "Integración personalizada de admisión y sistema de casos",
     ],
   },

@@ -506,7 +506,7 @@ export const en: SiteContent = {
         visitorTag: "Visitor",
         staffTag: "Your staff",
         launcher: "Ask a question",
-        assistantTitle: "Intake assistant",
+        assistantTitle: "Stellara intake agent",
         question: "Can someone contact me about an auto accident?",
         assistantReply: "Yes. A few quick details will help the team follow up.",
         detailsPrompt: "A few quick details for the team:",
