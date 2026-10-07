@@ -1,5 +1,6 @@
-import { ArrowRightIcon, CheckIcon, ClockIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
+import { ArrowRightIcon, CheckIcon, PhoneCallIcon } from "@phosphor-icons/react/dist/ssr"
 import type { TreatmentStoryContent } from "@/content/schema"
+import { StellaraSymbol } from "@/components/brand/stellara-logo"
 import type { Scene } from "@/components/sections/after-hours/scenes"
 import { cn } from "@/lib/utils"
 import { Bubble, Chip, buildScenes, delay, enter } from "./story-ui"
@@ -74,8 +75,9 @@ function CheckinSent({ ui, active }: SceneProps) {
         }
         style={delay(100)}
       >
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-          <ClockIcon weight="bold" className="size-3.5" />
+        <span className="relative flex size-6 shrink-0 items-center justify-center">
+          <span className="ah-agent-halo absolute inset-0 rounded-full" />
+          <StellaraSymbol className={"ah-agent relative h-3.5 " + (active ? "ah-alive" : "")} />
         </span>
         <span className="flex min-w-0 flex-col leading-tight">
           <span className="truncate text-[11px] font-semibold">{ui.checkinLabel}</span>
