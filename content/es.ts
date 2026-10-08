@@ -49,7 +49,7 @@ export const es: SiteContent = {
       websiteLabel: "Sitio web de la firma",
       websitePlaceholder: "https://sufirma.com",
       firstNameLabel: "Nombre",
-      firstNamePlaceholder: "Ana",
+      firstNamePlaceholder: "Jane",
       lastNameLabel: "Apellido",
       lastNamePlaceholder: "Pérez",
       mobileLabel: "Número móvil",
@@ -103,7 +103,7 @@ export const es: SiteContent = {
           {
             stage: "Llega una consulta",
             owner: "auto",
-            title: "Daniel Ortiz",
+            title: "John Doe",
             meta: "Formulario web · 7:48 p. m.",
             lines: ["\u201CMe chocaron por detrás la semana pasada y estoy viendo a un quiropráctico.\u201D"],
           },
@@ -127,7 +127,7 @@ export const es: SiteContent = {
             owner: "staff",
             title: "Ana revisa la consulta",
             meta: "8:15 a. m.",
-            lines: ["Llama a Daniel para hablar de los próximos pasos"],
+            lines: ["Llama a John para hablar de los próximos pasos"],
           },
         ],
       },
@@ -512,7 +512,7 @@ export const es: SiteContent = {
         detailsPrompt: "Unos datos breves para el equipo:",
         formTitle: "Solicitud",
         fields: [
-          { label: "Nombre", value: "Daniel Ortiz" },
+          { label: "Nombre", value: "John Doe" },
           { label: "Caso", value: "Accidente de auto" },
           { label: "Fecha", value: "24 sep" },
           { label: "Teléfono", value: "(845) 555-0142" },
@@ -524,11 +524,11 @@ export const es: SiteContent = {
         requested: "Solicitada",
         requestedNote: "La firma la confirmará",
         inboxTitle: "Solicitudes",
-        inbox: ["Daniel Ortiz", "Priya Shah", "Leo Grant"],
+        inbox: ["John Doe", "Jane Doe"],
         summaryTitle: "Solicitud desde el sitio web",
         newLabel: "Nueva",
         summary: [
-          { label: "Contacto", value: "Daniel Ortiz \u00B7 (845) 555-0142" },
+          { label: "Contacto", value: "John Doe \u00B7 (845) 555-0142" },
           { label: "Caso", value: "Accidente de auto \u00B7 24 sep" },
           { label: "Llamada", value: "Jue 11:00 AM \u00B7 solicitada" },
         ],
@@ -579,22 +579,24 @@ export const es: SiteContent = {
     },
     addOns: [
       "Mejora inteligente del sitio web",
-      "Reactivaci��n de consultas no convertidas",
       "Integración personalizada de admisión y sistema de casos",
     ],
   },
   trustFounder: {
     eyebrow: "El fundador",
-    title: "Conozca a quien construye sus flujos de trabajo.",
+    title: "Construido con experiencia. Basado en la confianza.",
     name: "Kerwin Londono",
     role: "Fundador, Stellara AI LLC",
-    photo: null,
+    photo: "/images/kerwin-londono.png",
     photoAlt: "Kerwin Londono, fundador de Stellara AI LLC",
     photoPending: "Foto próximamente",
     paragraphs: [
-      "Soy ingeniero de software y creé Stellara para ayudar a las firmas a mantener en movimiento el trabajo rutinario: desde la primera consulta hasta el seguimiento que necesita respuesta.",
-      "Empezamos por cómo trabaja su equipo hoy: qué debe ocurrir automáticamente, qué información necesita el personal y en qué momento debe intervenir una persona. Luego configuramos y probamos los flujos acordados y definimos cómo medir su actividad.",
+      "Soy Kerwin Londono, fundador de Stellara e ingeniero de software sénior con más de 20 años de experiencia desarrollando software para organizaciones del sector público y servicios financieros, donde la precisión, la confiabilidad y la atención al detalle son esenciales.",
+      "Fundé Stellara porque creo que las empresas deberían poder beneficiarse de los avances en inteligencia artificial sin complejidad innecesaria. La tecnología debe resolver problemas reales, ahorrar tiempo valioso y ayudar a las personas a atender mejor a sus clientes.",
+      "Mi fe y mis valores personales han definido mi manera de hacer negocios. Creo en ser honesto, tratar a las personas con justicia, cumplir mi palabra y ganarme la confianza con hechos.",
+      "En Stellara aplicamos esos principios en cada relación con nuestros clientes. Nos tomamos el tiempo de entender su negocio, recomendamos soluciones prácticas y nos enfocamos en entregar un valor que usted pueda ver.",
     ],
+    closing: "Sin exageraciones. Solo resultados.",
   },
   faqFinalCta: {
     eyebrow: "FAQ",
@@ -620,7 +622,7 @@ export const es: SiteContent = {
         items: [
           {
             q: "¿Puede funcionar con nuestros sistemas actuales?",
-            a: "Depende de los sistemas. Primero revisamos lo que usa su firma y luego definimos qué conexiones son viables. Las conexiones más profundas están disponibles con el complemento de Integración personalizada de admisión y sistema de casos.",
+            a: "Por lo general, la pregunta no es si podemos conectarnos, sino cómo. Empezamos revisando las herramientas que su firma ya usa y luego definimos la forma más sencilla de integrar Stellara con ellas. Las conexiones más profundas están disponibles con el complemento de Integración personalizada de admisión y sistema de casos.",
           },
           {
             q: "¿Cómo se manejan el inglés y el español?",
