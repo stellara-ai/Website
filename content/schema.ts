@@ -350,6 +350,10 @@ export interface TrustFounderContent {
   photoPending: string
   paragraphs: string[]
   closing?: string
+  expectations: {
+    title: string
+    items: { title: string; body: string }[]
+  }
 }
 
 export interface FaqItem {

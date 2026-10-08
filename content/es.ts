@@ -586,17 +586,37 @@ export const es: SiteContent = {
     eyebrow: "El fundador",
     title: "Construido con experiencia. Basado en la confianza.",
     name: "Kerwin Londono",
-    role: "Fundador, Stellara AI LLC",
+    role: "Fundador \u00b7 Ingeniero de software sénior",
     photo: "/images/kerwin-londono.png",
     photoAlt: "Kerwin Londono, fundador de Stellara AI LLC",
     photoPending: "Foto próximamente",
     paragraphs: [
-      "Soy Kerwin Londono, fundador de Stellara e ingeniero de software sénior con más de 20 años de experiencia desarrollando software para organizaciones del sector público y servicios financieros, donde la precisión, la confiabilidad y la atención al detalle son esenciales.",
-      "Fundé Stellara porque creo que las empresas deberían poder beneficiarse de los avances en inteligencia artificial sin complejidad innecesaria. La tecnología debe resolver problemas reales, ahorrar tiempo valioso y ayudar a las personas a atender mejor a sus clientes.",
-      "Mi fe y mis valores personales han definido mi manera de hacer negocios. Creo en ser honesto, tratar a las personas con justicia, cumplir mi palabra y ganarme la confianza con hechos.",
-      "En Stellara aplicamos esos principios en cada relación con nuestros clientes. Nos tomamos el tiempo de entender su negocio, recomendamos soluciones prácticas y nos enfocamos en entregar un valor que usted pueda ver.",
+      "Más de 20 años de experiencia desarrollando software para organizaciones del sector público y servicios financieros, donde la precisión, la confiabilidad y la atención al detalle son esenciales.",
+      "Fundé Stellara para ayudar a las empresas a usar la IA de forma práctica: reducir el trabajo repetitivo, responder con más rapidez y permitir que los equipos se concentren en sus clientes.",
+      "Mi fe y mis valores personales definen mi manera de hacer negocios: honestidad, justicia y cumplir mi palabra. En Stellara buscamos ganarnos la confianza entendiendo las necesidades de cada cliente, estableciendo expectativas realistas y cumpliendo nuestros compromisos.",
     ],
     closing: "Sin exageraciones. Solo resultados.",
+    expectations: {
+      title: "Qué puede esperar de nosotros",
+      items: [
+        {
+          title: "Respuestas directas",
+          body: "Explicamos lo que la automatización puede hacer, cuáles son sus limitaciones y cuándo debe intervenir una persona.",
+        },
+        {
+          title: "Adaptado a su práctica",
+          body: "Conocemos cómo opera su firma antes de recomendar cambios en sus flujos de trabajo.",
+        },
+        {
+          title: "Implementación cuidadosa",
+          body: "Probamos los flujos acordados, revisamos las transferencias y resolvemos los problemas antes del lanzamiento.",
+        },
+        {
+          title: "Valor medible",
+          body: "Definimos cómo se ve el éxito y damos seguimiento a actividades como consultas atendidas, citas solicitadas y seguimientos completados.",
+        },
+      ],
+    },
   },
   faqFinalCta: {
     eyebrow: "FAQ",
