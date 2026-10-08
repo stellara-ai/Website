@@ -67,6 +67,28 @@ export function TrustFounder({ content }: { content: SiteContent }) {
           </div>
         </Reveal>
       </div>
+
+      <div className="container-editorial pb-20 md:pb-24">
+        <Reveal className="border-t border-ink-foreground/15 pt-12 md:pt-14">
+          <h3
+            id="expectations-heading"
+            className="text-balance text-2xl font-semibold tracking-tight text-ink-foreground sm:text-3xl"
+          >
+            {section.expectations.title}
+          </h3>
+          <ul
+            aria-labelledby="expectations-heading"
+            className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {section.expectations.items.map((item) => (
+              <li key={item.title} className="flex flex-col gap-2 border-t-2 border-brand pt-4">
+                <span className="text-lg font-semibold tracking-tight text-ink-foreground">{item.title}</span>
+                <p className="text-pretty text-base leading-relaxed text-ink-muted">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </div>
     </section>
   )
 }

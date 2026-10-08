@@ -586,17 +586,37 @@ export const en: SiteContent = {
     eyebrow: "The founder",
     title: "Built on experience. Grounded in trust.",
     name: "Kerwin Londono",
-    role: "Founder, Stellara AI LLC",
+    role: "Founder \u00b7 Senior Software Engineer",
     photo: "/images/kerwin-londono.png",
     photoAlt: "Kerwin Londono, founder of Stellara AI LLC",
     photoPending: "Photo coming soon",
     paragraphs: [
-      "I\u2019m Kerwin Londono, founder of Stellara and a senior software engineer with over 20 years of experience developing software for public-sector organizations and financial services, where accuracy, reliability, and attention to detail matter.",
-      "I started Stellara because I believe businesses should be able to benefit from advances in AI without unnecessary complexity. Technology should solve real problems, save valuable time, and help people serve their clients better.",
-      "My faith and personal values have shaped how I approach business. I believe in being honest, treating people fairly, keeping my word, and earning trust through actions.",
-      "At Stellara, we bring those principles to every client relationship. We take the time to understand your business, recommend practical solutions, and focus on delivering value you can actually see.",
+      "Over 20 years of experience developing software for public-sector organizations and financial services, where accuracy, reliability, and attention to detail matter.",
+      "I started Stellara to help businesses use AI in practical ways: reducing repetitive work, improving responsiveness, and helping teams focus on their clients.",
+      "My faith and personal values shape how I approach business: honesty, fairness, and keeping my word. At Stellara, we aim to earn trust by understanding each client\u2019s needs, setting realistic expectations, and following through on our commitments.",
     ],
     closing: "No hype. Just outcomes.",
+    expectations: {
+      title: "What you can expect from us",
+      items: [
+        {
+          title: "Straight answers",
+          body: "We explain what automation can do, where it has limitations, and when a person should take over.",
+        },
+        {
+          title: "Built around your practice",
+          body: "We learn how your firm operates before recommending changes to its workflows.",
+        },
+        {
+          title: "Careful implementation",
+          body: "We test agreed workflows, review handoffs, and address problems before launch.",
+        },
+        {
+          title: "Measurable value",
+          body: "We define what success looks like and track activities such as inquiries handled, appointments requested, and follow-ups completed.",
+        },
+      ],
+    },
   },
   faqFinalCta: {
     eyebrow: "FAQ",
