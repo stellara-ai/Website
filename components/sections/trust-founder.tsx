@@ -59,6 +59,11 @@ export function TrustFounder({ content }: { content: SiteContent }) {
                 {paragraph}
               </p>
             ))}
+            {section.closing ? (
+              <p className="text-pretty text-lg font-semibold tracking-tight text-ink-foreground sm:text-xl">
+                {section.closing}
+              </p>
+            ) : null}
           </div>
         </Reveal>
       </div>

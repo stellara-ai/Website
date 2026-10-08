@@ -349,6 +349,7 @@ export interface TrustFounderContent {
   photoAlt: string
   photoPending: string
   paragraphs: string[]
+  closing?: string
 }
 
 export interface FaqItem {
